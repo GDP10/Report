@@ -1,5 +1,6 @@
 \documentclass[a4paper, 12pt]{article}
 \usepackage[backend=biber]{biblatex}
+\usepackage{graphicx}
 
 \addbibresource{report.bib}
 \nocite{*}
@@ -52,6 +53,23 @@
 \subsection{Project Description}
 
 \subsection{Background Information}
+
+\subsubsection{Publish/Subscribe Architecture}
+
+\begin{figure}
+\begin{center}
+\def\svgwidth{\columnwidth}
+\input{broker.pdf_tex}
+\end{center}
+\caption{Publish/Subscribe Architecture with Broker}
+\label{fig:example_net}
+\end{figure}
+
+Publish-subscribe is a messaging architecture that allows decoupling between the \emph{producers} and the \emph{consumers} of \emph{messages}. Messages are categorised into \emph{topics}; producers publish messages on a given topic with no knowledge of which (if any) subscribers the topic has, and consumers subscribe to a given topic with no knowledge of which (if any) producers are publishing messages with that topic.
+
+This architecture is generally implemented using a \emph{broker}, which exists as middleware between the producers and consumers. Producers send messages on a given topic to the broker, which then decides which consumers the messages should be forwarded to. Consumers subscribe via the broker to topics they’re interested in, and the broker forwards relevant messages to them. This architecture has a number of benefits, including providing loose coupling between producers and consumers (since they need no knowledge of each other to make use of this architecture) and facilitating scalability by supporting arbitrary numbers of producers and consumers for any given topic.
+
+In Java, brokers typically implement the Java Message Service (JMS) API provided by Java Enterprise Edition, which offers a consistent interface for communicating with many different message broker implementations.
 
 \newpage
 
