@@ -76,6 +76,14 @@ In Java, brokers typically implement the Java Message Service (JMS) API provided
 \section{Planning and Organisation}
 \label{sec:planning}
 
+The project was built using the Agile software development practices of Scrum, and each sprint followed a similar structure. First, the customer came up with ideas for features which could be worked on in the following sprint. Next, user stories based on these features were created, dividing up the requirements of each feature and helping to create acceptance criteria which would come together to prove acceptance that the feature was successfully implemented.
+
+At the beginning of each sprint, a sprint meeting was held to both close the previous sprint and prepare for the following one. First, features implemented in the previous sprint were demonstrated to the customer, allowing them to track the progress of the project and decide whether the feature had been successfully implemented. In the event the customer was not satisfied with the work done in the sprint, the user stories were kept in the backlog for the following sprint. Otherwise, the customer discussed future features to be implemented and broke the feature up into user stories to be added to the backlog.
+
+Various software was used to carry out this process, including JIRA (access to which was provided by the client) and Cucumber. JIRA is a tracker that manages user stories and their corresponding acceptance criteria as per each feature. User stories within JIRA are stored in the standardised “As a, I want, So that” format, with their acceptance criteria written as “Given, When, Then”. This format is also used by Cucumber for acceptance tests. Team members on JIRA can choose what user stories to complete or they can be assigned.
+
+Cucumber was used to express the acceptance criteria for each story, allowing them to be converted into automated acceptance tests which could be run using JUnit. The Cucumber features are written in a language called Gherkin. Each Gherkin feature has a number of scenarios that test the aspects of that feature. The scenarios are written such that the implementation of the feature can change without having to rewrite the file. In the JUnit test file methods are called by Cucumber based off regex tags on the methods. For each story, when all acceptance tests passed within JUnit, the user story is removed from the backlog.
+
 \newpage
 
 \section{Conclusions}
