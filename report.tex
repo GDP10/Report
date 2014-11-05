@@ -51,6 +51,13 @@
 \label{sec:introduction}
 
 \subsection{Project Description}
+Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Currently there is a system in place where a flight planner must manually sort through information given as ‘Notice to Airman’ or ‘NOTAM’, to find only notices which are relevant to their flight. The goal of the software produced by over the course of the project was to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model.
+
+The customer for the project was Snowflake Software, a company focusing on open data exchange, and various products based on mapping data. Within sprint meetings the company was represented by Eddie Curtis, who expressed the feature requests and feedback representing Snowflake as a whole.
+
+The vision as stated by Snowflake was, “To develop a proof of concept push event service for delivering digital “NOTAM” updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners”.
+
+The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy should be based on simple factors such as departure and arrival airports, to more complex temporal queries, limiting NOTAMs events to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to handle an estimated 10,000 messages per day. These messages come from two sources: a baseline NOTAM which arrives every 28 days from the Federal NOTAM Service and updated delta files which arrive every 15 minutes. 
 
 \subsection{Background Information}
 
