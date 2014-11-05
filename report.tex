@@ -61,6 +61,13 @@ The subscriptions to this service had to be based on the relevancy of NOTAMs to 
 
 \subsection{Background Information}
 
+\subsubsection{NOTAMs}
+A ‘notice to airmen’ (NOTAM), is a notice given to airmen about events on the flightpath or at the origin/destination airport of the flight. The events may be hazards that have to be avoided such as dangerous weather or updates on runway closures which may or may not be relevant to the flight.
+
+The NOTAM’s are delivered as deltas from a baseline of data. For instance, a pilot may be told in a NOTAM that runway 3 has been closed at their destination. They were previously told about the number of alternative runways at the destination airport in a baseline message. Deltas can be either temporary or non-temporary; temporary updates apply for a certain time frame whereas non-temporary updates last indefinitely.
+
+If there are many delta updates it may be useful to make a snapshot. A snapshot is an updated baseline that is formed from the original baseline and a combination of deltas.
+
 \subsubsection{Publish/Subscribe Architecture}
 
 \begin{figure}
