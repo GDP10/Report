@@ -51,20 +51,23 @@
 \label{sec:introduction}
 
 \subsection{Project Description}
-Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Currently there is a system in place where a flight planner must manually sort through information given as ‘Notice to Airman’ or ‘NOTAM’, to find only notices which are relevant to their flight. The goal of the software produced by over the course of the project was to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model.
+\subsubsection{Motivation}
+Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. These events could include closed runways, restricted airspaces, extreme weather conditions and even the presence of migrating birds through an airspace. Currently there are systems in place where a flight planner must manually sort through information pulled as `Notice to Airman' or `NOTAM', to find only notices which are relevant to their flight. Having to pull NOTAMs for all relevant airspaces and airports and then manually filtering for relevant information is extremely time-consuming. 
+
+\subsubsection{Goals}
 
 The customer for the project was Snowflake Software, a company focusing on open data exchange, and various products based on mapping data. Within sprint meetings the company was represented by Eddie Curtis, who expressed the feature requests and feedback representing Snowflake as a whole.
 
-The vision as stated by Snowflake was, “To develop a proof of concept push event service for delivering digital “NOTAM” updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners”.
+The vision as stated by Snowflake was, ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced by over the course of the project was to explore options and find methods to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of relevant NOTAMs by pilots. 
 
 The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy should be based on simple factors such as departure and arrival airports, to more complex temporal queries, limiting NOTAMs events to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to handle an estimated 10,000 messages per day. These messages come from two sources: a baseline NOTAM which arrives every 28 days from the Federal NOTAM Service and updated delta files which arrive every 15 minutes. 
 
 \subsection{Background Information}
 
 \subsubsection{NOTAMs}
-A ‘notice to airmen’ (NOTAM), is a notice given to airmen about events on the flightpath or at the origin/destination airport of the flight. The events may be hazards that have to be avoided such as dangerous weather or updates on runway closures which may or may not be relevant to the flight.
+A `notice to airmen' (NOTAM), is a notice given to airmen about events on the flightpath or at the origin/destination airport of the flight. The events may be hazards that have to be avoided such as dangerous weather or updates on runway closures which may or may not be relevant to the flight.
 
-The NOTAM’s are delivered as deltas from a baseline of data. For instance, a pilot may be told in a NOTAM that runway 3 has been closed at their destination. They were previously told about the number of alternative runways at the destination airport in a baseline message. Deltas can be either temporary or non-temporary; temporary updates apply for a certain time frame whereas non-temporary updates last indefinitely.
+The NOTAMs are delivered as deltas from a baseline of data. For instance, a pilot may be told in a NOTAM that runway 3 has been closed at their destination. They were previously told about the number of alternative runways at the destination airport in a baseline message. Deltas can be either temporary or non-temporary; temporary updates apply for a certain time frame whereas non-temporary updates last indefinitely.
 
 If there are many delta updates it may be useful to make a snapshot. A snapshot is an updated baseline that is formed from the original baseline and a combination of deltas.
 
@@ -96,7 +99,7 @@ The project was built using the Agile software development practices of Scrum, a
 
 At the beginning of each sprint, a sprint meeting was held to both close the previous sprint and prepare for the following one. First, features implemented in the previous sprint were demonstrated to the customer, allowing them to track the progress of the project and decide whether the feature had been successfully implemented. In the event the customer was not satisfied with the work done in the sprint, the user stories were kept in the backlog for the following sprint. Otherwise, the customer discussed future features to be implemented and broke the feature up into user stories to be added to the backlog.
 
-Various software was used to carry out this process, including JIRA (access to which was provided by the client) and Cucumber. JIRA is a tracker that manages user stories and their corresponding acceptance criteria as per each feature. User stories within JIRA are stored in the standardised “As a, I want, So that” format, with their acceptance criteria written as “Given, When, Then”. This format is also used by Cucumber for acceptance tests. Team members on JIRA can choose what user stories to complete or they can be assigned.
+Various software was used to carry out this process, including JIRA (access to which was provided by the client) and Cucumber. JIRA is a tracker that manages user stories and their corresponding acceptance criteria as per each feature. User stories within JIRA are stored in the standardised ``As a, I want, So that'' format, with their acceptance criteria written as ``Given, When, Then''. This format is also used by Cucumber for acceptance tests. Team members on JIRA can choose what user stories to complete or they can be assigned.
 
 Cucumber was used to express the acceptance criteria for each story, allowing them to be converted into automated acceptance tests which could be run using JUnit. The Cucumber features are written in a language called Gherkin. Each Gherkin feature has a number of scenarios that test the aspects of that feature. The scenarios are written such that the implementation of the feature can change without having to rewrite the file. In the JUnit test file methods are called by Cucumber based off regex tags on the methods. For each story, when all acceptance tests passed within JUnit, the user story is removed from the backlog.
 
