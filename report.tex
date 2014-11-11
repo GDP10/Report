@@ -1,6 +1,7 @@
 \documentclass[a4paper, 12pt]{article}
 \usepackage[backend=biber]{biblatex}
 \usepackage{graphicx}
+\usepackage{caption}
 
 \addbibresource{report.bib}
 \nocite{*}
@@ -112,6 +113,17 @@ Cucumber was used to express the acceptance criteria for each story, allowing th
 
 \subsubsection{Sprint 2}
 
+
+\begin{table}
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    Origin         & Destination    & Route                 & Consumers \\ \hline
+    One Hard-Coded & None           & None                  & One       \\
+    Configurable   & One Hard-Coded & One Hard-Coded        & Two       \\
+    ~              & Configurable   & Multiple Hard-Coded   & Multiple  \\
+    ~              & ~              & Multiple Configurable & ~         \\ \hline
+    \end{tabular}
+\end{table}
 
 \section{Conclusions}
 \label{sec:conclusions}
