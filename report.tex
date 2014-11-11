@@ -109,7 +109,11 @@ Cucumber was used to express the acceptance criteria for each story, allowing th
 \section{Implementation}
 \subsection{Sprint Breakdown}
 \subsubsection{Sprint 1}
+In the first sprint meeting the customer laid out a user story epic for the entire project, stating the overall goals and requirements. Shorter term goals for the following sprint were also established, including setting up development environments and source repositories and investigating Apache ActiveMQ, a message queue with filtering capabilities. Once language, development environment and source repository were established, development began.
 
+After working on a basic implementation of ActiveMQ and exploring the documentation available online, it became obvious that it contained no implementation of WS-Notification. One of the requirements stated by the customer was the inclusion of WS-Notification and while this was a soft requirement, meaning that it's inclusion could be forgone if sufficient justification was given, the project was in an early enough stage at this point in development that it was worth exploring other alternatives. Alternatives such as Apache CXF.
+
+Apache CXF is a framework for producing web services and contains an implementation of WS-Notification. After ActiveMQ was deemed unusable, research began into using CXF. Progress in this research was slowed significantly by documentation for the framework being extremely limited, requiring necessary features such as WS-Notification support to be implemented entirely through experimentation. Despite the setbacks, a basic demo was produced using Apache CXF, subscribing a consumer to a preallocated topic and sending out a message through the subscription.
 
 \subsubsection{Sprint 2}
 
