@@ -6,6 +6,14 @@
 \addbibresource{report.bib}
 \nocite{*}
 
+\newcommand{\userstory}[3]{
+	\noindent\fbox{
+		\parbox{\textwidth}{
+			\emph{\textbf{AS A}} {\small #1}\\*\emph{\textbf{I WANT}} {\small #2}\\*\emph{\textbf{SO THAT}} {\small #3}
+		}
+	}
+}
+
 \begin{document}
 
 \begin{titlepage}
@@ -114,6 +122,8 @@ In the first sprint meeting the customer laid out a user story epic for the enti
 After working on a basic implementation of ActiveMQ and exploring the documentation available online, it became obvious that it contained no implementation of WS-Notification. One of the requirements stated by the customer was the inclusion of WS-Notification and while this was a soft requirement, meaning that it's inclusion could be forgone if sufficient justification was given, the project was in an early enough stage at this point in development that it was worth exploring other alternatives. Alternatives such as Apache CXF.
 
 Apache CXF is a framework for producing web services and contains an implementation of WS-Notification. After ActiveMQ was deemed unusable, research began into using CXF. Progress in this research was slowed significantly by documentation for the framework being extremely limited, requiring necessary features such as WS-Notification support to be implemented entirely through experimentation. Despite the setbacks, a basic demo was produced using Apache CXF, subscribing a consumer to a preallocated topic and sending out a message through the subscription.
+
+\userstory{flight planner}{to be notified if there is a change to my destination airport for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
 \subsubsection{Sprint 2}
 
