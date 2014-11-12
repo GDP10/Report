@@ -127,16 +127,23 @@ Apache CXF is a framework for producing web services and contains an implementat
 
 \subsubsection{Sprint 2}
 
+In the second sprint we were set the goals of expanding on the work we had already done. At the end of the first sprint we had a producer, broker and consumer all with hard-coded values for the subscription information. Our target for the end of the second sprint was to have a consumer that subscribed with configurable topics and to have multiple consumers listening to a broker.
+
+During the second sprint planning meeting we made a table of requirements to implement the code for the sprint. At the start of the sprint we had implemented the top row of the table and the target for the end of the sprint was to implement the lowest row from each column. The process works by filling out each layer of the table, one at a time to make sure features could be implemented in feasible steps.
+
+In practice we found that the jump from hard coded values to having everything being configurable was trivial. However creating tests for the code was not as simple as we had hoped. We created a set of Cucumber tests to check that a NOTAM could be sent from a producer, to a broker and out to a set of consumers; we ran into problems with waiting for processes to load up and having time-outs to check if a NOTAM had been received, in sprint 3 this was remedied by moving our tests to a continuous integration server. 
 
 \begin{table}
     \begin{tabular}{|l|l|l|l|}
     \hline
-    Origin         & Destination    & Route                 & Consumers \\ \hline
-    One Hard-Coded & None           & None                  & One       \\
-    Configurable   & One Hard-Coded & One Hard-Coded        & Two       \\
-    ~              & Configurable   & Multiple Hard-Coded   & Multiple  \\
+    \emph{Origin}         & \emph{Destination}    & \emph{Route}                 & \emph{Consumers} \\ \hline
+    One Hard-Coded & None           & None                  & One       \\ \hline
+    Configurable   & One Hard-Coded & One Hard-Coded        & Two       \\ \hline
+    ~              & Configurable   & Multiple Hard-Coded   & Multiple  \\ \hline
     ~              & ~              & Multiple Configurable & ~         \\ \hline
     \end{tabular}
+\caption{Sprint 2 Table}
+\label{tab:sprint2}
 \end{table}
 
 \section{Conclusions}
