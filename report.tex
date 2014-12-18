@@ -148,6 +148,14 @@ In practice we found that the jump from hard coded values to having everything b
 \label{tab:sprint2}
 \end{table}
 
+\subsubsection{Sprint 3}
+
+The focus of sprint 3 was research and investigation, specifically into the use of JBoss A-MQ in the project and the extent of its filtering capabilities. Through research in the previous sprint, the prominance of JBoss as a message queue used industrially had become apparent. Research done by Snowflake themselves also suggested that it would be useful for the project. The subject of testing was also brought up, and the implementation of a continuous integration system was decided upon to streamline the implementation of changes to the project. Early on in the sprint Jenkins was implemented and set up to run tests continuously on the latest version of the project, updating the project's Github page with the outcome of the latest tests.
+
+It was in sprint 3, after the progress made up to that point was shown in the sprint meeting, the customer expressed their interest in the implementation of spatial and temporal filtering of NOTAMs. The utility of spatial filtering is obvious in the case of flight planning, a flight planner simply defining the start and end point of the journey and then receiving all messages relevant to that geographical space would save considerable time when compared to the alternative of manually subscribing to airspaces and airports which are within range. Temporal filtering would allow a consumer to define the relevancy of a NOTAM, not only in terms of the type and location of the event, but the time it would affect a flight. This would dramatically reduce the number of irrelevant NOTAMs being sent to a consumer, retaining only integral information.
+
+With ideas for an implementation of JBoss A-MQ which necessitated these two filtering types being the goal of the sprint, work was split into exploring documentation for implementation instructions and information regarding filtering. After a week of investigation it became apparent that JBoss would not allow us to fulfil the requirements of the product, due to its extremely limited filtering implementation. JBoss filtering is restricted exclusively to simple strings, comparing the contents of each message with a given filter and sending based on its presence. This left us with two options: either forking A-MQ and modify it to support the required features or to drop it in favour of a message queue which does fulfil those requirements. Basing the decision on the scope of the project and limited remaining time to complete it, we opted to abandon A-MQ. As it was early in a sprint and the outcome of the decision would dramatically affect the outcome of the sprint, we notified the customer of our decision, explaining the decision and asking for input on moving forward.
+
 \section{Conclusions}
 \label{sec:conclusions}
 
