@@ -116,6 +116,12 @@ JAXB, or ``Java Architecture for XML Binding'', is a tool used to marshal Java o
 
 DOM parsing is one of the two most commonly used XML parsing methods, the other being SAX parsing. A DOM parser works by loading the entirety of an XML document into memory, modelling it as a tree to allow it to be easily traversed. The tree is traversed node by node to obtain the required information, in this case known tags within the OpenGIS standard for use in spatial filtering.
 
+\subsubsection{JIRA Issue Tracking}
+
+As our customer is a company which regularly works on projects of a much greater scale than that of our AES system, they possess a number of professional tools for organisation and issue tracking. One of these is JIRA, an issue tracker created by Atlassian designed to work with our chosen cycle of creating user stories and acceptance criteria with the customer and assigning these stories to team members after each sprint meeting. As JIRA is a professional piece of software which normally requires a monthly fee for usage, we had to gain access to the server running it licensed to our customer through their VPN. By using the tools in use by our customer, they were able to easily keep track of progress and make comments on submissions to the service.
+
+While JIRA initially proved useful early on in the project, having to install and use the VPN software on every computer we wished to access the tools on meant the issue tracker provided by our source repository (Github) ended up being temporarily used as a middleman. Shortly after realising that this was not an efficient use of time, we debated leaving JIRA in favour of fully committing to Github. While a number of tools offered by JIRA did not exist in Github's issue tracker, this often worked against JIRA as it contained a large array of tools not useful for a small scale project such as ours which often got in the way. As Github was already being used as our source repository, bringing issue tracking and source control into one place seemed like the most efficient thing to do.
+
 \newpage
 
 \section{Planning and Organisation}
@@ -150,7 +156,7 @@ In the second sprint we were set the goals of expanding on the work we had alrea
 
 During the second sprint planning meeting we made a table of requirements to implement the code for the sprint. At the start of the sprint we had implemented the top row of the table and the target for the end of the sprint was to implement the lowest row from each column. The process works by filling out each layer of the table, one at a time to make sure features could be implemented in feasible steps.
 
-In practice we found that the jump from hard coded values to having everything being configurable was trivial. However creating tests for the code was not as simple as we had hoped. We created a set of Cucumber tests to check that a NOTAM could be sent from a producer, to a broker and out to a set of consumers; we ran into problems with waiting for processes to load up and having time-outs to check if a NOTAM had been received, in sprint 3 this was remedied by moving our tests to a continuous integration server. 
+In practice we found that the jump from hard coded values to having everything being configurable was trivial. However creating tests for the code was not as simple as we had hoped. We created a set of Cucumber tests to check that a NOTAM could be sent from a producer, to a broker and out to a set of consumers; we ran into problems with waiting for processes to load up and having time-outs to check if a NOTAM had been received, in sprint 3 this was remedied by moving our tests to a continuous integration server.
 
 \begin{table}
     \begin{tabular}{|l|l|l|l|}
@@ -164,6 +170,8 @@ In practice we found that the jump from hard coded values to having everything b
 \caption{Sprint 2 Table}
 \label{tab:sprint2}
 \end{table}
+
+It was at this point, after producing a large number of user stories for this sprint, that we made the decision to cease using JIRA as our issue tracker. At this point in the project we were getting bogged down by the many unused pages and tools of JIRA which served no purpose in our small project, so we opted to fully commit to Github's issue tracker as it was already in use in a minimal capacity.
 
 \subsubsection{Sprint 3}
 
