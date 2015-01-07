@@ -76,11 +76,20 @@ The subscriptions to this service had to be based on the relevancy of NOTAMs to 
 \subsection{Background Information}
 
 \subsubsection{NOTAMs}
-A `notice to airmen' (NOTAM), is a notice given to airmen about events in a particular airspace or at a particular airport. The events may be hazards that have to be avoided, such as dangerous weather or updates on runway closures, which may or may not be relevant to the flight.
+A `notice to airmen' (NOTAM), is a notice given to airmen about events in a particular airspace or at a particular airport. The events may be hazards that have to be avoided, such as dangerous weather or updates on runway closures, which may or may not be relevant to the flight. They're used by pilots and flight planners to notify them about events which have the potential to affect the safety of their flight. NOTAMs are distributed by various aviation authorities around the world and are generally received by pilots and flight planners by pull notifications.
 
-The NOTAMs are delivered as deltas from a baseline of data. For instance, a pilot may be told in a NOTAM that runway 3 has been closed at their destination. They were previously told about the number of alternative runways at the destination airport in a baseline message. Deltas can be either temporary or non-temporary; temporary updates apply for a certain time frame whereas non-temporary updates last indefinitely.
+The NOTAMs are delivered as deltas from a baseline of data. For instance, a pilot may be told in a NOTAM that runway 3 has been closed at their destination. They were previously told about the number of alternative runways at the destination airport in a baseline message. Deltas can be either temporary or non-temporary; temporary updates apply for a certain time frame whereas non-temporary updates last indefinitely. If there are many delta updates, it is often useful to make a snapshot. A snapshot is an updated baseline that is formed from the original baseline and a combination of deltas, this allows flight planners requesting a NOTAM after a large number of delta updates to quickly receive up to date information without having to request large numbers of delta updates.
 
-If there are many delta updates, it may be useful to make a snapshot. A snapshot is an updated baseline that is formed from the original baseline and a combination of deltas.
+All NOTAMs are sent as XML documents using a schema known as AIXM. The AIXM, or \emph{Aeronautical Information Exchange Model}, is a specification for aeronautical information flows and includes two major components: the AIXM conceptual model and its corresponding XML schema. The conceptual model is used to model all important properties, features and restrictions which govern all aeronautical information. Features include runways, aerodromes and airspaces, whereas properties can include information such as the width and length of a specific runway. This model is implemented as the AIXM XML schema which all NOTAMs are created using.
+
+\begin{figure}
+\begin{center}
+\def\svgwidth{\columnwidth}
+\includegraphics[scale=0.5]{aixmUML.png}
+\end{center}
+\caption{UML diagram highlighting some features of the AIXM conceptual model.\cite{aixm}}
+\label{fig:example_net}
+\end{figure}
 
 \newpage
 
