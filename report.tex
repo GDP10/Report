@@ -112,7 +112,13 @@ In Java, brokers typically implement the Java Message Service (JMS) API provided
 
 \subsubsection{Web Services Notification}
 
-Web services notification (or WSN) is a set of specifications that defines the interactions between web services, using notifications, which can form the basis of a publish/subscribe architecture built using web services. They provide a standardized way to communicate with and between web services, without having prior information about them.
+Web services notification (or WSN) is a set of specifications created by OASIS that defines the interactions between web services, using notifications, which can form the basis of a publish/subscribe architecture built using web services. They provide a standardized way to communicate with and between web services, without having prior information about them. It includes facilities for detailed subscription, where those wishing to consume information can register with a web service along with details about the type of information they wish to receive. WSN was designed to revolve around these subscription details known as ``topics'' and use them to filter down subscriptions, allowing for large scale usage of the publish/subscribe architecture without unwanted message overload.
+
+WSN covers a family of smaller specifications including WS-Base Notifications, WS-Brokered Notification and WS-Topics. WS-Base Notifications is a specification of the simple producer/consumer relationship, consumers send out subscription requests to the producers, specifying the subset of messages produced by that producer which it wishes to receive. The request also contains a reference to the consumer itself, so the producer knows where to send the messages.
+
+WS-Brokered Notification works in a similar manner to WS-Base, but introduces a middleman between the message publishers and the message subscribers known as the broker. The broker is designed to decouple the connection between producers and consumers and allows for advanced messaging features such as demand-based publishing, load-balancing and publication of messages from entities which are not themselves web service providers.
+
+WS-Topics is a specification which defines a method for categorising subscriptions into ``topics''. This specification is designed to work in conjunction with WS-Base or WS-Brokered and contains various methods for defining groups of subscriptions.
 
 \subsubsection{Web Services Description Language}
 
