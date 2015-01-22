@@ -231,17 +231,46 @@ Cucumber was used to express the acceptance criteria for each story, allowing th
 \newpage
 
 \section{Implementation}
-\subsection{Sprint Breakdown}
-\subsubsection{Sprint 1}
-In the first sprint meeting the customer laid out a user story epic for the entire project, stating the overall goals and requirements. Shorter term goals for the following sprint were also established, including setting up development environments and source repositories and investigating Apache ActiveMQ, an open source message queue with filtering capabilities. Once language, development environment and source repository were established, development began.
+\subsection{Sprint 1}
+
+In the meeting we had with Snowflake, we were introduced to the project and we discussed the scope, requirements and overall goals of the project. 
+
+\subsubsection{Sprint Goals}
+
+For the first sprint the goal was to have a basic push notification system running that could publish and recieve an XML. As well as this we had to set up our developement environment and tools for the project.
+
+We decided to program using Java as it was what our group had used most in the past. For version control, we set up a repository on Github~\ref{github}.
+
+For this sprint we had a single user story as well as the epic that defined the whole project. We used Jira\ref{jira} to manage our user stories.
+
+\userstory{Basic Push Notification}{flight planner}{to be notified if there is a change to my destination airport for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
+
+To fufill this goal we had to set up Apache ActiveMQ\ref{activeMQ} and find a way to give the broker a message and a way of displaying the message so we know it had been recieved. 
+
+\subsubsection{Work Allocation}
+
+As the sprint goal was very simple it was difficult to seperate the work between team members. James Robinson did the majority of the coding work while everyone else in the group assisted by researching the possible tools we could use. This was in effect an extension of pair-programming, where two people working on a single machine take turns in programming while the other checks for mistakes.
+
+Once we had found a solution that worked, James presented the code to everyone else so that the group understood which of the implementations we went with and why.
+
+Apart from programming, James also helped to set up Maven on the team member's machines so that they could also work on the code. Charles Sherman set up the github repository to store the code for the project and Peter Prince typed up the user stories into Jira.
+
+\subsubsection{Implementation}
 
 After working on a basic implementation of ActiveMQ and exploring the documentation available online, it became obvious that it contained no implementation of WS-Notification and the page within its online documentation which was supposed to detail its implementation was a dead link. One of the requirements stated by the customer was the inclusion of WS-Notification and while this was a soft requirement, meaning that it's inclusion could be forgone if sufficient justification was given, the project was in an early enough stage at this point in development that it was worth exploring other alternatives. Alternatives such as developing our own WS-Notification implementation using CXF.
 
 Apache CXF is an open source framework for producing web services, and after ActiveMQ was deemed unusable, research began into using CXF. Work started by creating a WS-Notification implementation within CXF. Progress in this was slowed significantly by documentation for the framework being extremely limited. While creating this implementation, it was discovered that an implementation existed, undocumented, within Apache CXF. Through experimentation and knowledge gained from attempting to build a bespoke implementation, a basic demo was produced, subscribing a consumer to a preallocated topic and sending out a message through the subscription.
 
-\userstory{flight planner}{to be notified if there is a change to my destination airport for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
+\subsubsection{Review}
 
-\subsubsection{Sprint 2}
+At the end of the first sprint we completed our goals. We had Eclipse with Maven working on everyone's machines and using Github, we shared the code that had been written so that in future sprints everyone would be able to work on the code.
+
+The major issue in this sprint was the bottleneck caused by the coding. It was impossible for us to divide up the programming work between us which made it difficult to progress through the work quickly and to keep everyone informed about the work. Although it was inefficient, by having one team member write the code while everyone else researched, this did mean that everyone was at least familiar with the project so that they would be able to work efficiently in future sprints. At the end of the sprint, the team had meeting without the customer where the code was reviewed so that everyone understood it and could work on it in the future sprints.
+
+There were issues with writing the user stories to Jira. Peter Prince was the only person who could get onto the online service due to issues with the web plugin on other team member's machines. This made the point of assigning work to eachother on Jira useless as people couldn't see what work they had been given. This issue was solved in sprint 3 where Jira was replaced with github issue tracking.
+
+
+\subsection{Sprint 2}
 
 In the second sprint we were set the goals of expanding on the work we had already done. At the end of the first sprint we had a producer, broker and consumer all with hard-coded values for the subscription information. Our target for the end of the second sprint was to have a consumer that subscribed with configurable topics and to have multiple consumers listening to a broker.
 
@@ -264,7 +293,7 @@ In practice we found that the jump from hard coded values to having everything b
 
 It was at this point, after producing a large number of user stories for this sprint, that we made the decision to cease using JIRA as our issue tracker. At this point in the project we were getting bogged down by the many unused pages and tools of JIRA which served no purpose in our small project, so we opted to fully commit to Github's issue tracker as it was already in use in a minimal capacity. While JIRA initially proved useful early on in the project, having to install and use the VPN software on every computer we wished to access the tools on meant the issue tracker provided by our source repository (Github) ended up being temporarily used as a middleman. Shortly after realising that this was not an efficient use of time, we debated leaving JIRA in favour of fully committing to Github. While a number of tools offered by JIRA did not exist in Github's issue tracker, this often worked against JIRA as it contained a large array of tools not useful for a small scale project such as ours which often got in the way. As Github was already being used as our source repository, bringing issue tracking and source control into one place seemed like the most efficient thing to do.
 
-\subsubsection{Sprint 3}
+\subsection{Sprint 3}
 
 The main focus of sprint 3 was to research the extent of JBoss A-MQ's filtering capabilities, to access its viability for use in the project. Through research in the previous sprint, the prominence of JBoss as a message queue used industrially had become apparent. Research done by Snowflake themselves also suggested that it would be useful for the project. The subject of testing was also brought up, and the implementation of a continuous integration system was decided upon to streamline the implementation of changes to the project. Early on in the sprint, Jenkins was implemented and set up to run tests continuously on the latest version of the project, updating the project's Github page with the outcome of the latest tests.
 
@@ -274,7 +303,7 @@ In order to perform spatial filtering, latitude and longitude data for every air
 
 With these two filtering types being the goal of the sprint, work was split into exploring documentation for implementation instructions and information regarding filtering, in JBoss A-MQ. After a week of investigation it became apparent that JBoss would not allow us to fulfil the requirements of the product, due to its extremely limited filtering implementation. JBoss filtering is restricted exclusively to simple strings, comparing the contents of each message with a given filter and sending based on its presence. This left two options: either forking A-MQ and modifying it to support the required features or dropping it in favour of a message queue which does fulfil those requirements. Basing the decision on the scope of the project and limited remaining time to complete it, it was decided to abandon A-MQ. As it was early in the sprint and the outcome of the decision would dramatically affect the outcome of the sprint, the customer was notified of the decision, to ensure it was satisfactory to them.
 
-\subsubsection{Sprint 4}
+\subsection{Sprint 4}
 
 The forth sprint meeting consisted of bringing up to speed members of Snowflake in attendance who had not been notified about JBoss A-MQ. As well as the customer representative, Eddie, and the scrum master, Adrian, Alexis Brooker also attended, and after discussing the need for GPS locations in order to perform spatial filtering, Alexis provided access to a HTTP-GET web feature service (WFS), which returns latitude and longitude locations for all European airfields. Ideally, calling this service would be implemented into AES itself, however given the time remaining on the project and the status of the product as a proof of concept, it was elected to simply retrieve data for all airfields and hard-code them into the system for use in spatial queries, knowing that the system could easily be modified to directly call the service and utilise the data if more time was spent on it.
 
