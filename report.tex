@@ -447,7 +447,7 @@ Moving the Cucumber tests to Travis was done with little difficulty. As the team
 
 \subsubsection{Review}
 
-We had JMS with basic temporal filtering and travis tests
+We had JMS with basic temporal filtering and Travis tests
 
 \subsection{Sprint 4}
 
@@ -462,17 +462,11 @@ We also needed to implement spatial and temporal filtering and required NOTAM en
 
 \subsubsection{Work Allocation}
 
-Charles was assigned temporal filtering of NOTAMS.
-
-James had to add WS Notifications standard to the system
-
-Pete did spatial filtering
-
-Andrew created an xml with a subset of airport locations.
+For this sprint Charles was assigned to the task of building temporal filtering, in parallel to this, Peter worked on spatial filtering, James was tasking with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
 
 \subsubsection{Implementation}
 
-Temporal filtering was implemented by parsing the NOTAM xml and converting the timestamps in the data to a unix time stamp format. The time stamp measures the time in milliseconds so it is possible to directly compare the times using inequality operators. The code allows a consumer to subscribe to topics after a given time, or within a time period.
+Temporal filtering was implemented by parsing the NOTAM XML and converting the timestamps in the data to a Unix time stamp format. The time stamp measures the time in milliseconds so it is possible to directly compare the times using inequality operators. The code allows a consumer to subscribe to topics after a given time, or within a time period.
 
 Spatial filtering was implemented using a bounding box.
 
