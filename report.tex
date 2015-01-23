@@ -6,7 +6,14 @@
 %Package stuff for the user stories
 \usepackage{framed}
 \usepackage{tikz}
-\usetikzlibrary{decorations.pathmorphing,calc}
+\usepackage[a4paper,margin=1cm,landscape]{geometry}
+\usetikzlibrary{decorations.pathmorphing,calc,positioning,shapes,shadows,arrows}
+\tikzstyle{abstract}=[rectangle, draw=black, rounded corners, fill=gray!80, drop shadow,
+        text centered, anchor=north, text=white, text width=3cm]
+\tikzstyle{comment}=[rectangle, draw=black, rounded corners, fill=white, drop shadow,
+        text centered, anchor=north, text=white, text width=3cm]
+\tikzstyle{myarrow}=[->, >=open triangle 90, thick]
+\tikzstyle{line}=[-, thick]
 \pgfmathsetseed{1} % To have predictable results
 % Define a background layer, in which the parchment shape is drawn
 \pgfdeclarelayer{background}
@@ -351,7 +358,7 @@ For the first sprint the goal was to have a basic push notification system runni
 
 The project was written in Java because of the familiarity the team already had with it. The team worked in the IDE Eclipse, and used the build system Maven to handle library dependencies as it has automatic dependency resolution and plugins for code generation. For version control the team used Github.
 
-For the first sprint there was only a single user story to implement. Jira\ref{jira} was used to manage our user stories and to allocate the work, however there were problems using it.
+For the first sprint there was only a single user story to implement. Jira\ref{JIRA} was used to manage our user stories and to allocate the work, however there were problems using it.
 
 \userstory{Basic Push Notification}{flight planner}{to be notified if there is a change to my destination airport for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
