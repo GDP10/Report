@@ -635,9 +635,11 @@ We were able to complete all of our goals for this sprint, and produced two proj
     \draw[-latex] (Consumer2.north) -- (WSN Broker2.south) node[midway,right] {WSN(SOAP over HTTP)};
 
 \end{tikzpicture}
-\end{center}
+\caption{System overview}
+\label{fig:system_overview}
+\end{figure}
 
-The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in our project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. An overview of this system is given in figure X.
+The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in our project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. An block diagram giving an overview of this system is provided in figure~\ref{fig:system_overview}.
 
 The system was designed with scalability in mind, since it needed to be able to handle a large volume of NOTAM traffic, and a potentially large number of consumers. For this reason, an arbitrary number of producers and an arbitrary number of WS-Notification brokers are supported, with each broker servicing multiple consumers. The limiting factor in this setup is the number of simultaneous connections that the JMS broker itself is able to service. Since ActiveMQ already has robust support for clustering, this was deemed to be a non-issue.
 
