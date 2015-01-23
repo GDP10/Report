@@ -13,7 +13,7 @@
 \pgfsetlayers{background,main}
 % define styles for the normal border and the torn border
 \tikzset{
-  normal border/.style={orange!30!black!10, decorate 
+  normal border/.style={orange!30!black!10, decorate
      }}
 
      % Macro to draw the shape behind the text, when it fits completly in the
@@ -22,8 +22,8 @@
 \tikz{
   \node[inner sep=2em] (A) {#1};  % Draw the text of the node
   \begin{pgfonlayer}{background}  % Draw the shape behind
-  \fill[normal border] 
-        (A.south east) -- (A.south west) -- 
+  \fill[normal border]
+        (A.south east) -- (A.south west) --
         (A.north west) -- (A.north east) -- cycle;
   \end{pgfonlayer}}}
 
@@ -31,9 +31,9 @@
 \def\parchmentframetop#1{
 \tikz{
   \node[inner sep=2em] (A) {#1};    % Draw the text of the node
-  \begin{pgfonlayer}{background}    
+  \begin{pgfonlayer}{background}
   \fill[normal border]              % Draw the ``complete shape'' behind
-        (A.south east) -- (A.south west) -- 
+        (A.south east) -- (A.south west) --
         (A.north west) -- (A.north east) -- cycle;
   \end{pgfonlayer}}}
 
@@ -41,9 +41,9 @@
 \def\parchmentframebottom#1{
 \tikz{
   \node[inner sep=2em] (A) {#1};   % Draw the text of the node
-  \begin{pgfonlayer}{background}   
+  \begin{pgfonlayer}{background}
   \fill[normal border]             % Draw the ``complete shape'' behind
-        (A.south east) -- (A.south west) -- 
+        (A.south east) -- (A.south west) --
         (A.north west) -- (A.north east) -- cycle;
   \end{pgfonlayer}}}
 
@@ -52,9 +52,9 @@
 \def\parchmentframemiddle#1{
 \tikz{
   \node[inner sep=2em] (A) {#1};   % Draw the text of the node
-  \begin{pgfonlayer}{background}   
+  \begin{pgfonlayer}{background}
   \fill[normal border]             % Draw the ``complete shape'' behind
-        (A.south east) -- (A.south west) -- 
+        (A.south east) -- (A.south west) --
         (A.north west) -- (A.north east) -- cycle;
   \end{pgfonlayer}}}
 
@@ -69,7 +69,7 @@
   \def\MidFrameCommand{\parchmentframemiddle}%
   \vskip\baselineskip
   \MakeFramed {\FrameRestore}
-  \noindent\tikz\node[inner sep=1ex, draw=black!20,fill=white, 
+  \noindent\tikz\node[inner sep=1ex, draw=black!20,fill=white,
           anchor=west, overlay] at (0em, 2em) {\sffamily#1};\par}%
 {\endMakeFramed}
 
@@ -143,9 +143,9 @@ The customer for this project was Snowflake Software, a company focused on open 
 
 \subsection{Goals}
 
-The vision, as stated by Snowflake, was ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced over the course of the project was to explore options and find methods to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of relevant NOTAMs by pilots. 
+The vision, as stated by Snowflake, was ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced over the course of the project was to explore options and find methods to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of relevant NOTAMs by pilots.
 
-The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy was determined by geographic data, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAMs events to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes. 
+The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy was determined by geographic data, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAMs events to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes.
 
 \subsubsection{Project Goals}
 \begin{enumerate}
@@ -263,9 +263,9 @@ This practice of continues integration allows developers to detect problems quic
 \subsection{Cucumber}
 
 Cucumber is a testing suite that runs behaviour-driven development style acceptance tests, i.e., tests written to check if the requirements of a specification are met by the code. These focus on testing behaviours, i.e. the action the code is supposed to perform, where each test goal is independent of the code’s structure, rather than an approach like unit testing, that tests individual units of code.
-A single Cucumber test consists of a plain text feature definition, written in plain English, and corresponding step definitions, that is, the code that actually tests the feature. 
+A single Cucumber test consists of a plain text feature definition, written in plain English, and corresponding step definitions, that is, the code that actually tests the feature.
 
-A feature definition describes a single behaviour the code is supposed to be able to perform (such as ``Feature: Filter NOTAMs by time'') and then outlines one or many scenarios: sets of conditions that test a facet of the behaviour. These describe initial conditions, steps that are then carried out, and what the results of performing those steps (with those initial conditions) should be. These are specified with the keywords ``Given, When, Then'', i.e., given a set of initials conditions, when something happens, then the program should do something (with the ability to have multiple steps with the keyword And). 
+A feature definition describes a single behaviour the code is supposed to be able to perform (such as ``Feature: Filter NOTAMs by time'') and then outlines one or many scenarios: sets of conditions that test a facet of the behaviour. These describe initial conditions, steps that are then carried out, and what the results of performing those steps (with those initial conditions) should be. These are specified with the keywords ``Given, When, Then'', i.e., given a set of initials conditions, when something happens, then the program should do something (with the ability to have multiple steps with the keyword And).
 
 For each feature, there is then a set of corresponding step definitions, that is, code to test the feature, in the form of a subroutine for each step (e.g. there will be a single subroutine for ``Given a broker is running'', which will check that a broker is running and, if not, launch one). Depending on the keyword, these should either set up the initial conditions (in the case of Given or a following And), perform a particular action (in the case of When or a following And), or assert that particular conditions are true (in the case of Then or a following And). If all conditions are satisfied, the test passes, otherwise it fails.
 
@@ -275,7 +275,7 @@ JSON (or JavaScript Object Notation) is a human readable data interchange format
 
 \subsection{SOAP}
 
-SOAP (or, originally, Simple Object Access Protocol) is a platform independent protocol for exchanging information between web services, based on XML, and is dependant on other application layer protocols for message transmission (typically HTTP but other transport protocols are supported as well). 
+SOAP (or, originally, Simple Object Access Protocol) is a platform independent protocol for exchanging information between web services, based on XML, and is dependant on other application layer protocols for message transmission (typically HTTP but other transport protocols are supported as well).
 
 \subsection{Netcat}
 
@@ -326,7 +326,7 @@ During each sprint meeting the work for the following sprint was decided upon, w
 
 \subsection{Testing Methodology}
 
-Behavioural-driven development style acceptance testing was used, using Cucumber to express the acceptance criteria for each story, allowing them to be converted into automated acceptance tests which could be run using JUnit. The scenarios were written such that the implementation of the feature can change without having to rewrite the file. For each story, when all acceptance tests passed within JUnit, the user story is removed from the backlog. This type of testing keeps testing focused on user stories, testing features rather than abstract units of code, better ensuring that the code satisfies the client's requirements, rather than some abstract measure of performance. 
+Behavioural-driven development style acceptance testing was used, using Cucumber to express the acceptance criteria for each story, allowing them to be converted into automated acceptance tests which could be run using JUnit. The scenarios were written such that the implementation of the feature can change without having to rewrite the file. For each story, when all acceptance tests passed within JUnit, the user story is removed from the backlog. This type of testing keeps testing focused on user stories, testing features rather than abstract units of code, better ensuring that the code satisfies the client's requirements, rather than some abstract measure of performance.
 
 Continuous integration was also used, utilizing Travis CI. This helps to ensure new code doesn't break old tests, ensures the software can run on a variety of computer set-ups, and allows problems to be detected more quickly and fixed with less backtracking.
 
@@ -345,7 +345,7 @@ At the start of the project the team had a meeting with Snowflake, we were intro
 
 For the first sprint the goal was to have a basic push notification system running that could publish and receive an XML. As well as this we had to set up our development environment and tools for the project.
 
-The project was written in Java because of the familiarity the team already had with it. The team worked in the IDE Eclipse, and used the build system Maven to handle library dependencies as it has automatic dependency resolution and plugins for code generation. For version control the team used Github.  
+The project was written in Java because of the familiarity the team already had with it. The team worked in the IDE Eclipse, and used the build system Maven to handle library dependencies as it has automatic dependency resolution and plugins for code generation. For version control the team used Github.
 
 For the first sprint there was only a single user story to implement. Jira\ref{jira} was used to manage our user stories and to allocate the work, however there were problems using it.
 
@@ -446,7 +446,7 @@ The forth sprint meeting consisted of bringing up to speed members of Snowflake 
 
 After JBoss A-MQ proved to be a dead end, a new system structure was decided on, with only the consumer side using WS-Notifications to communicate. All remaining communication between brokers and producers was changed to rely on JMS, with converters between WS-Notification topics and JMS filters becoming a primary focus for the sprint.
 
-We also needed to implement spatial and temporal filtering and required NOTAM enrichment to do this. 
+We also needed to implement spatial and temporal filtering and required NOTAM enrichment to do this.
 
 
 \subsubsection{Work Allocation}
@@ -503,6 +503,14 @@ We originally planned to switch to JAXB for our XML parsing needs during this sp
 We were able to complete all of our goals for this sprint, and produced two projects - the AES service itself, consisting of our producer and WS-Notification broker implementation, and a separate project containing an example consumer.
 
 \subsection{Final Meeting}
+
+\section{Final System Overview}
+
+The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in our project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. An overview of this system is given in figure X.
+
+The system was designed with scalability in mind, since it needed to be able to handle a large volume of NOTAM traffic, and a potentially large number of consumers. For this reason, an arbitrary number of producers and an arbitrary number of WS-Notification brokers are supported, with each broker servicing multiple consumers. The limiting factor in this setup is the number of simultaneous connections that the JMS broker itself is able to service. Since ActiveMQ already has robust support for clustering, this was deemed to be a non-issue.
+
+Although the consumer was out of this project's scope, we still produced a basic implementation in order to demonstrate the system's functionality. A class diagram for this separate project is given in figure X. Note that this project does not directly reference any of the classes from our main project; instead, it uses the published WSDL for our service, along with JAX-WS, to connect to the service.
 
 \section{Conclusions}
 \label{sec:conclusions}
