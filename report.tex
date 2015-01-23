@@ -269,6 +269,7 @@ Netcat is a utility to read from and write across network connections using TCP 
 
 cURL is both a library and command line tool for sending and retrieving data using a wide variety of protocols (such as HTTP, FTP, SCP, POP3, etc.). It is very portable, working on a wide variety of platforms, and bindings are available for a large number of programming languages.
 
+\subsection{Web Feature Service}
 
 \newpage
 
@@ -284,6 +285,14 @@ Meetings also regularly featured exercises to identify issues and find solutions
 Various software was used to carry out this process, including JIRA (access to which was provided by the client) and Cucumber. JIRA is a tracker that manages user stories and their corresponding acceptance criteria as per each feature. User stories within JIRA are stored in the standardised \emph{``As a, I want, So that''} format, with their acceptance criteria written as \emph{``Given, When, Then''}. This format is also used by Cucumber for acceptance tests. Team members on JIRA can choose what user stories to complete or they can be assigned.
 
 Early on in the project we were given access to Jira on Snowflake's private servers. This allowed us to keep control over our backlog and keep a record of what had been completed. However over the course of the project, the number of steps required to connect to the Snowflake VPN and access Jira as well as the difficulty from never having used the service before, we decided keeping track of the project would be better done through Github, which was already being used as a code repository. The issue tracking features within Github replaced Jira's extensive features (the majority of which far surpassed the requirements of a small project such as ours) and all tasks became issues, still using the standard user story format.
+
+\subsection{Skills Audit}
+
+\subsection{Risk Analysis}
+
+\subsection{Customer Relations}
+
+\subsection{Deliverables}
 
 \subsection{Testing Methodology}
 
@@ -445,6 +454,10 @@ We had JMS working but not WS Notification
 \newpage
 
 \section{Future Work}
+
+Performance/scalability testing (using Amazon EC2 and/or Elastic Beanstalk for example)
+
+Fix stupidly long compile times (e.g. using catalogues rather than re-downloading every XML file on every compile)
 
 \newpage
 
