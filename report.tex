@@ -151,20 +151,28 @@ The subscriptions to this service had to be based on the relevancy of NOTAMs to 
 \begin{enumerate}
 \item Capable of parsing XML documents from the AIXM schema.
 \item Capable of basic filtering of NOTAMs based on simple text fields such as airport names.
-\item Capable of spatial filtering of NOTAMs based on distances from points.
-\item Capable of spatial filtering of NOTAMs based on locations within bounding boxes.
+\item Capable of temporal filtering of NOTAMs.
 \item Capable of receiving and handling subscriptions from consumers.
 \item Capable of publishing parsed NOTAMs to relevant subscribers.
 \item Produced utilising exclusively open-source libraries.
 \item Using WS-Notifications to securely communicate all NOTAMs.
 \item Able to handle 10,000 messages per day.
+\item Store and update baselines to provide to consumers upon connection.
 \end{enumerate}
 
 \subsubsection{Additional Goals}
 \begin{enumerate}
-\item Temporal filtering of NOTAMs.
+\item Spatial filtering of NOTAMs based on distances from points.
+\item Spatial filtering of NOTAMs based on locations within bounding boxes.
+\item Retrieve GPS co-ordinates for airports and airspaces from Snowflake's Global Aerodromes web service.
 \item Enriching NOTAMs with GPS co-ordinates to allow for faster spatial filtering.
+\item Handle cases where the Global Aerodromes service does not contain a designator for a location.
 \end{enumerate}
+
+\subsubsection{Project Scope Changes}
+In the opening meeting, the initial project goals were set out by our liason with Snowflake, Adrian. Several meetings later this list of requirements was updated, making a spatial filtering a major focus for the project and temporal filtering an extension goal to complete if we had time. As most of the groundwork for both filtering types could be reused, both were completed.
+
+The storing and provision of baselines ceased to be a requirement after a few meetings, when it was revealed to us that Snowflake already possessed a service which provided updated NOTAM baselines and this functionality was not required of any system we produced.
 
 \section{Background Information}
 
