@@ -466,9 +466,33 @@ We had JMS working but not WS Notification
 \subsection{Sprint 5}
 
 \subsubsection{Sprint Goals}
+
+The goal for the final sprint was to produce a complete minimal viable product for the product owner. This involved finishing our WS-Notification implementation, packaging the application as a WAR for deployment on Tomcat, building a WSDL for the web service, making a barebones client to demonstrate the service's functionality, and implementing basic OpenGIS filtering support. We also planned to replace our DOM parsers with JAXB in order to make it easier to implement the OpenGIS filtering support.
+
 \subsubsection{Work Allocation}
+
+\begin{tabular}{l|l}
+  \emph{Task} & \emph{Assignee(s)} \\ \hline
+  JAX-WS code generation using CXF Maven plugin & James \\
+  WSDL for our WS-Notification implementation & James, Charles \\
+  WAR generation using Maven & Charles \\
+  Tomcat setup and WAR deployment & Charles \\
+  Mapping from OpenGIS filters to JMS selectors & Peter \\
+  Mock client implementation using NetCat and cURL & Peter \\
+  Barebones client implementation using JAX-WS & James \\
+  NOTAM enrichment & Peter, Andrew \\
+  Parsing the Snowflake GlobalAerodromes WFS & Andrew \\
+\end{tabular}
+
 \subsubsection{Implementation}
+
+We used the Apache CXF JAX-WS codegen plugin for Maven to build class stubs from the WSN WSDLs. Unfortunately the WSDLs provided by Oasis do not specify any endpoints, and so we created our own based on a subset of the WSN WSDL included with the Apache CXF implementation of WSN.
+
+A mock client for the system was implemented using NetCat and cURL - NetCat took the place of the WSN consumer, listening on port 80 and simply printing out all received data to standard output, and cURL was used to send a subscription request to the WSN broker. Unfortunately we were unable to determine the correct format for the subscription request, so we ditched the barebones client implementation and created a new implementation using CXF, based on the WSDL for our web service.
+
 \subsubsection{Review}
+
+We were able to complete all of our goals for this sprint, and produced two projects - the AES service itself, consisting of our producer and WS-Notification broker implementation, and a separate project containing an example consumer.
 
 \subsection{Final Meeting}
 
