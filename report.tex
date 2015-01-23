@@ -264,7 +264,12 @@ Various software was used to carry out this process, including JIRA (access to w
 
 Early on in the project we were given access to Jira on Snowflake's private servers. This allowed us to keep control over our backlog and keep a record of what had been completed. However over the course of the project, the number of steps required to connect to the Snowflake VPN and access Jira as well as the difficulty from never having used the service before, we decided keeping track of the project would be better done through Github, which was already being used as a code repository. The issue tracking features within Github replaced Jira's extensive features (the majority of which far surpassed the requirements of a small project such as ours) and all tasks became issues, still using the standard user story format.
 
-Cucumber was used to express the acceptance criteria for each story, allowing them to be converted into automated acceptance tests which could be run using JUnit. The Cucumber features are written in a language called Gherkin. Each Gherkin feature has a number of scenarios that test the aspects of that feature. The scenarios are written such that the implementation of the feature can change without having to rewrite the file. In the JUnit test file methods are called by Cucumber based off regex tags on the methods. For each story, when all acceptance tests passed within JUnit, the user story is removed from the backlog.
+\subsection{Testing Methodology}
+
+Behavioural-driven development style acceptance testing was used, using Cucumber to express the acceptance criteria for each story, allowing them to be converted into automated acceptance tests which could be run using JUnit. The scenarios were written such that the implementation of the feature can change without having to rewrite the file. For each story, when all acceptance tests passed within JUnit, the user story is removed from the backlog. This type of testing keeps testing focused on user stories, testing features rather than abstract units of code, better ensuring that the code satisfies the client's requirements, rather than some abstract measure of performance. 
+
+Continuous integration was also used, utilizing Travis CI. This helps to ensure new code doesn't break old tests, ensures the software can run on a variety of computer set-ups, and allows problems to be detected more quickly and fixed with less backtracking.
+
 
 \newpage
 
