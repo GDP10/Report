@@ -517,6 +517,67 @@ We were able to complete all of our goals for this sprint, and produced two proj
 
 \section{Final System Overview}
 
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+     \node (Producer1) [abstract, rectangle split, rectangle split parts=2]
+        {
+            \textbf{Producer}
+            \nodepart{second}JMS Publisher
+        };
+
+    \node (ActiveMQ) [abstract, rectangle split, rectangle split parts=1, right=5cm of Producer1]
+        {
+            \textbf{ActiveMQ}
+            
+        };
+
+    \node (Producer2) [abstract, rectangle split, rectangle split parts=2, right=5cm of ActiveMQ]
+    {
+        \textbf{Producer}
+        \nodepart{second}JMS Publisher
+    };
+
+    \node (WSN Broker1) [abstract, rectangle split, rectangle split parts=1, below left=0.8cm of ActiveMQ]
+        {
+            \textbf{WSN Broker}
+            
+        };
+
+    \node (WSN Broker2) [abstract, rectangle split, rectangle split parts=1, below right=0.8cm of ActiveMQ]
+        {
+            \textbf{WSN Broker}
+            
+        };
+
+    \node (Consumer) [abstract, rectangle split, rectangle split parts=2, below right=0.8cm of WSN Broker1]
+    {
+        \textbf{Consumer}
+        \nodepart{second}WSN Consumer
+    };
+
+    \node (Consumer1) [abstract, rectangle split, rectangle split parts=2, below left=0.8cm of WSN Broker1]
+    {
+        \textbf{Consumer}
+        \nodepart{second}WSN Consumer
+    };
+
+    \node (Consumer2) [abstract, rectangle split, rectangle split parts=2, below=1cm of WSN Broker2]
+    {
+        \textbf{Consumer}
+        \nodepart{second}WSN Consumer
+    };
+
+    \draw[-latex] (Producer1.east) -- (ActiveMQ.west) node[midway,above] {JMS Message Publish};
+    \draw[-latex] (Producer2.west) -- (ActiveMQ.east) node[midway,above] {JMS Message Publish};
+    \draw[-latex] (WSN Broker1.north) -- (ActiveMQ.south) node[midway,left] {JMS Subscription};
+    \draw[-latex] (WSN Broker2.north) -- (ActiveMQ.south) node[midway,right] {JMS Subscription};
+    \draw[-latex] (Consumer.north) -- (WSN Broker1.south) node[midway,right] {};
+    \draw[-latex] (Consumer1.north) -- (WSN Broker1.south) node[midway,right] {};
+    \draw[-latex] (Consumer2.north) -- (WSN Broker2.south) node[midway,right] {WSN(SOAP over HTTP)};
+
+\end{tikzpicture}
+\end{center}
+
 The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in our project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. An overview of this system is given in figure X.
 
 The system was designed with scalability in mind, since it needed to be able to handle a large volume of NOTAM traffic, and a potentially large number of consumers. For this reason, an arbitrary number of producers and an arbitrary number of WS-Notification brokers are supported, with each broker servicing multiple consumers. The limiting factor in this setup is the number of simultaneous connections that the JMS broker itself is able to service. Since ActiveMQ already has robust support for clustering, this was deemed to be a non-issue.
