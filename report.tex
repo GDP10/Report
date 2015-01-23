@@ -217,6 +217,14 @@ Travis CI is a free, hosted, continuous integration platform that is used to aut
 
 This practice of continues integration allows developers to detect problems quickly. This also makes fixing them easier, as less back tracking is required to identify when and where the issue occurred, reducing the number of large scale revisions required. It also means they can assure the software will run on a variety of computer set-ups, without time consuming manual testing.
 
+\subsubsection{Cucumber}
+
+Cucumber is a testing suite that runs behaviour-driven development style acceptance tests, i.e., tests written to check if the requirements of a specification are met by the code. These focus on testing behaviours, i.e. the action the code is supposed to perform, where each test goal is independent of the code’s structure, rather than an approach like unit testing, that tests individual units of code.
+A single Cucumber test consists of a plain text feature definition, written in plain English, and corresponding step definitions, that is, the code that actually tests the feature. 
+
+A feature definition describes a single behaviour the code is supposed to be able to perform (such as "Feature: Filter NOTAMs by time") and then outlines one or many scenarios: sets of conditions that test a facet of the behaviour. These describe initial conditions, steps that are then carried out, and what the results of performing those steps (with those initial conditions) should be. These are specified with the keywords "Given, When, Then", i.e., given a set of initials conditions, when something happens, then the program should do something (with the ability to have multiple steps with the keyword And). 
+
+For each feature, there is then a set of corresponding step definitions, that is, code to test the feature, in the form of a subroutine for each step (e.g. there will be a single subroutine for "Given a broker is running", which will check that a broker is running and, if not, launch one). Depending on the keyword, these should either set up the initial conditions (in the case of Given or a following And), perform a particular action (in the case of When or a following And), or assert that particular conditions are true (in the case of Then or a following And). If all conditions are satisfied, the test passes, otherwise it fails.
 
 \newpage
 
