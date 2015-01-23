@@ -468,7 +468,7 @@ For this sprint Charles was assigned to the task of building temporal filtering,
 
 Temporal filtering was implemented by parsing the NOTAM XML and converting the timestamps in the data to a Unix time stamp format. The time stamp measures the time in milliseconds so it is possible to directly compare the times using inequality operators. The code allows a consumer to subscribe to topics after a given time, or within a time period.
 
-Spatial filtering was implemented using a bounding box.
+The selectors used for filtering are based on SQL 92, which features only simple arithmetic operators. In order to create a proper bounding box which covered a plane route, more operators were required (such as square roots, which are not included). As a result, spatial filtering's implementation was simplified to an axis-aligned bounding box. This type of spatial filtering required simply greater than and less than operators to perform.
 
 \subsubsection{Review}
 
