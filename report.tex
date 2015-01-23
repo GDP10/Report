@@ -232,6 +232,12 @@ JAXB, or ``Java Architecture for XML Binding'', is a tool used to marshal Java o
 
 DOM parsing is one of the two most commonly used XML parsing methods, the other being SAX parsing. A DOM parser works by loading the entirety of an XML document into memory, modelling it as a tree to allow it to be easily traversed. The tree is traversed node by node to obtain the required information, in this case known tags within the OpenGIS standard for use in spatial filtering. This method of parsing generally has quite a large overhead when parsing large XML files, due to the fact it needs to parse the entire file.
 
+\subsection{XML Catalogs}
+
+XML files contain references to external XML resources such as schema files and WSDL files. When referencing a large number of external files, events such as network outages and slow connections can cause major issues for a service and its performance. Another problem which can occur when referencing external resources is relative URLs being used to address them. Relative URLs limit the service using them to the context in which it was created, as launching it from any other location will not work.
+
+A solution to these problems is creating an XML catalog, which allows you to store these files locally and instruct your service to use these local references when its external counterpart is requested. The catalog maps between these two versions of the same resource.
+
 \subsection{JIRA Issue Tracking}
 
 Issue trackers are systems which maintains lists of issues in an ongoing project, with the ability to assign these issues to specific group members, report bugs while working and connect solved issues to source control commits which fix them. Issues can also be broken into sub-tasks, prioritised and categorised to improve efficiency. For example, many issues were recorded after each sprint meeting, these included work for the next sprint, work for near future sprints and overall project goals. These issue reports were categorised according to the sprint which they were to be completed in. When every issue attached to a sprint was marked as solved, a sprint was considered complete in terms of work.
@@ -506,6 +512,8 @@ We were able to complete all of our goals for this sprint, and produced two proj
 Performance/scalability testing (using Amazon EC2 and/or Elastic Beanstalk for example)
 
 Fix stupidly long compile times (e.g. using catalogues rather than re-downloading every XML file on every compile)
+
+Switch from IATA designator to ICAO location indicator
 
 \newpage
 
