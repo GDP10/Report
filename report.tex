@@ -511,9 +511,14 @@ We were able to complete all of our goals for this sprint, and produced two proj
 
 \section{Future Work}
 
+\subsection{Performance/Scalability Testing}
 %Performance/scalability testing (using Amazon EC2 and/or Elastic Beanstalk for example)
 
-%Switch from IATA designator to ICAO location indicator
+\subsection{IATA Designators and ICAO Location Indicators}
+
+Global Aerodromes is a service provided by Snowflake which allowed our system to map from aerodromes referenced in NOTAMs to GPS co-ordinates, a feature required in order to perform spatial filtering. Within the AIXM specification for NOTAMs, both IATA (International Air Transport Assocation) designators and ICAO (International Civil Aviation Organisation) location indicators are specified. Both of these designating IDs are used by Global Aerodromes and the AES service we produced made use of just IATA designators to pair NOTAMs to GPS co-ordinates. This caused an issue due to a fraction of the aerodromes listed by the Global Aerodromes service do not contain a value for this identifier. A possible future extension would be to add a contingency for this occurrence and include support for ICAO location indicators as well, to maximise the chance that every NOTAM's aerodrome is matched to a location for filtering.
+
+\subsection{Compile Time Issues}
 
 A major issue with the final version of the AES system is compile time problems. The reason for these issues is the time required to download all required XML documents and WSDL files. The WSDL files in particular require a large number of external resources including more WSDL files and relevant XSD schemata, each of these referencing even more resources in a long chain. A number of these chained references take a long time to download and as they are referenced multiple times from different locations they are downloaded multiple times, greatly increasing compile times.
 
