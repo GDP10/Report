@@ -470,6 +470,8 @@ Temporal filtering was implemented by parsing the NOTAM XML and converting the t
 
 The selectors used for filtering are based on SQL 92, which features only simple arithmetic operators. In order to create a proper bounding box which covered a plane route, more operators were required (such as square roots, which are not included). As a result, spatial filtering's implementation was simplified to an axis-aligned bounding box. This type of spatial filtering required simply greater than and less than operators to perform.
 
+To produce the subset XML document, a bounding box was placed over Europe and submitted to the Global Aerodromes service, all aerodromes within the given bounding box were retrieved.
+
 \subsubsection{Review}
 
 We had JMS working but not WS Notification
