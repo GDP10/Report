@@ -145,6 +145,25 @@ The vision, as stated by Snowflake, was ``To develop a proof of concept push eve
 
 The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy should be based on simple factors, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAMs events to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes. 
 
+\subsubsection{Project Goals}
+\begin{enumerate}
+\item Capable of parsing XML documents from the AIXM schema.
+\item Capable of basic filtering of NOTAMs based on simple text fields such as airport names.
+\item Capable of spatial filtering of NOTAMs based on distances from points.
+\item Capable of spatial filtering of NOTAMs based on locations within bounding boxes.
+\item Capable of receiving and handling subscriptions from consumers.
+\item Capable of publishing parsed NOTAMs to relevant subscribers.
+\item Produced utilising exclusively open-source libraries.
+\item Using WS-Notifications to securely communicate all NOTAMs.
+\item Able to handle 10,000 messages per day.
+\end{enumerate}
+
+\subsubsection{Additional Goals}
+\begin{enumerate}
+\item Temporal filtering of NOTAMs.
+\item Enriching NOTAMs with GPS co-ordinates to allow for faster spatial filtering.
+\end{enumerate}
+
 \section{Background Information}
 
 \subsection{NOTAMs}
