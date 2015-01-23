@@ -429,7 +429,7 @@ Having tests for the system would have been useful but they only worked on certa
 
 The main focus of sprint 3 was to research the extent of JBoss A-MQ's filtering capabilities, to access its viability for use in the project. Through research in the previous sprint, the prominence of JBoss as a message queue used industrially had become apparent. Research done by Snowflake themselves also suggested that it would be useful for the project. The subject of testing was also brought up, and the implementation of a continuous integration system was decided upon to streamline the implementation of changes to the project. Early on in the sprint, Jenkins was implemented and set up to run tests continuously on the latest version of the project, updating the project's Github page with the outcome of the latest tests.
 
-It was in sprint 3, after the progress made up to that point was shown in the sprint meeting, that the customer expressed a desire for the implementation of spatial and temporal filtering of NOTAMs. The utility of spatial filtering is obvious in the case of flight planning, a flight planner simply defining the start and end point of the journey and then receiving all messages relevant to that geographical space would save considerable time when compared to the alternative of manually subscribing to airspaces and airports which are within range. Temporal filtering would allow a consumer to only receive NOTAMs that are in effect for the duration of their flight, dramatically reducing the number of irrelevant NOTAMs being sent.
+It was in sprint 3, after the progress made up to that point was shown in the sprint meeting, that another representative of Snowflake expressed the importance of spatial filtering over temporal filtering. The utility of spatial filtering is obvious in the case of flight planning, a flight planner simply defining the start and end point of the journey and then receiving all messages relevant to that geographical space would save considerable time when compared to the alternative of manually subscribing to airspaces and airports which are within range. Temporal filtering would allow a consumer to only receive NOTAMs that are in effect for the duration of their flight, dramatically reducing the number of irrelevant NOTAMs being sent.
 
 In order to perform spatial filtering, latitude and longitude data for every airspace and airfield would be required, as NOTAMs lack information at this level of detail. The information required for temporal filtering is featured in each NOTAM, and only conversion to a usable timestamp format was required.
 
@@ -437,17 +437,20 @@ Additionally we wanted to fix the problems we had with the Cucumber tests. The t
 
 \subsubsection{Work Allocation}
 
-Charles continued working on the Cucumber tests, writing more case scenarios and fixing bugs in the old tests. He also set up the Github repository to work with the the continuous integration service on Travis.James was assigned changing the system over to JBoss. In the middle of the sprint we realised that JBoss wouldn't be able to meet our requirements and so James then started to work on a JMS system. Pete looked into temporal and spatial filtering and was set the task of writing a basic test scenario to check we could filter GPS coordinates.
+Charles continued working on the Cucumber tests, writing more case scenarios and fixing bugs in the old tests. He also set up the Github repository to work with the the continuous integration service on Travis. James was assigned changing the system over to JBoss. In the middle of the sprint we realised that JBoss wouldn't be able to meet our requirements and so James then started to work on a JMS system. Pete looked into temporal and spatial filtering and was set the task of writing a basic test scenario to check we could produce basic filters based on GPS co-ordinates.
 
 \subsubsection{Implementation}
 
 With these two filtering types being the goal of the sprint, work was split into exploring documentation for implementation instructions and information regarding filtering, in JBoss A-MQ. After a week of investigation it became apparent that JBoss would not allow us to fulfil the requirements of the product, due to its extremely limited filtering implementation. JBoss filtering is restricted exclusively to simple strings, comparing the contents of each message with a given filter and sending based on its presence. This left two options: either forking A-MQ and modifying it to support the required features or dropping it in favour of a message queue which does fulfil those requirements. Basing the decision on the scope of the project and limited remaining time to complete it, it was decided to abandon A-MQ. As it was early in the sprint and the outcome of the decision would dramatically affect the outcome of the sprint, the customer was notified of the decision, to ensure it was satisfactory to them.
+
+Once the decision had been made to use JMS, a filtering proof of concept was required to justify the change. Using JMS Selectors to filter based on dummy GPS co-ordinates randomly assigned to each NOTAM, a basic implementation of spatial filtering was created.
 
 Moving the Cucumber tests to Travis was done with little difficulty. As the team was already using Maven for the project, the only work that was required was in creating a configuration file to call the relevant tests. The issues with startup and teardown with the Cucumber tests was fixed by rewriting the consumer and producer code so that they could be run in a single process rather than in multiple ones. When the tests were moved to running on Travis rather than on a compile, they were instead run every time a commit or a merge request was made which worked well with the Git workflow of the group.
 
 \subsubsection{Review}
 
 We had JMS with basic temporal filtering and Travis tests
+In this sprint, a major shift was made from JBoss A-MQ to a JMS-based service. This change required a large amount of work to complete, but allowed work to start on spatial filtering.
 
 \subsection{Sprint 4}
 
@@ -462,7 +465,7 @@ We also needed to implement spatial and temporal filtering and required NOTAM en
 
 \subsubsection{Work Allocation}
 
-For this sprint Charles was assigned to the task of building temporal filtering, in parallel to this, Peter worked on spatial filtering, James was tasking with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
+For this sprint Charles was assigned to the task of building more elaborate temporal filtering, in parallel to this, Peter worked on spatial filtering, James was tasking with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
 
 \subsubsection{Implementation}
 
