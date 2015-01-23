@@ -2,6 +2,11 @@
 \usepackage[backend=biber]{biblatex}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{hyperref}
+\usepackage{tabularx}
+
+% Define \fullref command to reference both number and name of section
+\newcommand*{\fullref}[1]{\ref{#1} \nameref{#1}}
 
 %Package stuff for the user stories
 \usepackage{framed}
@@ -142,13 +147,16 @@ The project customer was Snowflake Software, a company that works in geographica
 
 \section{Project Description}
 \subsection{Motivation}
+\label{sec:intro_motivation}
 Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Examples of such events includes: closed runways, restricted airspaces, extreme weather conditions and even the presence of migrating birds through an airspace. Currently, flight planners receive such information by pulling NOTAM's, or `Notice to Airmen', and must manually sort through all NOTAMs to find only the notices which are relevant to their flight, which is extremely time consuming. The efficiency of this task could be improved dramatically if the filtering were performed automatically using defined geographic regions and time frames. The aeronautics industry uses WSN as their prefered standard, so our customer required us to work to this standard or WS-Events.
 
 \subsection{Customer}
+\label{sec:intro_customer}
 
 The customer for this project was Snowflake Software, a company focused on open data exchange, and various products based on mapping data. Within sprint meetings the company was represented by Eddie Curtis, who expressed the feature requests and gave feedback, representing Snowflake as a whole.
 
 \subsection{Goals}
+\label{sec:intro_goals}
 
 The vision, as stated by Snowflake, was ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced over the course of the project was to explore options and find methods to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of relevant NOTAMs by pilots.
 
@@ -184,6 +192,7 @@ The storing and provision of baselines ceased to be a requirement after a few me
 \section{Background Information}
 
 \subsection{NOTAMs}
+\label{sec:bg_notams}
 A `notice to airmen' (NOTAM), is a notice given to airmen about events in a particular airspace or at a particular airport. The events may be hazards that have to be avoided, such as dangerous weather or updates on runway closures, which may or may not be relevant to the flight. They're used by pilots and flight planners to notify them about events which have the potential to affect the safety of their flight. NOTAMs are distributed by various aviation authorities around the world and are generally received by pilots and flight planners by pull notifications.
 
 The NOTAMs are delivered as deltas from a baseline of data. For instance, a pilot may be told in a NOTAM that runway 3 has been closed at their destination. They were previously told about the number of alternative runways at the destination airport in a baseline message. Deltas can be either temporary or non-temporary; temporary updates apply for a certain time frame whereas non-temporary updates last indefinitely. If there are many delta updates, it is often useful to make a snapshot. A snapshot is an updated baseline that is formed from the original baseline and a combination of deltas, this allows flight planners requesting a NOTAM after a large number of delta updates to quickly receive up to date information without having to request large numbers of delta updates.
@@ -202,6 +211,7 @@ All NOTAMs are sent as XML documents using a schema known as AIXM. The AIXM, or 
 \newpage
 
 \subsection{Publish/Subscribe Architecture}
+\label{sec:bg_pubsub}
 
 \begin{figure}
 \begin{center}
@@ -219,6 +229,7 @@ This architecture is generally implemented using a \emph{broker}, which exists a
 In Java, brokers typically implement the Java Message Service (JMS) API provided by Java Enterprise Edition, which offers a consistent interface for communicating with many different message broker implementations.
 
 \subsection{Web Services Notification}
+\label{sec:bg_wsn}
 
 Web services notification (or WSN) is a set of specifications created by OASIS that defines the interactions between web services, using notifications, which can form the basis of a publish/subscribe architecture built using web services. They provide a standardized way to communicate with and between web services, without having prior information about them. It includes facilities for detailed subscription, where those wishing to consume information can register with a web service along with details about the type of information they wish to receive. WSN was designed to revolve around these subscription details known as ``topics'' and use them to filter down subscriptions, allowing for large scale usage of the publish/subscribe architecture without unwanted message overload.
 
@@ -229,45 +240,53 @@ WS-Brokered Notification works in a similar manner to WS-Base, but introduces a 
 WS-Topics is a specification which defines a method for categorising subscriptions into ``topics''. This specification is designed to work in conjunction with WS-Base or WS-Brokered and contains various methods for defining groups of subscriptions.
 
 \subsection{Web Services Description Language}
+\label{sec:bg_wsdl}
 
 The Web Services Description Language (or WSDL) is an XML based language for describing the interfaces and functionality of a web service. A WSDL file provides a machine readable description of a web service's interface, including the function calls, parameters they expect and return values.\\
 Typically, it is used in combination with SOAP to provide a web service, where a client program will read the WSDL, to determine the functions available, and then use SOAP to call them.
 
 \subsection{JAXB and DOM Parsing}
+\label{sec:bg_parsing}
 
 JAXB, or ``Java Architecture for XML Binding'', is a tool used to marshal Java objects into XML and unmarshal XML into Java objects. It can be used as an alternative to standard XML parsers, taking complicated schema and converting XML created from them into usable Java objects. Use of JAXB was explored towards the end of the project for use in spatial filtering. We intended to use JAXB to parse XML filters of the OpenGIS standard in order to create filters within our system, however implementing JAXB proved beyond the scope of the project in terms of time, given the nature of the system as a proof of concept piece with a strict time constraint. Instead, we settled for a more commonly used XML parsing method known as ``Document Object Model'' or DOM parsing.
 
 DOM parsing is one of the two most commonly used XML parsing methods, the other being SAX parsing. A DOM parser works by loading the entirety of an XML document into memory, modelling it as a tree to allow it to be easily traversed. The tree is traversed node by node to obtain the required information, in this case known tags within the OpenGIS standard for use in spatial filtering. This method of parsing generally has quite a large overhead when parsing large XML files, due to the fact it needs to parse the entire file.
 
 \subsection{XML Catalogues}
+\label{sec:bg_catalogues}
 
 XML files contain references to external XML resources such as schema files and WSDL files. When referencing a large number of external files, events such as network outages and slow connections can cause major issues for a service and its performance. Another problem which can occur when referencing external resources is relative URLs being used to address them. Relative URLs limit the service using them to the context in which it was created, as launching it from any other location will not work.
 
 A solution to these problems is creating an XML catalogue, which allows you to store these files locally and instruct your service to use these local references when its external counterpart is requested. The catalogue maps between these two versions of the same resource.
 
 \subsection{JIRA Issue Tracking}
+\label{sec:bg_jira}
 
 Issue trackers are systems which maintains lists of issues in an ongoing project, with the ability to assign these issues to specific group members, report bugs while working and connect solved issues to source control commits which fix them. Issues can also be broken into sub-tasks, prioritised and categorised to improve efficiency. For example, many issues were recorded after each sprint meeting, these included work for the next sprint, work for near future sprints and overall project goals. These issue reports were categorised according to the sprint which they were to be completed in. When every issue attached to a sprint was marked as solved, a sprint was considered complete in terms of work.
 
 As our customer is a company which regularly works on projects of a much greater scale than that of our AES system, they possess a number of professional tools for organisation and issue tracking. One of these is JIRA, an issue tracker created by Atlassian designed to work with our chosen cycle of creating user stories and acceptance criteria with the customer and assigning these stories to team members after each sprint meeting. As JIRA is a professional piece of software which normally requires a monthly fee for usage, we had to gain access to the server running it licensed to our customer through their VPN. By using the tools in use by our customer, they were able to easily keep track of progress and make comments on submissions to the service.
 
 \subsection{ActiveMQ}
+\label{sec:bg_activemq}
 
 Apache ActiveMQ is an open source message queue service which communicates using the Java Message Service (JMS). It contains a number of features deemed useful to the project including subscription management and filtering. The filtering itself is through objects known as selectors, which use the SQL 92 syntax to filter messages. SQL 92 is a fairly barebones SQL syntax, which features basic arithmetic operators (addition, subtraction, multiplication, division and modulo), enough for the requirements set out by the customer of temporal filtering and spatial filtering using GPS co-ordinates.
 
 \subsection{Git and GitHub}
+\label{sec:bg_git}
 
 Git is a distributed version control system, which allows multiple people to work on a single project at the same time, without necessitating the use of a shared network, as well as tracking document history, affording reversions or rollbacks to previous versions. Some form of source control is essential for effective collaboration between programmers and greatly aides coordination and communication.
 
 GitHub is a Git repository hosting service, which also offers other features that aide collaborative coding, such as issue tracking and task assignment.
 
 \subsection{Travis CI}
+\label{sec:bg_travis}
 
 Travis CI is a free, hosted, continuous integration platform that is used to automatically build and test projects hosted on GitHub. It automatically detects when a commit has been pushed to a linked GitHub repository and attempts to build all branches and run tests. It can then be set up to show the results of this in the GitHub readme or to notify the developer in some other way, such as by emailing the results.
 
 This practice of continues integration allows developers to detect problems quickly. This also makes fixing them easier, as less back tracking is required to identify when and where the issue occurred, reducing the number of large scale revisions required. It also means they can assure the software will run on a variety of computer set-ups, without time consuming manual testing.
 
 \subsection{Cucumber}
+\label{sec:bg_cucumber}
 
 Cucumber is a testing suite that runs behaviour-driven development style acceptance tests, i.e., tests written to check if the requirements of a specification are met by the code. These focus on testing behaviours, i.e. the action the code is supposed to perform, where each test goal is independent of the code’s structure, rather than an approach like unit testing, that tests individual units of code.
 A single Cucumber test consists of a plain text feature definition, written in plain English, and corresponding step definitions, that is, the code that actually tests the feature.
@@ -277,22 +296,27 @@ A feature definition describes a single behaviour the code is supposed to be abl
 For each feature, there is then a set of corresponding step definitions, that is, code to test the feature, in the form of a subroutine for each step (e.g. there will be a single subroutine for ``Given a broker is running'', which will check that a broker is running and, if not, launch one). Depending on the keyword, these should either set up the initial conditions (in the case of Given or a following And), perform a particular action (in the case of When or a following And), or assert that particular conditions are true (in the case of Then or a following And). If all conditions are satisfied, the test passes, otherwise it fails.
 
 \subsection{JSON}
+\label{sec:bg_json}
 
 JSON (or JavaScript Object Notation) is a human readable data interchange format and an alternative to XML. It transmits data objects consisting of attribute-value pairs and is primarily used for server-web application communication. One of its primary advantages is its relative concision and lack of redundancy when compared to XML.
 
 \subsection{SOAP}
+\label{sec:bg_soap}
 
 SOAP (or, originally, Simple Object Access Protocol) is a platform independent protocol for exchanging information between web services, based on XML, and is dependant on other application layer protocols for message transmission (typically HTTP but other transport protocols are supported as well).
 
 \subsection{Netcat}
+\label{sec:bg_netcat}
 
 Netcat is a utility to read from and write across network connections using TCP or UDP. It is designed so that it can easily and reliably be used as a back-end tool, so it can be used by other programs. It is frequently referred to as the `Swiss army knife' of networking tool because of its wide array of features, such as port scanning and a large number of network debugging and investigation tools.
 
 \subsection{cURL}
+\label{sec:bg_curl}
 
 cURL is both a library and command line tool for sending and retrieving data using a wide variety of protocols (such as HTTP, FTP, SCP, POP3, etc.). It is very portable, working on a wide variety of platforms, and bindings are available for a large number of programming languages.
 
 \subsection{Web Feature Service}
+\label{sec:bg_wfs}
 
 \newpage
 
@@ -310,6 +334,7 @@ Various software was used to carry out this process, including JIRA (access to w
 Early on in the project we were given access to Jira on Snowflake's private servers. This allowed us to keep control over our backlog and keep a record of what had been completed. However over the course of the project, the number of steps required to connect to the Snowflake VPN and access Jira as well as the difficulty from never having used the service before, we decided keeping track of the project would be better done through Github, which was already being used as a code repository. The issue tracking features within Github replaced Jira's extensive features (the majority of which far surpassed the requirements of a small project such as ours) and all tasks became issues, still using the standard user story format.
 
 \subsection{Skills Audit}
+\label{sec:plan_skills_audit}
 To maximise the efficiency of the team and to minimise the amount of time which needed to be spent learning new skills for the project it was necessary to assign tasks according to relevant skills and experience. In order to do this it was necessary to produce a skills audit (shown below) and divide tasks according to it.
 
 \begin{table}[h]
@@ -326,16 +351,23 @@ James Robinson     & Java, Maven, Git, JIRA, Travis, Cucumber, JUnit  \\ \hline
 During each sprint meeting the work for the following sprint was decided upon, we then met in labs after the meeting to break down the sprint work further and assign each key area to a team member according to the relevant skills. Due to the nature of the project, a lot of early work on the project was not easily divisible, so a system of a single team member coding as the rest of the team researched and provided support.
 
 \subsection{Risk Analysis}
+\label{sec:plan_risk_analysis}
 
 \subsection{Customer Relations}
+\label{sec:plan_customer_relations}
 
 Our customer was Snowflake Software, a Southampton-based company specialising in open data exchange solutions. Over the course of the project we had regular sprint meetings held with a number of Snowflake employees including one of the CEOs: Ian Painter, the chief technology officer: Eddie Curtis, the professional services director: Alex Brooker, head of software development: Adrian McKenzie (who acted as our main liason with the company) as well as a number of members of their development team who were present in the final presentation to the company of the finished product. Communication with Adrian was done through both emails and the fortnightly Scrum meetings.
 
 \subsection{Deliverables}
+\label{sec:plan_deliverables}
 
 \subsection{Git workflow}
+\label{sec:plan_git_workflow}
+
+Assigned to James
 
 \subsection{Testing Methodology}
+\label{sec:plan_testing_methodology}
 
 Behavioural-driven development style acceptance testing was used, using Cucumber to express the acceptance criteria for each story, allowing them to be converted into automated acceptance tests which could be run using JUnit. The scenarios were written such that the implementation of the feature can change without having to rewrite the file. For each story, when all acceptance tests passed within JUnit, the user story is removed from the backlog. This type of testing keeps testing focused on user stories, testing features rather than abstract units of code, better ensuring that the code satisfies the client's requirements, rather than some abstract measure of performance.
 
@@ -345,10 +377,12 @@ Continuous integration was also used, utilizing Travis CI. This helps to ensure 
 \newpage
 
 \section{Implementation}
+\label{sec:implementation}
 
 Due to the exploratory nature of the project, there was a lot of work that went into the project that wasn't present in the end result. The team worked using SCRUM and completed five sprints. In our implementation, we discuss each sprint individually to show the alternatives we explored and to show the work that didn't make it to the final prototype.
 
 \subsection{Sprint 1}
+\label{sec:impl_sprint_1}
 
 At the start of the project the team had a meeting with Snowflake, we were introduced to the project and we discussed the scope, requirements and overall goals of the project. Snowflake described the vision of the project, the goal we were set was: ``To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. This also had to be implemented using either the WS-Notification standard or WS-Events, as these are the most used standards in the industry.
 
@@ -387,6 +421,7 @@ The major issue in this sprint was the bottleneck caused by the coding. It was i
 There were issues with writing the user stories to Jira. Peter was the only person who could get onto the online service due to issues with the web plugin on other team member's machines. This made the point of assigning work to each other on Jira useless as people couldn't see what work they had been given. This issue was solved in our next sprint where Jira was replaced with github issue tracking.
 
 \subsection{Sprint 2}
+\label{sec:impl_sprint_2}
 
 \subsubsection{Sprint Goals}
 
@@ -424,6 +459,7 @@ It was at this point, after producing a large number of user stories for this sp
 Having tests for the system would have been useful but they only worked on certain team member's machines. This made the tests counterproductive as we didn't know if the system was working or not. There were also issues with setting up and pulling down services, such as the notification broker, between tests. Additionally since the tests ran every time the code was compiled this slowed the development process considerably when we had to include long timeouts for the tests. In sprint 3, the tests were moved to Travis which solved all these problems.
 
 \subsection{Sprint 3}
+\label{sec:impl_sprint_3}
 
 \subsubsection{Sprint Goals}
 
@@ -454,6 +490,7 @@ In this sprint, a major shift was made from JBoss A-MQ to a JMS-based service. T
 Cucumber tests easily made the transition on Travis and improved consistency with the existing Git workflow.
 
 \subsection{Sprint 4}
+\label{sec:impl_sprint_4}
 
 The forth sprint meeting consisted of bringing up to speed members of Snowflake in attendance who had not been notified about JBoss A-MQ. As well as the customer representative, Eddie, and the scrum master, Adrian, Alexis Brooker also attended, and after discussing the need for GPS locations in order to perform spatial filtering, Alexis provided access to a HTTP-GET web feature service (WFS), which returns latitude and longitude locations for all European airfields. Ideally, calling this service would be implemented into AES itself, however given the time remaining on the project and the status of the product as a proof of concept, it was elected to simply retrieve data for all airfields and hard-code them into the system for use in spatial queries, knowing that the system could easily be modified to directly call the service and utilise the data if more time was spent on it.
 
@@ -481,6 +518,7 @@ To produce the subset XML document, a bounding box was placed over Europe and su
 All required features of JMS (selectors and subscriptions) were successfully added, however we could not create a functioning implementation of the WS-Notification standard. This goal was moved to the final sprint as a primary focus.
 
 \subsection{Sprint 5}
+\label{sec:impl_sprint_5}
 
 \subsubsection{Sprint Goals}
 
@@ -514,8 +552,10 @@ We originally planned to switch to JAXB for our XML parsing needs during this sp
 We were able to complete all of our goals for this sprint, and produced two projects - the AES service itself, consisting of our producer and WS-Notification broker implementation, and a separate project containing an example consumer.
 
 \subsection{Final Meeting}
+\label{sec:impl_final_meeting}
 
 \section{Final System Overview}
+\label{sec:final_system}
 
 \begin{center}
 \begin{tikzpicture}[node distance=2cm]
@@ -585,12 +625,17 @@ The system was designed with scalability in mind, since it needed to be able to 
 Although the consumer was out of this project's scope, we still produced a basic implementation in order to demonstrate the system's functionality. A class diagram for this separate project is given in figure X. Note that this project does not directly reference any of the classes from our main project; instead, it uses the published WSDL for our service, along with JAX-WS, to connect to the service.
 
 \section{Critical Evaluation}
+\label{sec:critical_evaluation}
 
 \subsection{Git workflow}
+\label{sec:eval_git_workflow}
+
+Assigned to James
 
 After we switched to the new workflow, this worked pretty well
 
 \subsection{Project management}
+\label{sec:eval_project_management}
 
 Using GitHub issues worked well, but didn't provide us with things like burndown charts, etc. that traditional agile project management tools provide
 
@@ -600,15 +645,20 @@ Using GitHub issues worked well, but didn't provide us with things like burndown
 \newpage
 
 \section{Future Work}
+\label{sec:future_work}
 
 \subsection{Performance/Scalability Testing}
+\label{sec:future_testing}
 %Performance/scalability testing (using Amazon EC2 and/or Elastic Beanstalk for example)
+Assigned to James
 
 \subsection{IATA Designators and ICAO Location Indicators}
+\label{sec:future_designators}
 
 Global Aerodromes is a service provided by Snowflake which allowed our system to map from aerodromes referenced in NOTAMs to GPS co-ordinates, a feature required in order to perform spatial filtering. Within the AIXM specification for NOTAMs, both IATA (International Air Transport Assocation) designators and ICAO (International Civil Aviation Organisation) location indicators are specified. Both of these designating IDs are used by Global Aerodromes and the AES service we produced made use of just IATA designators to pair NOTAMs to GPS co-ordinates. This caused an issue due to a fraction of the aerodromes listed by the Global Aerodromes service do not contain a value for this identifier. A possible future extension would be to add a contingency for this occurrence and include support for ICAO location indicators as well, to maximise the chance that every NOTAM's aerodrome is matched to a location for filtering.
 
 \subsection{Compile Time Issues}
+\label{sec:future_compilation}
 
 A major issue with the final version of the AES system is compile time problems. The reason for these issues is the time required to download all required XML documents and WSDL files. The WSDL files in particular require a large number of external resources including more WSDL files and relevant XSD schemata, each of these referencing even more resources in a long chain. A number of these chained references take a long time to download and as they are referenced multiple times from different locations they are downloaded multiple times, greatly increasing compile times.
 
@@ -623,5 +673,55 @@ This was not previously implemented due to the team's inexperience at working wi
 \printbibliography
 
 \appendix
+
+\section{Report authorship}
+
+\begin{tabularx}{\textwidth}{|X|X|} \hline
+  \emph{Section}                         & \emph{Author}                      \\ \hline
+  \fullref{sec:introduction}             & Charles Sherman                    \\ \hline
+  \fullref{sec:intro_motivation}         & Peter Prince                       \\
+  \fullref{sec:intro_customer}           & Peter Prince                       \\
+  \fullref{sec:intro_goals}              & Peter Prince                       \\ \hline
+  \fullref{sec:bg_notams}                & Peter Prince\par Andrew Sullivan   \\
+  \fullref{sec:bg_pubsub}                & James Robinson                     \\
+  \fullref{sec:bg_wsn}                   & Peter Prince                       \\
+  \fullref{sec:bg_parsing}               & Peter Prince                       \\
+  \fullref{sec:bg_catalogues}            & Peter Prince                       \\
+  \fullref{sec:bg_jira}                  & Peter Prince                       \\
+  \fullref{sec:bg_activemq}              & Peter Prince                       \\
+  \fullref{sec:bg_git}                   & Andrew Sullivan                    \\
+  \fullref{sec:bg_travis}                & Andrew Sullivan                    \\
+  \fullref{sec:bg_cucumber}              & Andrew Sullivan                    \\
+  \fullref{sec:bg_json}                  & Andrew Sullivan                    \\
+  \fullref{sec:bg_soap}                  & Andrew Sullivan                    \\
+  \fullref{sec:bg_netcat}                & Andrew Sullivan                    \\
+  \fullref{sec:bg_curl}                  & Andrew Sullivan                    \\
+  \fullref{sec:bg_wfs}                   & -                                  \\ \hline
+  \fullref{sec:planning}                 & Peter Prince                       \\
+  \fullref{sec:plan_skills_audit}        & Peter Prince                       \\
+  \fullref{sec:plan_risk_analysis}       & -                                  \\
+  \fullref{sec:plan_customer_relations}  & Peter Prince                       \\
+  \fullref{sec:plan_deliverables}        & -                                  \\
+  \fullref{sec:plan_git_workflow}        & James Robinson                     \\
+  \fullref{sec:plan_testing_methodology} & Andrew Sullivan                    \\ \hline
+\end{tabularx}
+\newpage
+\begin{tabularx}{\textwidth}{|X|X|} \hline
+  \emph{Section}                         & \emph{Author}                      \\ \hline
+  \fullref{sec:implementation}           & Charles Sherman                    \\
+  \fullref{sec:impl_sprint_1}            & Charles Sherman\par Peter Prince   \\
+  \fullref{sec:impl_sprint_2}            & Charles Sherman\par Peter Prince   \\
+  \fullref{sec:impl_sprint_3}            & Charles Sherman\par Peter Prince   \\
+  \fullref{sec:impl_sprint_4}            & Charles Sherman\par Peter Prince   \\
+  \fullref{sec:impl_sprint_5}            & Charles Sherman\par Peter Prince   \\
+  \fullref{sec:impl_final_meeting}       & -                                  \\ \hline
+  \fullref{sec:final_system}             & James Robinson\par Charles Sherman \\ \hline
+  \fullref{sec:eval_git_workflow}        & James Robinson                     \\
+  \fullref{sec:eval_project_management}  & -                                  \\ \hline
+  \fullref{sec:conclusions}              & -                                  \\ \hline
+  \fullref{sec:future_testing}           & James Robinson                     \\
+  \fullref{sec:future_designators}       & Peter Prince                       \\
+  \fullref{sec:future_compilation}       & Peter Prince                       \\ \hline
+\end{tabularx}
 
 \end{document}
