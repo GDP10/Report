@@ -232,11 +232,11 @@ JAXB, or ``Java Architecture for XML Binding'', is a tool used to marshal Java o
 
 DOM parsing is one of the two most commonly used XML parsing methods, the other being SAX parsing. A DOM parser works by loading the entirety of an XML document into memory, modelling it as a tree to allow it to be easily traversed. The tree is traversed node by node to obtain the required information, in this case known tags within the OpenGIS standard for use in spatial filtering. This method of parsing generally has quite a large overhead when parsing large XML files, due to the fact it needs to parse the entire file.
 
-\subsection{XML Catalogs}
+\subsection{XML Catalogues}
 
 XML files contain references to external XML resources such as schema files and WSDL files. When referencing a large number of external files, events such as network outages and slow connections can cause major issues for a service and its performance. Another problem which can occur when referencing external resources is relative URLs being used to address them. Relative URLs limit the service using them to the context in which it was created, as launching it from any other location will not work.
 
-A solution to these problems is creating an XML catalog, which allows you to store these files locally and instruct your service to use these local references when its external counterpart is requested. The catalog maps between these two versions of the same resource.
+A solution to these problems is creating an XML catalogue, which allows you to store these files locally and instruct your service to use these local references when its external counterpart is requested. The catalogue maps between these two versions of the same resource.
 
 \subsection{JIRA Issue Tracking}
 
@@ -511,11 +511,15 @@ We were able to complete all of our goals for this sprint, and produced two proj
 
 \section{Future Work}
 
-Performance/scalability testing (using Amazon EC2 and/or Elastic Beanstalk for example)
+%Performance/scalability testing (using Amazon EC2 and/or Elastic Beanstalk for example)
 
-Fix stupidly long compile times (e.g. using catalogues rather than re-downloading every XML file on every compile)
+%Switch from IATA designator to ICAO location indicator
 
-Switch from IATA designator to ICAO location indicator
+A major issue with the final version of the AES system is compile time problems. The reason for these issues is the time required to download all required XML documents and WSDL files. The WSDL files in particular require a large number of external resources including more WSDL files and relevant XSD schemata, each of these referencing even more resources in a long chain. A number of these chained references take a long time to download and as they are referenced multiple times from different locations they are downloaded multiple times, greatly increasing compile times.
+
+A solution to this would be the implementation of XML catalogues which map external references to previously downloaded local files. This would dramatically reduce compile times at the expense of file size, however if the product is to be extended then the time saved would be well worth the cost.
+
+This was not previously implemented due to the team's inexperience at working with them and the compile time creep did not occur until late in the project. At which point a cost-benefit analysis of learning how to use this tool and implementing it into the system at that late a stage was done and decided against.
 
 \newpage
 
