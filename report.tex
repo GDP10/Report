@@ -496,6 +496,8 @@ We used the Apache CXF JAX-WS codegen plugin for Maven to build class stubs from
 
 A mock client for the system was implemented using NetCat and cURL - NetCat took the place of the WSN consumer, listening on port 80 and simply printing out all received data to standard output, and cURL was used to send a subscription request to the WSN broker. Unfortunately we were unable to determine the correct format for the subscription request, so we ditched the barebones client implementation and created a new implementation using CXF, based on the WSDL for our web service.
 
+We originally planned to switch to JAXB for our XML parsing needs during this sprint, but there were so many naming conflicts in the generated code for the XML schemata that it was easier to just manually write DOM parsers instead. After consulting with Snowflake we discovered that they too attempted to use JAXB but abandoned it due to the same issue.
+
 \subsubsection{Review}
 
 We were able to complete all of our goals for this sprint, and produced two projects - the AES service itself, consisting of our producer and WS-Notification broker implementation, and a separate project containing an example consumer.
