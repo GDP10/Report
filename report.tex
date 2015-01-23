@@ -297,6 +297,20 @@ Various software was used to carry out this process, including JIRA (access to w
 Early on in the project we were given access to Jira on Snowflake's private servers. This allowed us to keep control over our backlog and keep a record of what had been completed. However over the course of the project, the number of steps required to connect to the Snowflake VPN and access Jira as well as the difficulty from never having used the service before, we decided keeping track of the project would be better done through Github, which was already being used as a code repository. The issue tracking features within Github replaced Jira's extensive features (the majority of which far surpassed the requirements of a small project such as ours) and all tasks became issues, still using the standard user story format.
 
 \subsection{Skills Audit}
+To maximise the efficiency of the team and to minimise the amount of time which needed to be spent learning new skills for the project it was necessary to assign tasks according to relevant skills and experience. In order to do this it was necessary to produce a skills audit (shown below) and divide tasks according to it.
+
+\begin{table}[h]
+\begin{tabular}{|l|l|}
+\hline
+Team Member     & Relevant Skills                                  \\ \hline
+Andrew Sullivan & Python, JUnit                                    \\ \hline
+Charles Sherman & Java, WSDLs, JUnit, Cucumber, SCRUM              \\ \hline
+Peter Prince    & Java, Python, JUnit                              \\ \hline
+James Robinson  & Java, Maven, Git, Jira, Travis, Cucumber, JUnit, \\ \hline
+\end{tabular}
+\end{table}
+
+During each sprint meeting the work for the following sprint was decided upon, we then met in labs after the meeting to break down the sprint work further and assign each key area to a team member according to the relevant skills. Due to the nature of the project, a lot of early work on the project was not easily divisible, so a system of a single team member coding as the rest of the team researched and provided support.
 
 \subsection{Risk Analysis}
 
@@ -474,5 +488,7 @@ Fix stupidly long compile times (e.g. using catalogues rather than re-downloadin
 \addcontentsline{toc}{section}{References}
 \sloppy
 \printbibliography
+
+\appendix
 
 \end{document}
