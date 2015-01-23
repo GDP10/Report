@@ -129,13 +129,13 @@
 \section{Introduction}
 \label{sec:introduction}
 
-The project customer was Snowflake Software, a company that works in geographical data exchange services. The focus of this project is the exchange of aeronautical data between flight planners and data publishers such as the Federal Notam Service and the Aeronautical Information Service. Snowflake were planning to implement a data exchange service for clients that would allow consumers to recieve aeronautical data in the form of NOTAMS, using a push notification service. Our group was given the task: "To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners". In other terms, our work was to research what architectures existed to do push notification and which would work with the requested standard of WS-Notification.
+The project customer was Snowflake Software, a company that works in geographical data exchange services. The focus of this project is the exchange of aeronautical data between flight planners and data publishers such as the Federal Notam Service and the Aeronautical Information Service. Snowflake were planning to implement a data exchange service for clients that would allow consumers to recieve aeronautical data in the form of `Notice to Airmen', using a push notification service. Our group was given the task: ``To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. In practice, our work was to explore what architectures existed to do push notification and which would work with the requested standard of WSN.
 
 \newpage
 
 \section{Project Description}
 \subsection{Motivation}
-Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Examples of such events includes: closed runways, restricted airspaces, extreme weather conditions and even the presence of migrating birds through an airspace. Currently, flight planners receive such information by pulling 'NOTAM's, or 'Notice to Airmen', and must manually sort through all NOTAMs to find only the notices which are relevant to their flight, which is extremely time consuming. The efficiency of this task could be improved dramatically if the filtering were performed automatically.
+Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Examples of such events includes: closed runways, restricted airspaces, extreme weather conditions and even the presence of migrating birds through an airspace. Currently, flight planners receive such information by pulling NOTAM's, or `Notice to Airmen', and must manually sort through all NOTAMs to find only the notices which are relevant to their flight, which is extremely time consuming. The efficiency of this task could be improved dramatically if the filtering were performed automatically using defined geographic regions and time frames. The aeronautics industry uses WSN as their prefered standard, so our customer required us to work to this standard or WS-Events.
 
 \subsection{Customer}
 
@@ -145,7 +145,7 @@ The customer for this project was Snowflake Software, a company focused on open 
 
 The vision, as stated by Snowflake, was ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced over the course of the project was to explore options and find methods to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of relevant NOTAMs by pilots. 
 
-The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy should be based on simple factors, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAMs events to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes. 
+The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy was determined by geographic data, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAMs events to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes. 
 
 \subsubsection{Project Goals}
 \begin{enumerate}
@@ -259,9 +259,9 @@ This practice of continues integration allows developers to detect problems quic
 Cucumber is a testing suite that runs behaviour-driven development style acceptance tests, i.e., tests written to check if the requirements of a specification are met by the code. These focus on testing behaviours, i.e. the action the code is supposed to perform, where each test goal is independent of the code’s structure, rather than an approach like unit testing, that tests individual units of code.
 A single Cucumber test consists of a plain text feature definition, written in plain English, and corresponding step definitions, that is, the code that actually tests the feature. 
 
-A feature definition describes a single behaviour the code is supposed to be able to perform (such as "Feature: Filter NOTAMs by time") and then outlines one or many scenarios: sets of conditions that test a facet of the behaviour. These describe initial conditions, steps that are then carried out, and what the results of performing those steps (with those initial conditions) should be. These are specified with the keywords "Given, When, Then", i.e., given a set of initials conditions, when something happens, then the program should do something (with the ability to have multiple steps with the keyword And). 
+A feature definition describes a single behaviour the code is supposed to be able to perform (such as ``Feature: Filter NOTAMs by time'') and then outlines one or many scenarios: sets of conditions that test a facet of the behaviour. These describe initial conditions, steps that are then carried out, and what the results of performing those steps (with those initial conditions) should be. These are specified with the keywords ``Given, When, Then'', i.e., given a set of initials conditions, when something happens, then the program should do something (with the ability to have multiple steps with the keyword And). 
 
-For each feature, there is then a set of corresponding step definitions, that is, code to test the feature, in the form of a subroutine for each step (e.g. there will be a single subroutine for "Given a broker is running", which will check that a broker is running and, if not, launch one). Depending on the keyword, these should either set up the initial conditions (in the case of Given or a following And), perform a particular action (in the case of When or a following And), or assert that particular conditions are true (in the case of Then or a following And). If all conditions are satisfied, the test passes, otherwise it fails.
+For each feature, there is then a set of corresponding step definitions, that is, code to test the feature, in the form of a subroutine for each step (e.g. there will be a single subroutine for ``Given a broker is running'', which will check that a broker is running and, if not, launch one). Depending on the keyword, these should either set up the initial conditions (in the case of Given or a following And), perform a particular action (in the case of When or a following And), or assert that particular conditions are true (in the case of Then or a following And). If all conditions are satisfied, the test passes, otherwise it fails.
 
 \subsection{JSON}
 
@@ -273,7 +273,7 @@ SOAP (or, originally, Simple Object Access Protocol) is a platform independent p
 
 \subsection{Netcat}
 
-Netcat is a utility to read from and write across network connections using TCP or UDP. It is designed so that it can easily and reliably be used as a back-end tool, so it can be used by other programs. It is frequently referred to as the 'Swiss army knife' of networking tool because of its wide array of features, such as port scanning and a large number of network debugging and investigation tools.
+Netcat is a utility to read from and write across network connections using TCP or UDP. It is designed so that it can easily and reliably be used as a back-end tool, so it can be used by other programs. It is frequently referred to as the `Swiss army knife' of networking tool because of its wide array of features, such as port scanning and a large number of network debugging and investigation tools.
 
 \subsection{cURL}
 
@@ -319,7 +319,7 @@ Due to the exploratory nature of the project, there was a lot of work that went 
 
 \subsection{Sprint 1}
 
-At the start of the project the team had a meeting with Snowflake, we were introduced to the project and we discussed the scope, requirements and overall goals of the project. Snowflake described the vision of the project, the goal we were set was: "To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners". This also had to be implemented using either the WS-Notification standard or WS-Events, as these are the most used standards in the industry.
+At the start of the project the team had a meeting with Snowflake, we were introduced to the project and we discussed the scope, requirements and overall goals of the project. Snowflake described the vision of the project, the goal we were set was: ``To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. This also had to be implemented using either the WS-Notification standard or WS-Events, as these are the most used standards in the industry.
 
 \subsubsection{Sprint Goals}
 
