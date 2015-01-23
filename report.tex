@@ -129,23 +129,25 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\subsection{Project Description}
-\subsubsection{Motivation}
+\newpage
+
+\section{Project Description}
+\subsection{Motivation}
 Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Examples of such events includes: closed runways, restricted airspaces, extreme weather conditions and even the presence of migrating birds through an airspace. Currently, flight planners receive such information by pulling 'NOTAM's, or 'Notice to Airmen', and must manually sort through all NOTAMs to find only the notices which are relevant to their flight, which is extremely time consuming. The efficiency of this task could be improved dramatically if the filtering were performed automatically.
 
-\subsubsection{Customer}
+\subsection{Customer}
 
 The customer for this project was Snowflake Software, a company focused on open data exchange, and various products based on mapping data. Within sprint meetings the company was represented by Eddie Curtis, who expressed the feature requests and gave feedback, representing Snowflake as a whole.
 
-\subsubsection{Goals}
+\subsection{Goals}
 
 The vision, as stated by Snowflake, was ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced over the course of the project was to explore options and find methods to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of relevant NOTAMs by pilots. 
 
 The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy should be based on simple factors, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAMs events to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes. 
 
-\subsection{Background Information}
+\section{Background Information}
 
-\subsubsection{NOTAMs}
+\subsection{NOTAMs}
 A `notice to airmen' (NOTAM), is a notice given to airmen about events in a particular airspace or at a particular airport. The events may be hazards that have to be avoided, such as dangerous weather or updates on runway closures, which may or may not be relevant to the flight. They're used by pilots and flight planners to notify them about events which have the potential to affect the safety of their flight. NOTAMs are distributed by various aviation authorities around the world and are generally received by pilots and flight planners by pull notifications.
 
 The NOTAMs are delivered as deltas from a baseline of data. For instance, a pilot may be told in a NOTAM that runway 3 has been closed at their destination. They were previously told about the number of alternative runways at the destination airport in a baseline message. Deltas can be either temporary or non-temporary; temporary updates apply for a certain time frame whereas non-temporary updates last indefinitely. If there are many delta updates, it is often useful to make a snapshot. A snapshot is an updated baseline that is formed from the original baseline and a combination of deltas, this allows flight planners requesting a NOTAM after a large number of delta updates to quickly receive up to date information without having to request large numbers of delta updates.
@@ -163,7 +165,7 @@ All NOTAMs are sent as XML documents using a schema known as AIXM. The AIXM, or 
 
 \newpage
 
-\subsubsection{Publish/Subscribe Architecture}
+\subsection{Publish/Subscribe Architecture}
 
 \begin{figure}
 \begin{center}
@@ -180,7 +182,7 @@ This architecture is generally implemented using a \emph{broker}, which exists a
 
 In Java, brokers typically implement the Java Message Service (JMS) API provided by Java Enterprise Edition, which offers a consistent interface for communicating with many different message broker implementations.
 
-\subsubsection{Web Services Notification}
+\subsection{Web Services Notification}
 
 Web services notification (or WSN) is a set of specifications created by OASIS that defines the interactions between web services, using notifications, which can form the basis of a publish/subscribe architecture built using web services. They provide a standardized way to communicate with and between web services, without having prior information about them. It includes facilities for detailed subscription, where those wishing to consume information can register with a web service along with details about the type of information they wish to receive. WSN was designed to revolve around these subscription details known as ``topics'' and use them to filter down subscriptions, allowing for large scale usage of the publish/subscribe architecture without unwanted message overload.
 
@@ -190,40 +192,40 @@ WS-Brokered Notification works in a similar manner to WS-Base, but introduces a 
 
 WS-Topics is a specification which defines a method for categorising subscriptions into ``topics''. This specification is designed to work in conjunction with WS-Base or WS-Brokered and contains various methods for defining groups of subscriptions.
 
-\subsubsection{Web Services Description Language}
+\subsection{Web Services Description Language}
 
 The Web Services Description Language (or WSDL) is an XML based language for describing the interfaces and functionality of a web service. A WSDL file provides a machine readable description of a web service's interface, including the function calls, parameters they expect and return values.\\
 Typically, it is used in combination with SOAP to provide a web service, where a client program will read the WSDL, to determine the functions available, and then use SOAP to call them.
 
-\subsubsection{JAXB and DOM Parsing}
+\subsection{JAXB and DOM Parsing}
 
 JAXB, or ``Java Architecture for XML Binding'', is a tool used to marshal Java objects into XML and unmarshal XML into Java objects. It can be used as an alternative to standard XML parsers, taking complicated schema and converting XML created from them into usable Java objects. Use of JAXB was explored towards the end of the project for use in spatial filtering. We intended to use JAXB to parse XML filters of the OpenGIS standard in order to create filters within our system, however implementing JAXB proved beyond the scope of the project in terms of time, given the nature of the system as a proof of concept piece with a strict time constraint. Instead, we settled for a more commonly used XML parsing method known as ``Document Object Model'' or DOM parsing.
 
 DOM parsing is one of the two most commonly used XML parsing methods, the other being SAX parsing. A DOM parser works by loading the entirety of an XML document into memory, modelling it as a tree to allow it to be easily traversed. The tree is traversed node by node to obtain the required information, in this case known tags within the OpenGIS standard for use in spatial filtering. This method of parsing generally has quite a large overhead when parsing large XML files, due to the fact it needs to parse the entire file.
 
-\subsubsection{JIRA Issue Tracking}
+\subsection{JIRA Issue Tracking}
 
 Issue trackers are systems which maintains lists of issues in an ongoing project, with the ability to assign these issues to specific group members, report bugs while working and connect solved issues to source control commits which fix them. Issues can also be broken into sub-tasks, prioritised and categorised to improve efficiency. For example, many issues were recorded after each sprint meeting, these included work for the next sprint, work for near future sprints and overall project goals. These issue reports were categorised according to the sprint which they were to be completed in. When every issue attached to a sprint was marked as solved, a sprint was considered complete in terms of work.
 
 As our customer is a company which regularly works on projects of a much greater scale than that of our AES system, they possess a number of professional tools for organisation and issue tracking. One of these is JIRA, an issue tracker created by Atlassian designed to work with our chosen cycle of creating user stories and acceptance criteria with the customer and assigning these stories to team members after each sprint meeting. As JIRA is a professional piece of software which normally requires a monthly fee for usage, we had to gain access to the server running it licensed to our customer through their VPN. By using the tools in use by our customer, they were able to easily keep track of progress and make comments on submissions to the service.
 
-\subsubsection{ActiveMQ}
+\subsection{ActiveMQ}
 
 Apache ActiveMQ is an open source message queue service which communicates using the Java Message Service (JMS). It contains a number of features deemed useful to the project including subscription management and filtering. The filtering itself is through objects known as selectors, which use the SQL 92 syntax to filter messages. SQL 92 is a fairly barebones SQL syntax, which features basic arithmetic operators (addition, subtraction, multiplication, division and modulo), enough for the requirements set out by the customer of temporal filtering and spatial filtering using GPS co-ordinates.
 
-\subsubsection{Git and GitHub}
+\subsection{Git and GitHub}
 
 Git is a distributed version control system, which allows multiple people to work on a single project at the same time, without necessitating the use of a shared network, as well as tracking document history, affording reversions or rollbacks to previous versions. Some form of source control is essential for effective collaboration between programmers and greatly aides coordination and communication.
 
 GitHub is a Git repository hosting service, which also offers other features that aide collaborative coding, such as issue tracking and task assignment.
 
-\subsubsection{Travis CI}
+\subsection{Travis CI}
 
 Travis CI is a free, hosted, continuous integration platform that is used to automatically build and test projects hosted on GitHub. It automatically detects when a commit has been pushed to a linked GitHub repository and attempts to build all branches and run tests. It can then be set up to show the results of this in the GitHub readme or to notify the developer in some other way, such as by emailing the results.
 
 This practice of continues integration allows developers to detect problems quickly. This also makes fixing them easier, as less back tracking is required to identify when and where the issue occurred, reducing the number of large scale revisions required. It also means they can assure the software will run on a variety of computer set-ups, without time consuming manual testing.
 
-\subsubsection{Cucumber}
+\subsection{Cucumber}
 
 Cucumber is a testing suite that runs behaviour-driven development style acceptance tests, i.e., tests written to check if the requirements of a specification are met by the code. These focus on testing behaviours, i.e. the action the code is supposed to perform, where each test goal is independent of the code’s structure, rather than an approach like unit testing, that tests individual units of code.
 A single Cucumber test consists of a plain text feature definition, written in plain English, and corresponding step definitions, that is, the code that actually tests the feature. 
@@ -232,19 +234,19 @@ A feature definition describes a single behaviour the code is supposed to be abl
 
 For each feature, there is then a set of corresponding step definitions, that is, code to test the feature, in the form of a subroutine for each step (e.g. there will be a single subroutine for "Given a broker is running", which will check that a broker is running and, if not, launch one). Depending on the keyword, these should either set up the initial conditions (in the case of Given or a following And), perform a particular action (in the case of When or a following And), or assert that particular conditions are true (in the case of Then or a following And). If all conditions are satisfied, the test passes, otherwise it fails.
 
-\subsubsection{JSON}
+\subsection{JSON}
 
 JSON (or JavaScript Object Notation) is a human readable data interchange format and an alternative to XML. It transmits data objects consisting of attribute-value pairs and is primarily used for server-web application communication. One of its primary advantages is its relative concision and lack of redundancy when compared to XML.
 
-\subsubsection{SOAP}
+\subsection{SOAP}
 
 SOAP (or, originally, Simple Object Access Protocol) is a platform independent protocol for exchanging information between web services, based on XML, and is dependant on other application layer protocols for message transmission (typically HTTP but other transport protocols are supported as well). 
 
-\subsubsection{Netcat}
+\subsection{Netcat}
 
 Netcat is a utility to read from and write across network connections using TCP or UDP. It is designed so that it can easily and reliably be used as a back-end tool, so it can be used by other programs. It is frequently referred to as the 'Swiss army knife' of networking tool because of its wide array of features, such as port scanning and a large number of network debugging and investigation tools.
 
-\subsubsection{cURL}
+\subsection{cURL}
 
 cURL is both a library and command line tool for sending and retrieving data using a wide variety of protocols (such as HTTP, FTP, SCP, POP3, etc.). It is very portable, working on a wide variety of platforms, and bindings are available for a large number of programming languages.
 
