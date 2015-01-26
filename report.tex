@@ -180,6 +180,7 @@ The subscriptions to this service had to be based on the relevancy of NOTAMs to 
 \item Produced utilising exclusively open-source libraries.
 \item Using WS-Notifications to securely communicate all NOTAMs.
 \item Able to handle 10,000 messages per day.
+\item Able to poll the Federal NOTAM System to request all NOTAMs.
 \item Store and update baselines to provide to consumers upon connection.
 \end{enumerate}
 
@@ -196,6 +197,8 @@ The subscriptions to this service had to be based on the relevancy of NOTAMs to 
 In the opening meeting, the initial project goals were set out by the scrum master, Adrian, and product owner, Eddie. Several meetings later, this list of requirements was updated, making spatial filtering a major focus for the project and temporal filtering an extension goal to complete if time permitted. As most of the groundwork for both filtering types could be reused, both were completed.
 
 The storing and provision of baselines ceased to be a requirement after a few meetings, when it was revealed that Snowflake already possessed a service which provided updated NOTAM baselines and so this functionality was not required of any system produced in the course of this project.
+
+A feature which was initially aimed for in the proof of concept design was polling of the FNS (Federal NOTAM System) for NOTAMs before filtering them and sending them out to the relevant subscribers. This was proved impossible, as access to the service for polling required registration with FNS which we were unable to do.
 
 \subsection{Deliverables}
 \label{sec:plan_deliverables}
@@ -702,10 +705,20 @@ The feedback was mostly positive, particularly focusing on the exploratory goals
 
 \blockquote{...good outcome for Snowflake Software; they answered some of our key questions and provided a solid foundation to commence our Pub-Sub product development in 2015... Reaching firm conclusions about the relative merits of the technologies you assessed represents a real achievement.}
 
-Their main criticism was the one sidedness of the sprint planning meetings and of the final meeting, where a large proportion of the speaking and demonstration was done by James.
+Their main criticism was the one-sidedness of the sprint planning meetings and of the final meeting, where a large proportion of the speaking and demonstration was done by James.
 
 \section{Conclusions}
 \label{sec:conclusions}
+
+In this report the design, development process and testing of the AES system has been recounted. The final product is a notification system for aeronautic standard messages known as NOTAMs, it utilises a publish/subscribe architecture with brokers handling messages between producers and the consumers. The product handles multiple types of message filtering, allowing subscribers to subscribe based on simple text, locations within bounding boxes and within a given time period.
+
+As stated as a requirement, AES makes use of the WS-Notification standard for communication between brokers and consumers. This standard was chosen due to its common usage within the aeronautics industry for communication. Messaging done between brokers, the ActiveMQ message queue and the producers uses the Java Messaging Service.
+
+The AES system was tested to handle multiple publishers and consumers, however its limits were not tested. Given the extensible nature of its design it should be able to handle any number of producers, consumers or NOTAMs within reason, but due to time and monetary constraints we were unable to confirm this.
+
+A main limitation of the final product is its limited implementations of WS-Notifications and OpenGIS filtering standards, only including a subset of directly relevant components. The decisions to only implement the parts of the standard which were vital to the project were made in the interest of time. If AES was built upon, completing these implementations would be required to adhere to the standards.
+
+An initially important goal of the project which had to be abandoned fairly early on was polling of the Federal NOTAM System. As the aim was to produce a system which took NOTAMs from their source, filtered them and communicated them to the correct consumers, this was to be an important component of the project. Unfortunately this was deemed impossible as access to the FNS is restricted and requires registration before you are authorised. This was deemed to be outside of the scope of a proof of concept design.
 
 \newpage
 
@@ -715,6 +728,7 @@ Their main criticism was the one sidedness of the sprint planning meetings and o
 \subsection{Performance/Scalability Testing}
 \label{sec:future_testing}
 %Performance/scalability testing (using Amazon EC2 and/or Elastic Beanstalk for example)
+%Please mention the fact we didn't apply for funding to do this at the beginning as we didn't consider this kind of testing at the start. By the time we realised it would be useful we were past the funding deadline. This is just to clarify what I wrote in the conclusion bit above.
 Assigned to James
 
 \subsection{IATA Designators and ICAO Location Indicators}
@@ -787,7 +801,7 @@ This was not previously implemented due to the team's inexperience at working wi
   \fullref{sec:eval_git_workflow}        & James Robinson                     \\
   \fullref{sec:eval_project_management}  & -                                  \\
   \fullref{sec:eval_customer_feedback}  & Andrew Sullivan  \\ \hline
-  \fullref{sec:conclusions}              & -                                  \\ \hline
+  \fullref{sec:conclusions}              & Peter Prince                       \\ \hline
   \fullref{sec:future_testing}           & James Robinson                     \\
   \fullref{sec:future_designators}       & Peter Prince                       \\
   \fullref{sec:future_compilation}       & Peter Prince                       \\ \hline
