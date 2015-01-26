@@ -745,9 +745,10 @@ An initially important goal of the project which had to be abandoned fairly earl
 
 \subsection{Performance/Scalability Testing}
 \label{sec:future_testing}
-%Performance/scalability testing (using Amazon EC2 and/or Elastic Beanstalk for example)
-%Please mention the fact we didn't apply for funding to do this at the beginning as we didn't consider this kind of testing at the start. By the time we realised it would be useful we were past the funding deadline. This is just to clarify what I wrote in the conclusion bit above.
-Assigned to James
+
+Although the system was designed to scale well with available hardware, it was not possible to test this functionality within the time constraints of the project. Given more time, the system's scalability could be tested by launching multiple instances of the WSN broker on Amazon EC2 instances, and measuring both the number of simultaneous subscriptions each is able to request, and the total number of simultaneous subscriptions that the entire system is able to service. The limiting factor for the latter will be the throughput of the JMS broker (ActiveMQ). This testing would require additional funding to pay for the required EC2 instances.
+
+Alternatively, the system could be deployed on Amazon Elastic Beanstalk, which automatically scales the service by provisioning additional EC2 instances when under high load. An Elastic Beanstalk distribution could be created for the service, and the peak number of subscriptions that the system is able to service could be measured. Again, this testing would require additional funding.
 
 \subsection{IATA Designators and ICAO Location Indicators}
 \label{sec:future_designators}
