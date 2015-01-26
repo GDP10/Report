@@ -370,6 +370,11 @@ The Open Geospatial Consortium (or OGC) is a voluntary standards organisation sp
 
 Geography Markup Language (or GML) is an XML grammar designed to express geographical features. It serves as both a geographical modelling language and as an data interchange format for the exchange of geographic data on the internet. It includes a very wide range of primitive objects, so that it can be used to express and integrate all forms of geographic information together. It was the standard used to encode the airport information that was used to perform NOTAM enrichment.
 
+\subsection{Web Feature Service}
+\label{sec:bg_wfs}
+
+The Web Feature Service interface standard (WFS) is a standard by the Open Geospatial Consortium that provides a platform-independent web interface for requesting geographical features. By default, the data is encoded in the GML format, although other formats can be used. In this project, Snowflake Software's GO Publisher WFS was used to retrieve the airport data. WFS includes the ability to query features based on spatial constraints, so it could be queried to only return airports within a particular area, allowing program testing to be performed with more manageable amounts of data.
+
 \newpage
 
 \section{Planning and Organisation}
