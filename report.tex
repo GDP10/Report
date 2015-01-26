@@ -440,7 +440,7 @@ Continuous integration was also used, utilizing Travis CI. This helps to ensure 
 \section{Implementation}
 \label{sec:implementation}
 
-Due to the exploratory nature of the project, there was a lot of work that went into the project that wasn't present in the end result. Work was completed using the SCRUM methodology and over the course of five sprints. In the implementation, each sprint is discussed individually to show the alternatives explored and to show the work that didn't make it to the final prototype.
+Due to the exploratory nature of the project, there was a lot of work that went into the project that wasn't present in the end result. Work was completed using the SCRUM methodology over the course of five sprints. In the this section of the report, each sprint is discussed individually to show the alternatives explored and to show the work that didn't make it to the final prototype as well as highlighting the motivations for the choices made in the development of the software.
 
 \subsection{Sprint 1}
 \label{sec:impl_sprint_1}
@@ -499,7 +499,7 @@ In the second sprint, the goals set were to expand on the work completed in the 
 
 During the second sprint planning meeting a table of requirements was made with Snowflake. The table split the tasks into layers that had to be implemented row by row, but within each row the columns were independent and could therefore be completed in any order. At the start of the sprint, the top row of the table had already been completed and the target for the end of the sprint was to have the lowest row from each column implemented. The process works by filling out each layer of the table, one at a time to make sure features could be implemented in feasible steps.
 
-\userstory{Notification Filtering By Airport}{flight planner}{to be notified if there is a change to airports I'm interested in for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
+\userstory{Notification Filtering By Airport}{flight planner}{to be notified if there is a change to my start, end or airports on the route of my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
 \subsubsection{Work Allocation}
 
@@ -513,7 +513,7 @@ In practice it was found that the jump from hard coded values to fully configura
 
 At the end of the sprint the sprint goals were all met. The system was now capable of having multiple consumers with unique subscriptions and the produced could send out multiple NOTAM's which were not hard-coded into the system. 
 
-The tests at the end of the sprint were found to contain bugs. This made the tests counterproductive as they would sometimes give the impression that the system was working when it would only work on one machine, in a specific set of circumstances. There were also issues with setting up and pulling down services, such as the notification broker, between tests which meant that tests had to be run one at a time. Additionally since the tests ran every time the code was compiled this slowed the development process considerably when long timeouts for the tests had to be included. In sprint 3, the tests were moved to Travis CI, which solved these issues. At the sprint meeting with snowflake, the system was run manually rather than using the Cucumber tests to evidence that the code was working.
+The tests at the end of the sprint were found to contain bugs. This made the tests counter-productive as they would sometimes give the impression that the system was working when it would only work on one machine, in a specific set of circumstances. There were also issues with setting up and pulling down services, such as the notification broker, between tests which meant that tests had to be run one at a time. Additionally since the tests ran every time the code was compiled this slowed the development process considerably when long timeouts for the tests had to be included. In sprint 3, the tests were moved to Travis CI, which solved these issues. At the sprint meeting with snowflake, the system was run manually rather than using the Cucumber tests to evidence that the code was working.
 
 \subsection{Sprint 3}
 \label{sec:impl_sprint_3}
@@ -528,7 +528,11 @@ The subject of testing was also brought up, and the implementation of a continuo
 
 It was in sprint 3, after the progress made up to that point was shown in the sprint meeting, that another representative of Snowflake expressed the importance of spatial filtering over temporal filtering. The utility of spatial filtering is obvious in the case of flight planning, a flight planner simply defining the start and end point of the journey and then receiving all messages relevant to that geographical space would save considerable time when compared to the alternative of manually subscribing to airspaces and airports which are within range. Temporal filtering would allow a consumer to only receive NOTAMs that are in effect for the duration of their flight, dramatically reducing the number of irrelevant NOTAMs being sent.
 
-In order to perform spatial filtering, latitude and longitude data for every airspace and airfield would be required, as NOTAMs lack information at this level of detail. The information required for temporal filtering is featured in each NOTAM, and only conversion to a usable timestamp format was required.
+In order to perform spatial filtering, latitude and longitude data for every airspace and airfield would be required, as NOTAMs lack information at this level of detail. The information required for temporal filtering is featured in each NOTAM, and only conversion to a usable time stamp format was required.
+
+\userstory{Notification Filtering By Time}{flight planner}{to be notified if there is a change to airports I'm interested in during my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
+
+\userstory{Notification Filtering By Geography}{flight planner}{to be notified if there is a change to airports on the route of, or near my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
 \subsubsection{Work Allocation}
 
