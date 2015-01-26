@@ -395,7 +395,11 @@ The majority of risks that were analysed concerned code loss and issues with tea
 
 \subsection{Code Loss}
 
-To prevent any loss of code or data Github and Dropbox were used to keep backups of data and code. Individual team members used Github to commit code for both transfer between machines and to create an online backup in case of computer failure. As the code on Github is available to the public, sensitive materials were kept on Dropbox, for example the NOTAM data given to the team by Snowflake.
+To prevent any loss of code or data Github and Dropbox were used to keep backups of data and code. Individual team members used Github to commit code for both transfer between machines and to create an online backup in case of computer failure.
+
+\subsection{Sensitive Data}
+
+As the project included working with data of a possibly sensitive nature, the security of any data was a factor which had to be considered. Partway through the project a set of NOTAMs was provided by the customer to test the system with, however the contents of the NOTAMs were considered to be classified. As the project's code and resources were stored on a publicly available code repository, we decided to store these sensitive files separately on a private Dropbox.
 
 \subsection{Team Member Absence}
 
@@ -426,7 +430,7 @@ After watching Zach Holman's presentation \emph{How GitHub Uses GitHub to Build 
 \subsection{Testing Methodology}
 \label{sec:plan_testing_methodology}
 
-Behavioural-driven development style acceptance testing was used, using Cucumber to express the acceptance criteria for each story, allowing them to be converted into automated acceptance tests which could be run using JUnit. The scenarios were written such that the implementation of the feature can change without the file needing to be rewritten. For each story, when all acceptance tests passed within JUnit, the user story was removed from the backlog. This type of testing keeps testing focused on user stories, testing features rather than abstract units of code, better ensuring that the code satisfies the client's requirements, rather than some abstract measure of performance.
+Behavioural-driven development style acceptance testing was used, utilising Cucumber to express the acceptance criteria for each story and allowing them to be converted into automated acceptance tests which could be run using JUnit. The scenarios were written such that the implementation of a feature can change without the file needing to be rewritten. For each story, when all acceptance tests passed within JUnit, the user story was removed from the backlog. This type of testing keeps testing focused on user stories, testing features rather than abstract units of code, better ensuring that the code satisfies the client's requirements rather than some abstract measure of performance.
 
 Continuous integration was also used, utilizing Travis CI. This helps to ensure new code doesn't break old tests, ensures the software can run on a variety of computer set-ups, and allows problems to be detected more quickly and fixed with less backtracking.
 
