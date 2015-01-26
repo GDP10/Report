@@ -125,6 +125,8 @@
 
 \begin{abstract}
 
+This group report details the planning, design processes and final implementation of a proof of concept NOTAM push notification system, utilising a publish/subscribe architecture, built for Snowflake Software. The system, named ``AES'', uses a combination of JMS and WS-Notification communication to handle subscriptions and the publishing of Notices To AirMen. Built in Java, the system parses AIXM XML documents to extract messages which need to be sent to the relevant recipients, storing messages in an ActiveMQ message queue. After receiving subscription requests filtered temporally or spatially, the system is able to send the published messages to the aubscribers who requested them. 
+
 \end{abstract}
 
 \newpage
@@ -143,6 +145,8 @@
 \label{sec:introduction}
 
 The project customer was Snowflake Software, a company that works in geographical data exchange services. The focus of this project is the exchange of aeronautical data between flight planners and data publishers such as the Federal Notam Service and the Aeronautical Information Service. Snowflake were planning to implement a data exchange service for clients that would allow consumers to receive aeronautical data in the form of `Notice to Airmen', using a push notification service. The group was given the task: ``To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. In practice, this translated to exploring what architectures existed that could be used to implement a push notification system, and which of those would work with the requested standard of WSN.
+
+As Snowflake were relatively unfamiliar with a number of the tools and technologies required to produce the service, the aim of the project from their perspective was to identify dead-ends and pitfalls a future team of theirs may fall victim to, as well as producing the groundwork for future implementations of the required standards. A number of possible architectures and tools were explored, with each Scrum meeting being used to recount all experiments and attempts as the process of producing the final product was as important as the final product itself.
 
 \newpage
 
