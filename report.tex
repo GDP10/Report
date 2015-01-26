@@ -147,7 +147,7 @@ Eddie Curtis, for providing with constant feedback in each sprint meeting which 
 \section{Introduction}
 \label{sec:introduction}
 
-The project customer was Snowflake Software, a company that works in geographical data exchange services. The focus of this project is the exchange of aeronautical data between flight planners and data publishers such as the Federal Notam Service and the Aeronautical Information Service. Snowflake were planning to implement a data exchange service for clients that would allow consumers to receive aeronautical data in the form of `Notice to Airmen', using a push notification service. The group was given the task: ``To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. In practice, this translated to exploring what architectures existed that could be used to implement a push notification system, and which of those would work with the requested standard of WSN.
+The project customer was Snowflake Software, a company that works in geographical data exchange services. The focus of this project is the exchange of aeronautical data between flight planners and data publishers such as the Federal Notam Service and the Aeronautical Information Service. Snowflake are planning to implement a data exchange service for clients that would allow consumers to receive aeronautical data in the form of `Notice to Airmen', using a push notification service. The group was given the task: ``To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. In practice, this translated to exploring what architectures existed that could be used to implement a push notification system, and which of those would work with the requested standard of WSN.
 
 As Snowflake were relatively unfamiliar with a number of the tools and technologies required to produce the service, the aim of the project from their perspective was to identify dead-ends and pitfalls a future team of theirs may fall victim to, as well as producing the groundwork for future implementations of the required standards. A number of possible architectures and tools were explored, with each Scrum meeting being used to recount all experiments and attempts as the process of producing the final product was as important as the final product itself.
 
@@ -170,7 +170,7 @@ As Snowflake were relatively unfamiliar with a number of the tools and technolog
 \section{Project Description}
 \subsection{Motivation}
 \label{sec:intro_motivation}
-Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Examples of such events includes: closed runways, restricted airspaces, extreme weather conditions, and even the presence of migrating birds through an airspace. Currently, flight planners receive such information by pulling all current NOTAM's, or `Notice to Airmen', and must manually sort through them to find only the notices which are relevant to their flight, which is extremely time consuming. The efficiency of this task could be improved dramatically if the filtering were performed automatically, using defined geographic regions and time frames. The aeronautics industry uses WSN as their preferred standard, so the customer required us to work to this standard or WS-Events.
+Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Examples of such events includes: closed runways, restricted airspaces, extreme weather conditions, and even the presence of migrating birds through an airspace. Currently, flight planners receive such information by pulling all current NOTAMs, or `Notice to Airmen', and must manually sort through them to find only the notices which are relevant to their flight, which is extremely time consuming. The efficiency of this task could be improved dramatically if the filtering were performed automatically, using defined geographic regions and time frames. The aeronautics industry uses WSN as their preferred standard, so the customer required us to work to this standard or WS-Events.
 
 \subsection{Customer}
 \label{sec:intro_customer}
@@ -182,7 +182,7 @@ The customer for this project was Snowflake Software, a company focused on open 
 
 The vision, as stated by Snowflake, was ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced over the course of the project was to explore options and find methods to limit the incoming data to a flight planner to only relevant data by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of relevant NOTAMs by pilots.
 
-The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy was determined by geographic data, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAM to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes.
+The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy was determined by geographic data, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAMs to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes.
 
 \subsubsection{Project Goals}
 \begin{enumerate}
@@ -276,7 +276,7 @@ In Java, brokers typically implement the Java Message Service (JMS) API provided
 \subsection{Web Services Notification}
 \label{sec:bg_wsn}
 
-Web services notification (or WSN) is a set of specifications created by OASIS that defines the interactions between web services, using notifications, which can form the basis of a publish/subscribe architecture built using web services. They provide a standardized way to communicate with and between web services, without having prior information about them. It includes facilities for detailed subscription, where those wishing to consume information can register with a web service along with details about the type of information they wish to receive. WSN was designed to revolve around these subscription details known as ``topics'' and use them to filter down subscriptions, allowing for large scale usage of the publish/subscribe architecture without unwanted message overload.
+Web services notification (or WSN) is a set of specifications created by OASIS that defines the interactions between web services, using notifications, which can form the basis of a publish/subscribe architecture built using web services. They provide a standardised way to communicate with and between web services, without having prior information about them. It includes facilities for detailed subscription, where those wishing to consume information can register with a web service along with details about the type of information they wish to receive. WSN was designed to revolve around these subscription details known as ``topics'' and use them to filter down subscriptions, allowing for large scale usage of the publish/subscribe architecture without unwanted message overload.
 
 WSN covers a family of smaller specifications including WS-Base Notifications, WS-Brokered Notification and WS-Topics. WS-Base Notifications is a specification of the simple producer/consumer relationship, consumers send out subscription requests to the producers, specifying the subset of messages produced by that producer which it wishes to receive. The request also contains a reference to the consumer itself, so the producer knows where to send the messages.
 
@@ -287,7 +287,7 @@ WS-Topics is a specification which defines a method for categorising subscriptio
 \subsection{Web Services Description Language}
 \label{sec:bg_wsdl}
 
-The Web Services Description Language (or WSDL) is an XML based language for describing the interfaces and functionality of a web service. A WSDL file provides a machine readable description of a web service's interface, including the function calls, parameters they expect and return values.\\
+Web Services Description Language (or WSDL) is an XML based language for describing the interfaces and functionality of a web service. A WSDL file provides a machine readable description of a web service's interface, including the function calls, parameters they expect and return values.\\
 Typically, it is used in combination with SOAP to provide a web service, where a client program will read the WSDL, to determine the functions available, and then use SOAP to call them.
 
 \subsection{JAXB and DOM Parsing}
@@ -307,9 +307,9 @@ A solution to these problems is creating an XML catalogue, which allows you to s
 \subsection{JIRA Issue Tracking}
 \label{sec:bg_jira}
 
-Issue trackers are systems which maintains lists of issues in an ongoing project, with the ability to assign these issues to specific group members, report bugs while working and connect solved issues to source control commits which fix them. Issues can also be broken into sub-tasks, prioritised and categorised to improve efficiency. For example, many issues were recorded after each sprint meeting, these included work for the next sprint, work for near future sprints and overall project goals. These issue reports were categorised according to the sprint which they were to be completed in. When every issue attached to a sprint was marked as solved, a sprint was considered complete in terms of work.
+Issue trackers are systems which maintain lists of issues in an ongoing project, with the ability to assign these issues to specific group members, report bugs while working and connect solved issues to source control commits which fix them. Issues can also be broken into sub-tasks, prioritised and categorised to improve efficiency. For example, many issues were recorded after each sprint meeting, these included work for the next sprint, work for near future sprints and overall project goals. These issue reports were categorised according to the sprint which they were to be completed in. When every issue attached to a sprint was marked as solved, a sprint was considered complete in terms of work.
 
-As the customer is a company which regularly works on projects of a much greater scale than that of the AES system, they possess a number of professional tools for organisation and issue tracking. One of these is JIRA, an issue tracker created by Atlassian designed to work with the chosen cycle of creating user stories and acceptance criteria with the customer and assigning these stories to team members after each sprint meeting. As JIRA is a professional piece of software which normally requires a monthly fee for usage, it had to be accessed via the server running it licensed to the customer through their VPN. By using the tools in use by the customer, they were able to easily keep track of progress and make comments on submissions to the service.
+As the customer is a company which regularly works on projects of a much greater scale than that of the AES system, they possess a number of professional tools for organisation and issue tracking. One of these is JIRA, an issue tracker created by Atlassian designed to work with the chosen cycle of creating user stories and acceptance criteria with the customer and assigning these stories to team members after each sprint meeting. As JIRA is a professional piece of software which normally requires a monthly fee for usage, it had to be accessed via the server running it licensed to the customer through their VPN. By using the tools in use by the customer, the product customer was able to easily keep track of progress and make comments on submissions to the service.
 
 \subsection{ActiveMQ}
 \label{sec:bg_activemq}
@@ -340,11 +340,6 @@ A feature definition describes a single behaviour the code is supposed to be abl
 
 For each feature, there is then a set of corresponding step definitions, that is, code to test the feature, in the form of a subroutine for each step (e.g. there will be a single subroutine for ``Given a broker is running'', which will check that a broker is running and, if not, launch one). Depending on the keyword, these should either set up the initial conditions (in the case of Given or a following And), perform a particular action (in the case of When or a following And), or assert that particular conditions are true (in the case of Then or a following And). If all conditions are satisfied, the test passes, otherwise it fails.
 
-\subsection{JSON}
-\label{sec:bg_json}
-
-JSON (or JavaScript Object Notation) is a human readable data interchange format and an alternative to XML. It transmits data objects consisting of attribute-value pairs and is primarily used for server-web application communication. One of its primary advantages is its relative concision and lack of redundancy when compared to XML.
-
 \subsection{SOAP}
 \label{sec:bg_soap}
 
@@ -353,7 +348,7 @@ SOAP (or, originally, Simple Object Access Protocol) is a platform independent p
 \subsection{Netcat}
 \label{sec:bg_netcat}
 
-Netcat is a utility to read from and write across network connections using TCP or UDP. It is designed so that it can easily and reliably be used as a back-end tool, so it can be used by other programs. It is frequently referred to as the `Swiss army knife' of networking tool because of its wide array of features, such as port scanning and a large number of network debugging and investigation tools.
+Netcat is a utility to read from and write across network connections using TCP or UDP. It is designed so that it can easily and reliably be used as a back-end tool, so it can be used by other programs. It is frequently referred to as the `Swiss army knife of networking' because of its wide array of features, such as port scanning and a large number of network debugging and investigation tools.
 
 \subsection{cURL}
 \label{sec:bg_curl}
@@ -383,7 +378,7 @@ The Web Feature Service interface standard (WFS) is a standard by the Open Geosp
 \subsection{Software Development Methodology}
 \label{sec:plan_software_development_methodology}
 
-The project was built using the Agile software development practices of Scrum, with each sprint following a similar structure. Every other week, the team would meet at Snowflake Software's main offices. First, the customer came up with ideas for features which could be worked on in the following sprint. Next, user stories based on these features were created, dividing up the requirements of each feature and helping to create acceptance criteria which would come together to prove acceptance that the feature was successfully implemented.
+The project was built using the Agile software development practices of Scrum, with each sprint following a similar structure. Every other week, the team would meet at Snowflake Software's main offices. First, progress in the previous sprint was discussed, then the customer came up with ideas for features which could be worked on in the following sprint. Next, user stories based on these features were created, dividing up the requirements of each feature and helping to create acceptance criteria which would come together to prove acceptance that the feature was successfully implemented.
 
 \subsubsection{Meetings}
 
@@ -393,9 +388,9 @@ Meetings also regularly featured exercises to identify issues and find solutions
 
 \subsubsection{Tools}
 
-Various software was used to aide this process, including JIRA (access to which was provided by the client) and Cucumber. JIRA is a tracker that manages user stories and their corresponding acceptance criteria as per each feature. User stories within JIRA are stored in the standardised \emph{``As a, I want, So that''} format, with their acceptance criteria written as \emph{``Given, When, Then''}. This format is also used by Cucumber for acceptance tests. Team members on JIRA can choose what user stories to complete or they can be assigned.
+Various software was used to aide this process, including JIRA (access to which was provided by the client) and Cucumber. JIRA is an issue tracker that manages user stories and their corresponding acceptance criteria as per each feature. User stories within JIRA are stored in the standardised \emph{``As a, I want, So that''} format, with their acceptance criteria written as \emph{``Given, When, Then''}. This format is also used by Cucumber for acceptance tests. Team members on JIRA can choose what user stories to complete or they can be assigned.
 
-Early on in the project, the group was given access to Jira on Snowflake's private servers. This allowed control over the backlog to be maintained and a record of what had been completed to be kept. However over the course of the project, the number of steps required to connect to the Snowflake VPN and access Jira, as well as the difficulties arising from never having used the service before, it was decided that keeping track of the project would be better done through GitHub, which was already being used as a code repository. The issue tracking features within GitHub replaced Jira's extensive features (the majority of which far surpassed the requirements of a small project such as this) and all tasks became issues, still using the standard user story format.
+Early on in the project, the group was given access to JIRA on Snowflake's private servers. This allowed control over the backlog to be maintained and a record of what had been completed to be kept. However over the course of the project, the number of steps required to connect to the Snowflake VPN and access JIRA, as well as the difficulties arising from never having used the service before, it was decided that keeping track of the project would be better done through GitHub, which was already being used as a code repository. The issue tracking features within GitHub replaced JIRA's extensive features (the majority of which far surpassed the requirements of a small project such as this) and all tasks became issues, still using the standard user story format.
 
 \subsection{Skills Audit}
 \label{sec:plan_skills_audit}
@@ -407,12 +402,12 @@ To maximise the efficiency of the team and to minimise the amount of time which 
 \emph{Team Member} & \emph{Relevant Skills}                           \\ \hline
 Andrew Sullivan    & Java, Python, JUnit                              \\ \hline
 Charles Sherman    & Java, WSDLs, SOAP-UI, JUnit, Cucumber, SCRUM     \\ \hline
-Peter Prince       & Java, Python, JUnit                              \\ \hline
+Peter Prince       & Java, Python, JUnit, cURL, Netcat                \\ \hline
 James Robinson     & Java, Maven, Git, JIRA, Travis, Cucumber, JUnit  \\ \hline
 \end{tabular}
 \end{table}
 
-During each sprint meeting the work for the following sprint was decided upon, followed by a meeting in labs to break down the sprint work further and assign each key area to a team member according to their relevant skills. Due to the nature of the project, a lot of early work on the project was not easily divisible, so a system of a single team member coding as the rest of the team researched and provided support, was used.
+During each sprint meeting the work for the following sprint was decided upon, followed by a meeting in labs to break down the sprint work further and assign each key area to a team member according to their relevant skills. Due to the nature of the project, a lot of early work was not easily divisible, so a system of a single team member coding as the rest of the team researched and provided support, was used.
 
 \subsection{Risk Analysis}
 \label{sec:plan_risk_analysis}
@@ -456,9 +451,9 @@ After watching Zach Holman's presentation \emph{How GitHub Uses GitHub to Build 
 \subsection{Testing Methodology}
 \label{sec:plan_testing_methodology}
 
-Behavioural-driven development style acceptance testing was used, utilising Cucumber to express the acceptance criteria for each story and allowing them to be converted into automated acceptance tests which could be run using JUnit. The scenarios were written such that the implementation of a feature can change without the file needing to be rewritten. For each story, when all acceptance tests passed within JUnit, the user story was removed from the backlog. This type of testing keeps testing focused on user stories, testing features rather than abstract units of code, better ensuring that the code satisfies the client's requirements rather than some abstract measure of performance.
+Behavioural-driven development style acceptance testing was used, utilising Cucumber to express the acceptance criteria for each story and allowing them to be converted into automated acceptance tests which could be run using JUnit. The scenarios were written such that the implementation of a feature can change without the file needing to be rewritten. For each story, when all acceptance tests had passed within JUnit, the user story was removed from the backlog. This type of testing keeps the focus on user stories, testing features rather than abstract units of code, better ensuring that the code satisfies the client's requirements rather than some abstract measure of performance.
 
-Continuous integration was also used, utilizing Travis CI. This helps to ensure new code doesn't break old tests, ensures the software can run on a variety of computer set-ups, and allows problems to be detected more quickly and fixed with less backtracking.
+Continuous integration was also used, utilising Travis CI. This helps to ensure new code doesn't break old tests, ensures the software can run on a variety of computer set-ups, and allows problems to be detected more quickly and fixed with less backtracking.
 
 
 \newpage
@@ -466,7 +461,7 @@ Continuous integration was also used, utilizing Travis CI. This helps to ensure 
 \section{Implementation}
 \label{sec:implementation}
 
-Due to the exploratory nature of the project, there was a lot of work that went into the project that wasn't present in the end result. Work was completed using the SCRUM methodology over the course of five sprints. In the this section of the report, each sprint is discussed individually to show the alternatives explored and to show the work that didn't make it to the final prototype as well as highlighting the motivations for the choices made in the development of the software.
+Due to the exploratory nature of the project, there was a lot of work that went into the project that wasn't present in the end result. Work was completed using the Scrum methodology over the course of five sprints. In the this section of the report, each sprint is discussed individually to show the alternatives explored and to show the work that didn't make it to the final prototype as well as highlighting the motivations for the choices made in the development of the software.
 
 \subsection{Sprint 1}
 \label{sec:impl_sprint_1}
@@ -499,7 +494,7 @@ At the end of the first sprint, the first user story had been completed. The cod
 
 The major issue in this sprint was the bottleneck caused by the coding. It was impossible to divide up the programming work between group members, which made it difficult to progress through the work quickly and to keep everyone informed about the work. Although it was inefficient, by having one team member write the code whilst everyone else researched, this did mean that everyone was at least familiar with the project so that they would be able to work efficiently in future sprints. At the end of the sprint, the team had a meeting without the customer, where the code was reviewed, so that everyone understood it and could work on it in the future sprints.
 
-There were no automated tests written for the first sprint. Since values were hard-coded for the broker address and the message topics, there was only one route through the code. For this sprint code was manually tested, and did not write automated unit or system-level tests. As the code expanded in future sprints, automated tests were added to check for errors in the code when changes were made and to demonstrate to the customer that the project was working.
+There were no automated tests written for the first sprint. Since values were hard-coded for the broker address and the message topics, there was only one route through the code. For this sprint, code was manually tested, and did not write automated unit or system-level tests. As the code expanded in future sprints, automated tests were added to check for errors in the code when changes were made and to demonstrate to the customer that the project was working.
 
 There were issues with writing the user stories to Jira. Peter and Andrew were the only people who could access the online service due to issues with the web plugin on other team member's machines. This made the point of assigning work to group members on Jira useless, as people couldn't see what work they had been given. This issue was solved in the next sprint where Jira was replaced with GitHub issue tracking.
 
@@ -537,9 +532,9 @@ In practice it was found that the jump from hard coded values to fully configura
 
 \subsubsection{Review}
 
-At the end of the sprint the sprint goals were all met. The system was now capable of having multiple consumers with unique subscriptions and the produced could send out multiple NOTAM's which were not hard-coded into the system. 
+At the end of the sprint the sprint goals were all met. The system was now capable of having multiple consumers with unique subscriptions and the produced could send out multiple NOTAMs which were not hard-coded into the system. 
 
-The tests at the end of the sprint were found to contain bugs. This made the tests counter-productive as they would sometimes give the impression that the system was working when it would only work on one machine, in a specific set of circumstances. There were also issues with setting up and pulling down services, such as the notification broker, between tests which meant that tests had to be run one at a time. Additionally since the tests ran every time the code was compiled this slowed the development process considerably when long timeouts for the tests had to be included. In sprint 3, the tests were moved to Travis CI, which solved these issues. At the sprint meeting with snowflake, the system was run manually rather than using the Cucumber tests to evidence that the code was working.
+The tests at the end of the sprint were found to contain bugs. This made the tests counter-productive as they would sometimes give the impression that the system was working when it would only work on one machine, in a specific set of circumstances. There were also issues with setting up and pulling down services between tests, which meant that tests had to be run one at a time to prevent issues with services such as the notification broker. Additionally, since the tests ran every time the code was compiled this slowed the development process considerably when long timeouts for the tests had to be included. In sprint 3, the tests were moved to Travis CI, which solved these issues. At the sprint meeting with Snowflake, the system was run manually rather than using the Cucumber tests to evidence that the code was working.
 
 \subsection{Sprint 3}
 \label{sec:impl_sprint_3}
@@ -554,7 +549,7 @@ The subject of testing was also brought up, and the implementation of a continuo
 
 It was in sprint 3, after the progress made up to that point was shown in the sprint meeting, that another representative of Snowflake expressed the importance of spatial filtering over temporal filtering. The utility of spatial filtering is obvious in the case of flight planning, a flight planner simply defining the start and end point of the journey and then receiving all messages relevant to that geographical space would save considerable time when compared to the alternative of manually subscribing to airspaces and airports which are within range. Temporal filtering would allow a consumer to only receive NOTAMs that are in effect for the duration of their flight, dramatically reducing the number of irrelevant NOTAMs being sent.
 
-In order to perform spatial filtering, latitude and longitude data for every airspace and airfield would be required, as NOTAMs lack information at this level of detail. The information required for temporal filtering is featured in each NOTAM, and only conversion to a usable time stamp format was required.
+In order to perform spatial filtering, latitude and longitude data for every airspace and airfield would be required, however NOTAMs lack information at this level of detail so a solution to this problem had to be found. The information required for temporal filtering is featured in each NOTAM, and only conversion to a usable time stamp format was required.
 
 \userstory{Notification Filtering By Time}{flight planner}{to be notified if there is a change to airports I'm interested in during my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
@@ -570,9 +565,9 @@ The main focus of the sprint was implementing temporal and spatial filtering of 
 
 Work was split into exploring documentation of JBoss A-MQ for implementation instructions and information regarding filtering. After a week of investigation, it became apparent that JBoss did not have the capabilities to fulfil the requirements of the product. JBoss filtering  was also restricted exclusively to filtering on strings.
 
-The inadequacy of JBoss A-MQ left two options: either forking JBoss A-MQ and modifying it to support the required features, or dropping it in favour of a message queue which does fulfil those requirements. Basing the decision on the scope of the project and limited remaining time to complete it, it was decided to abandon JBoss A-MQ. As it was early in the sprint and the outcome of the decision would dramatically affect the outcome of the sprint, the customer was notified of the decision, to ensure it was satisfactory to them.
+The inadequacy of JBoss A-MQ left two options: either forking JBoss A-MQ and modifying it to support the required features, or dropping it in favour of a message queue which does fulfil those requirements. Basing the decision on the scope of the project and limited time remaining to complete it, it was decided to abandon JBoss A-MQ. As it was early in the sprint and the outcome of the decision would dramatically affect the outcome of the sprint, the customer was notified of the decision, to ensure it was satisfactory to them.
 
-The decision was made to swap to using JMS and a filtering proof of concept was created to justify the change. Using JMS Selectors to filter based on dummy GPS co-ordinates randomly assigned to each NOTAM, a basic implementation of spatial filtering was created. NOTAM's were also given dummy time codes that were simple integer values and filtered based on those to create a form of temporal filtering.
+The decision was made to swap to using JMS and a filtering proof of concept was created to justify the change. Using JMS Selectors to filter based on dummy GPS co-ordinates randomly assigned to each NOTAM, a basic implementation of spatial filtering was created. NOTAMs were also given dummy time codes that were simple integer values and filtered based on those to create a form of temporal filtering.
 
 \subsubsection{Review}
 
@@ -583,7 +578,7 @@ In making this change to the code, WS-Notification support was lost. This made r
 \subsection{Sprint 4}
 \label{sec:impl_sprint_4}
 
-In the fourth sprint meeting the topic of NOTAM enrichment was raised. Many NOTAM's contained no geographic data or no temporal data which made filtering impossible, this made the enrichment of the NOTAM data a requirement for our software to filter the data. Snowflake provided access to a HTTP-GET web feature service (WFS), which returns latitude and longitude locations for all European airfields which could provide our software a means of enriching NOTAM's with geographic data by looking up the airport name in the NOTAM and finding its corresponding location.
+In the fourth sprint meeting the topic of NOTAM enrichment was raised. Many NOTAMs contained no geographic data or no temporal data which made filtering impossible, this made the enrichment of the NOTAM data a requirement for our software to filter the data. Snowflake provided access to a HTTP-GET web feature service (WFS), which returns latitude and longitude locations for all European airfields which could provide our software a means of enriching NOTAMs with geographic data by looking up the airport name in the NOTAM and finding its corresponding location.
 
 Ideally, calling this service would be implemented into AES itself, however given the time remaining on the project and the status of the product as a proof of concept, it was elected to simply retrieve data for all airfields and hard-code them into the system for use in spatial queries, knowing that the system could easily be modified to directly call the service and utilise the data if more time was spent on it.
 
@@ -595,7 +590,7 @@ As well as re-implementing WS-Notifications, the system also had to be expanded 
 
 \subsubsection{Work Allocation}
 
-For this sprint, Charles was assigned the task of building more elaborate temporal filtering; in parallel to this, Peter worked on spatial filtering. James was tasked with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
+For this sprint, Charles was assigned the task of building more elaborate temporal filtering; in parallel to this, Peter built upon his previous work on spatial filtering. James was tasked with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
 
 \subsubsection{Implementation}
 
@@ -607,7 +602,7 @@ To produce the subset XML document, a bounding box was placed over Europe and su
 
 \subsubsection{Review}
 
-Unfortunately WS-Notifications was not completely implemented in this sprint, however the code for filtering and enriching the data was completed. The task of creating a WS-Notification was much larger than previously thought and although it was planned to only implement a small section of WS-Notifications, this was still too much work.
+Unfortunately, the entire WS-Notification specification was not implemented in this sprint, however the code for filtering and enriching the data was completed. The task of creating a WS-Notification was much larger than previously thought and although it was planned to only implement a small section of WS-Notifications, this was still too much work.
 
 \subsection{Sprint 5}
 \label{sec:impl_sprint_5}
@@ -618,9 +613,9 @@ The goal for the final sprint was to produce a complete minimal viable product f
 
 \subsubsection{Work Allocation}
 
-OpenGIS filters were needed to filter temporally and geographically within WS-Notification. This required small changes to the enrichment of the NOTAM's which was assigned to Peter and Andrew.
+OpenGIS filters were needed to filter temporally and geographically within WS-Notification. This required small changes to the enrichment of the NOTAMs which was assigned to Peter and Andrew.
 
-The service had to be deployed as a WAR on Tomcat for consumers to communicate with to create subscriptions and to recieve relevant NOTAM's. The deployment was assigned to Charles and the mocking of a consumer was assigned to Peter.
+The service had to be deployed as a WAR on Tomcat for consumers to communicate with to create subscriptions and to recieve relevant NOTAMs. The deployment was assigned to Charles and the mocking of a consumer was assigned to Peter.
 
 To parse the filters, James looked into using JAX-WS however this was not used in the final software. Charles and James also worked on generating a WSDL for the producer and the consumers of the WS-Notification messages.
 
@@ -652,9 +647,9 @@ The majority of the goals for this sprint were completed, and two projects were 
 \subsection{Final Meeting}
 \label{sec:impl_final_meeting}
 
-The final meeting consisted of the group demoing and explaining the finished project (i.e. the results of sprint 5), not just to the usual customer representatives, but to a large number of other Snowflake employees that had no previous involvement with or knowledge of the project (including the CEO and a number of both technical and non technical roles). 
+The final meeting consisted of the group demoing and explaining the finished project (i.e. the results of sprint 5), not just to the usual customer representatives, but to a large number of other Snowflake employees that had no previous involvement with or knowledge of the project (including the CEO and a number of both technical and non-technical roles). 
 
-The demo of the software showed multiple consumers receiving NOTAM's sent by a single producer. The consumers subscribed to a broker of WS-Notifications using OpenGIS spatial filters. The spatial filter was made of an axis-aligned bounding box that matched airports based on the geographic data in the NOTAM's which had been included by the enrichment code.
+The demo of the software showed multiple consumers receiving NOTAMs sent by a single producer. The consumers subscribed to a broker of WS-Notifications using OpenGIS spatial filters. The spatial filter was made of an axis-aligned bounding box that matched airports based on the geographic data in the NOTAMs which had been included by the enrichment code.
 
 Once the demo was concluded, the group fielded questions, both from the original customer representatives about the progress in the last sprint, and from those new to the project about the project as a whole. The general architecture of the system was explained, as shown in figure~\ref{fig:system_overview}.
 
@@ -721,11 +716,12 @@ Once the demo was concluded, the group fielded questions, both from the original
 \label{fig:system_overview}
 \end{figure}
 
-The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in this project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. An block diagram giving an overview of this system is provided in figure~\ref{fig:system_overview}.
+The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in this project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. A block diagram giving an overview of this system is provided in figure~\ref{fig:system_overview}.
 
 The system was designed with scalability in mind, since it needed to be able to handle a large volume of NOTAM traffic, and a potentially large number of consumers. For this reason, an arbitrary number of producers and an arbitrary number of WS-Notification brokers are supported, with each broker servicing multiple consumers. The limiting factor in this setup is the number of simultaneous connections that the JMS broker itself is able to service. Since ActiveMQ already has robust support for clustering, this was deemed to be a non-issue.
 
-Although the consumer was out of this project's scope, a basic implementation was still produced, in order to demonstrate the system's functionality. A class diagram for this separate project is given in figure X. Note that this project does not directly reference any of the classes from thw main project; instead, it uses the published WSDL for the project's service, along with JAX-WS, to connect to the service.
+%REPLACE FIGURE X BELOW
+Although the consumer was out of this project's scope, a basic implementation was still produced, in order to demonstrate the system's functionality. A class diagram for this separate project is given in figure X. Note that this project does not directly reference any of the classes from the main project; instead, it uses the published WSDL for the project's service, along with JAX-WS, to connect to the service.
 
 \section{Critical Evaluation}
 \label{sec:critical_evaluation}
@@ -753,13 +749,13 @@ Their main criticism was the one-sidedness of the sprint planning meetings and o
 \section{Conclusions}
 \label{sec:conclusions}
 
-In this report the design, development process and testing of the AES system has been recounted. The final product is a notification system for aeronautic standard messages known as NOTAMs, it utilises a publish/subscribe architecture with brokers handling messages between producers and the consumers. The product handles multiple types of message filtering, allowing subscribers to subscribe based on simple text, locations within bounding boxes and within a given time period.
+In this report the design, development process and testing of the AES system has been recounted. The final product is a notification system for aeronautic standard messages known as NOTAMs, it utilises a publish/subscribe architecture with brokers handling messages between producers and the consumers. The product handles multiple types of message filtering, allowing consumers to subscribe based on simple text, locations within bounding boxes and within a given time period.
 
 As stated as a requirement, AES makes use of the WS-Notification standard for communication between brokers and consumers. This standard was chosen due to its common usage within the aeronautics industry for communication. Messaging done between brokers, the ActiveMQ message queue and the producers uses the Java Messaging Service.
 
-The AES system was tested to handle multiple publishers and consumers, however its limits were not tested. Given the extensible nature of its design it should be able to handle any number of producers, consumers or NOTAMs within reason, but due to time and monetary constraints it was not possible to confirm this.
+The AES system was tested to handle multiple publishers and consumers, however its limits were not stress tested. Given the extensible nature of its design it should be able to handle any number of producers, consumers or NOTAMs within reason, but due to time and monetary constraints it was not possible to confirm this.
 
-A main limitation of the final product is its limited implementations of WS-Notifications and OpenGIS filtering standards, only including a subset of directly relevant components. The decisions to only implement the parts of the standard which were vital to the project were made in the interest of time. If AES was built upon, completing these implementations would be required to adhere to the standards.
+A main limitation of the final product is its limited implementations of WS-Notifications and OpenGIS filtering standards, only including a subset of directly relevant components. The decisions to only implement the parts of the standard which were vital to the project were made in the interest of time. If AES was built upon, completing these implementations would be required to properly adhere to the standards.
 
 An initially important goal of the project which had to be abandoned fairly early on was polling of the Federal NOTAM System. As the aim was to produce a system which took NOTAMs from their source, filtered them and communicated them to the correct consumers, this was to be an important component of the project. Unfortunately this was deemed impossible as access to the FNS is restricted and requires registration before you are authorised. This was deemed to be outside of the scope of a proof of concept design.
 
@@ -773,12 +769,12 @@ An initially important goal of the project which had to be abandoned fairly earl
 
 Although the system was designed to scale well with available hardware, it was not possible to test this functionality within the time constraints of the project. Given more time, the system's scalability could be tested by launching multiple instances of the WSN broker on Amazon EC2 instances, and measuring both the number of simultaneous subscriptions each is able to request, and the total number of simultaneous subscriptions that the entire system is able to service. The limiting factor for the latter will be the throughput of the JMS broker (ActiveMQ). This testing would require additional funding to pay for the required EC2 instances.
 
-Alternatively, the system could be deployed on Amazon Elastic Beanstalk, which automatically scales the service by provisioning additional EC2 instances when under high load. An Elastic Beanstalk distribution could be created for the service, and the peak number of subscriptions that the system is able to service could be measured. Again, this testing would require additional funding.
+Alternatively, the system could be deployed on Amazon Elastic Beanstalk, which automatically scales the service by provisioning additional EC2 instances when under high load. An Elastic Beanstalk distribution could be created for the service, and the peak number of subscriptions that the system is able to service could be measured. Again, this testing would require additional funding and by the time it was realised that this type of testing would be useful to the project it was not possible to request funding.
 
 \subsection{IATA Designators and ICAO Location Indicators}
 \label{sec:future_designators}
 
-Global Aerodromes is a service provided by Snowflake which allowed the AES system to map from aerodromes referenced in NOTAMs to GPS co-ordinates, a feature required in order to perform spatial filtering. Within the AIXM specification for NOTAMs, both IATA (International Air Transport Assocation) designators and ICAO (International Civil Aviation Organisation) location indicators are specified. Both of these designating IDs are used by Global Aerodromes and the AES service produced made use of just IATA designators to pair NOTAMs to GPS co-ordinates. This caused an issue due to a fraction of the aerodromes listed by the Global Aerodromes service do not contain a value for this identifier. A possible future extension would be to add a contingency for this occurrence and include support for ICAO location indicators as well, to maximise the chance that every NOTAM's aerodrome is matched to a location for filtering.
+Global Aerodromes is a service provided by Snowflake which allowed the AES system to map from aerodromes referenced in NOTAMs to GPS co-ordinates, a feature required in order to perform spatial filtering. Within the AIXM specification for NOTAMs, both IATA (International Air Transport Assocation) designators and ICAO (International Civil Aviation Organisation) location indicators are specified. Both of these designating IDs are used by Global Aerodromes and the AES service produced made use of just IATA designators to pair NOTAMs to GPS co-ordinates. This caused an issue due to a fraction of the aerodromes listed by the Global Aerodromes service not containing a value for this identifier. A possible future extension would be to add a contingency for this occurrence and include support for ICAO location indicators as well, to maximise the chance that every NOTAM's aerodrome is matched to a location for filtering.
 
 \subsection{Compile Time Issues}
 \label{sec:future_compilation}
@@ -818,7 +814,6 @@ This was not previously implemented due to the team's inexperience at working wi
   \fullref{sec:bg_git}                   & Andrew Sullivan                    \\
   \fullref{sec:bg_travis}                & Andrew Sullivan                    \\
   \fullref{sec:bg_cucumber}              & Andrew Sullivan                    \\
-  \fullref{sec:bg_json}                  & Andrew Sullivan                    \\
   \fullref{sec:bg_soap}                  & Andrew Sullivan                    \\
   \fullref{sec:bg_netcat}                & Andrew Sullivan                    \\
   \fullref{sec:bg_curl}                  & Andrew Sullivan                    \\
