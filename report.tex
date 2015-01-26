@@ -406,46 +406,46 @@ Continuous integration was also used, utilizing Travis CI. This helps to ensure 
 \section{Implementation}
 \label{sec:implementation}
 
-Due to the exploratory nature of the project, there was a lot of work that went into the project that wasn't present in the end result. The team worked using SCRUM and completed five sprints. In our implementation, we discuss each sprint individually to show the alternatives we explored and to show the work that didn't make it to the final prototype.
+Due to the exploratory nature of the project, there was a lot of work that went into the project that wasn't present in the end result. The team worked using SCRUM and completed five sprints. In the implementation, each sprint is discussed individually to show the alternatives explored and to show the work that didn't make it to the final prototype.
 
 \subsection{Sprint 1}
 \label{sec:impl_sprint_1}
 
-At the start of the project the team had a meeting with Snowflake, we were introduced to the project and we discussed the scope, requirements and overall goals of the project. Snowflake described the vision of the project, the goal we were set was: ``To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. This also had to be implemented using either the WS-Notification standard or WS-Events, as these are the most used standards in the industry.
+At the start of the project, the team had a meeting with Snowflake, were introduced to the project and discussed the scope, requirements and overall goals of the project. Snowflake described the vision of the project, the goal set was: ``To demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. This also had to be implemented using either the WS-Notification standard or WS-Events, as these are the most used standards in the industry.
 
 \subsubsection{Sprint Goals}
 
-For the first sprint the goal was to have a basic push notification system running that could publish and receive an XML. As well as this we had to set up our development environment and tools for the project.
+For the first sprint, the goal was to have a basic push notification system running that could publish and receive an XML. As well as this, the development environment and tools for the project had to be set up.
 
-The project was written in Java because of the familiarity the team already had with it. The team worked in the IDE Eclipse, and used the build system Maven to handle library dependencies as it has automatic dependency resolution and plugins for code generation. For version control the team used Github.
+The project was written in Java because of the familiarity the team already had with it. The team worked in the IDE Eclipse, and used the build system Maven to handle library dependencies, as it has automatic dependency resolution and plugins for code generation. For version control the team used Github.
 
-For the first sprint there was only a single user story to implement. Jira\ref{JIRA} was used to manage our user stories and to allocate the work, however there were problems using it.
+For the first sprint, there was only a single user story to implement. Jira\ref{JIRA} was used to manage the user stories and to allocate the work, however there were problems using it.
 
 \userstory{Basic Push Notification}{flight planner}{to be notified if there is a change to my destination airport for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
-To implement the user story required setting up Apache ActiveMQ\ref{activeMQ} and implementing a method of providing a message to the broker and a way of displaying the message so tests could be written to see that it was recieved correctly.
+To implement the user story required setting up Apache ActiveMQ\ref{activeMQ} and implementing a method of providing a message to the broker and a way of displaying the message so tests could be written to see that it was received correctly.
 
 \subsubsection{Work Allocation}
 
-As the sprint goal was very simple it was difficult to separate the work between team members. James did the majority of the coding work while everyone else in the group assisted by researching the possible tools we could use. This was in effect an extension of pair-programming, where two people working on a single machine take turns in programming while the other checks for mistakes.
+As the sprint goal was very simple, it was difficult to separate the work between team members. The majority of the coding work was done by James, whilst everyone else in the group assisted by researching the possible tools that could be used. This was, in effect, an extension of pair-programming, where two people working on a single machine take turns in programming while the other critiques and checks for mistakes.
 
-Once we had found a solution that worked, James presented the code to everyone else so that the group understood which of the implementations we went with and why.
+Once a solution that worked has been found, James presented the code to everyone else so that the group understood the chosen implementation and the motives behind it.
 
 Apart from programming, James also helped to set up Maven on the team member's machines so that they could also work on the code. Charles Sherman set up the github repository to store the code for the project and Peter Prince set up the team's project on Jira.
 
 \subsubsection{Implementation}
 
-After working on a basic implementation of ActiveMQ and exploring the documentation available online, it became obvious that it contained no implementation of WS-Notification and the page within its online documentation which was supposed to detail its implementation was a dead link. One of the requirements stated by the customer was the inclusion of WS-Notification and while this was a soft requirement, meaning that it's inclusion could be forgone if sufficient justification was given. The project was in an early enough stage at this point in development that it was worth exploring other alternatives. Alternatives such as developing our own WS-Notification implementation using CXF.
+After working on a basic implementation of ActiveMQ and exploring the documentation available online, it became obvious that it contained no implementation of WS-Notification and the page within its online documentation which was supposed to detail its implementation was a dead link. One of the requirements stated by the customer was the inclusion of WS-Notification and whilst this was a soft requirement, meaning that it's inclusion could be forgone if sufficient justification was given, the project was in an early enough stage at this point in development that it was worth exploring other alternatives; alternatives such as developing a WS-Notification implementation from scratch using CXF.
 
-Apache CXF is an open source framework for producing web services, and after ActiveMQ was deemed unusable, research began into using CXF. Work started by creating a WS-Notification implementation within CXF. Progress in this was slowed significantly by documentation for the framework being extremely limited. While creating this implementation, it was discovered that an implementation existed, undocumented, within Apache CXF. Through experimentation and knowledge gained from attempting to build a bespoke implementation, a basic demo was produced, subscribing a consumer to a preallocated topic and sending out a message through the subscription.
+Apache CXF is an open source framework for producing web services, and after ActiveMQ was deemed unusable, research began into using CXF. Work started by creating a WS-Notification implementation within CXF. Progress in this was slowed significantly by documentation for the framework being extremely limited. Whilst creating this implementation, it was discovered that an implementation already existed, undocumented, within Apache CXF. Through experimentation and knowledge gained from attempting to build a bespoke implementation, a basic demo was produced, subscribing a consumer to a preallocated topic and sending out a message through the subscription.
 
 \subsubsection{Review}
 
-At the end of the first sprint we completed our first user story and set up the development environment for all the team members. We had Eclipse with Maven working on everyone's machines and using Github, we shared the code that had been written so that in future sprints everyone would be able to work on the code.
+At the end of the first sprint, the first user story had been completed and the development environment set up for all the team members. Eclipse with Maven was working on everyone's machines and using Github, the code that had been written was shared, so that in future sprints everyone would be able to work on the code.
 
-The major issue in this sprint was the bottleneck caused by the coding. It was impossible for us to divide up the programming work between us which made it difficult to progress through the work quickly and to keep everyone informed about the work. Although it was inefficient, by having one team member write the code while everyone else researched, this did mean that everyone was at least familiar with the project so that they would be able to work efficiently in future sprints. At the end of the sprint, the team had meeting without the customer where the code was reviewed so that everyone understood it and could work on it in the future sprints.
+The major issue in this sprint was the bottleneck caused by the coding. It was impossible to divide up the programming work between group members, which made it difficult to progress through the work quickly and to keep everyone informed about the work. Although it was inefficient, by having one team member write the code whilst everyone else researched, this did mean that everyone was at least familiar with the project so that they would be able to work efficiently in future sprints. At the end of the sprint, the team had a meeting without the customer, where the code was reviewed, so that everyone understood it and could work on it in the future sprints.
 
-There were issues with writing the user stories to Jira. Peter was the only person who could get onto the online service due to issues with the web plugin on other team member's machines. This made the point of assigning work to each other on Jira useless as people couldn't see what work they had been given. This issue was solved in our next sprint where Jira was replaced with github issue tracking.
+There were issues with writing the user stories to Jira. Peter and Andrew were the only people who could access the online service due to issues with the web plugin on other team member's machines. This made the point of assigning work to group members on Jira useless, as people couldn't see what work they had been given. This issue was solved in the next sprint where Jira was replaced with github issue tracking.
 
 \subsection{Sprint 2}
 \label{sec:impl_sprint_2}
