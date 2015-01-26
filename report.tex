@@ -5,7 +5,7 @@
 \usepackage{caption}
 \usepackage{hyperref}
 \usepackage{tabularx}
-\usepackage[autostyle]{csquotes}  
+\usepackage[autostyle]{csquotes}
 
 % Define \fullref command to reference both number and name of section
 \newcommand*{\fullref}[1]{\ref{#1} \nameref{#1}}
@@ -125,7 +125,7 @@
 
 \begin{abstract}
 
-This group report details the planning, design processes and final implementation of a proof of concept NOTAM push notification system, utilising a publish/subscribe architecture, built for Snowflake Software. The system, named ``AES'', uses a combination of JMS and WS-Notification communication to handle subscriptions and the publishing of Notices To AirMen. Built in Java, the system parses AIXM XML documents to extract messages which need to be sent to the relevant recipients, storing messages in an ActiveMQ message queue. After receiving subscription requests filtered temporally or spatially, the system is able to send the published messages to the subscribers who requested them. 
+This group report details the planning, design processes and final implementation of a proof of concept NOTAM push notification system, utilising a publish/subscribe architecture, built for Snowflake Software. The system, named ``AES'', uses a combination of JMS and WS-Notification communication to handle subscriptions and the publishing of Notices To AirMen. Built in Java, the system parses AIXM XML documents to extract messages which need to be sent to the relevant recipients, storing messages in an ActiveMQ message queue. After receiving subscription requests filtered temporally or spatially, the system is able to send the published messages to the subscribers who requested them.
 
 \end{abstract}
 
@@ -359,7 +359,7 @@ cURL is both a library and command line tool for sending and retrieving data usi
 
 The project was built using the Agile software development practices of Scrum, with each sprint following a similar structure. Every other week, the team would meet at Snowflake Software's main offices. First, the customer came up with ideas for features which could be worked on in the following sprint. Next, user stories based on these features were created, dividing up the requirements of each feature and helping to create acceptance criteria which would come together to prove acceptance that the feature was successfully implemented.
 
-\subsubsection{Meetings} 
+\subsubsection{Meetings}
 
 At the beginning of each sprint, a sprint meeting was held to both close the previous sprint and prepare for the following one. First, features implemented in the previous sprint were demonstrated to the customer, allowing them to track the progress of the project and decide if the feature had been successfully implemented. In the event that the customer was not satisfied with the work done in the sprint, the user stories were kept in the backlog for the following sprint. Otherwise, the customer discussed future features to be implemented and broke the feature up into user stories to be added to the backlog.
 
@@ -391,7 +391,7 @@ During each sprint meeting the work for the following sprint was decided upon, f
 \subsection{Risk Analysis}
 \label{sec:plan_risk_analysis}
 
-The majority of risks that were analysed concerned code loss and issues with team members being unable to complete work assigned to them.  
+The majority of risks that were analysed concerned code loss and issues with team members being unable to complete work assigned to them.
 
 \subsection{Code Loss}
 
@@ -619,7 +619,7 @@ The final meeting consisted of the group demoing and explaining the finished pro
 
 The demo consisted of a single producer and a single broker running throughout, with consumers each subscribing to individual topics; this demonstrated that the software can deal with multiple clients and demonstrated that it was actually performing filtering based on topics (as opposed to a precooked demo that could be used to mislead). Once the demo was complete (and after a member of Snowflake requested a demonstration of a topic of their own choosing), the general architecture of the system was explained (as seen in figure 3).
 
-Since it was the final meeting, the typical sprint review was omitted, since the project was completed and it was no longer needed to guide the direction of the next sprint.  Instead, once the initial meeting with Snowflake at large was concluded, there was a discussion of the project as a whole with just the original client representatives (Adrian and Eddie). Here the total project progress was discussed, as well as how the work would be used and developed further (by Snowflake) in the future. 
+Since it was the final meeting, the typical sprint review was omitted, since the project was completed and it was no longer needed to guide the direction of the next sprint.  Instead, once the initial meeting with Snowflake at large was concluded, there was a discussion of the project as a whole with just the original client representatives (Adrian and Eddie). Here the total project progress was discussed, as well as how the work would be used and developed further (by Snowflake) in the future.
 
 
 
@@ -637,7 +637,6 @@ Since it was the final meeting, the typical sprint review was omitted, since the
     \node (ActiveMQ) [abstract, rectangle split, rectangle split parts=1, right=5cm of Producer1]
         {
             \textbf{ActiveMQ}
-            
         };
 
     \node (Producer2) [abstract, rectangle split, rectangle split parts=2, right=5cm of ActiveMQ]
@@ -649,13 +648,11 @@ Since it was the final meeting, the typical sprint review was omitted, since the
     \node (WSN Broker1) [abstract, rectangle split, rectangle split parts=1, below left=0.8cm of ActiveMQ]
         {
             \textbf{WSN Broker}
-            
         };
 
     \node (WSN Broker2) [abstract, rectangle split, rectangle split parts=1, below right=0.8cm of ActiveMQ]
         {
             \textbf{WSN Broker}
-            
         };
 
     \node (Consumer) [abstract, rectangle split, rectangle split parts=2, below right=0.8cm of WSN Broker1]
@@ -773,15 +770,15 @@ This was not previously implemented due to the team's inexperience at working wi
 
 \begin{tabularx}{\textwidth}{|X|X|} \hline
   \emph{Section}                         & \emph{Author}                      \\ \hline
-  Abstract         & Peter Prince                       \\ \hline
+  Abstract                               & Peter Prince                       \\ \hline
   \fullref{sec:introduction}             & Charles Sherman\par Peter Prince   \\ \hline
   \fullref{sec:intro_motivation}         & Peter Prince                       \\
-  \fullref{sec:intro_customer}           & Peter Prince\par Andrew Sullivan  \\
+  \fullref{sec:intro_customer}           & Peter Prince\par Andrew Sullivan   \\
   \fullref{sec:intro_goals}              & Peter Prince                       \\ \hline
   \fullref{sec:bg_notams}                & Peter Prince\par Andrew Sullivan   \\
   \fullref{sec:bg_pubsub}                & James Robinson                     \\
   \fullref{sec:bg_wsn}                   & Peter Prince                       \\
-  \fullref{sec:bg_wsdl}						& Andrew Sullivan 				\\
+  \fullref{sec:bg_wsdl}                  & Andrew Sullivan                    \\
   \fullref{sec:bg_parsing}               & Peter Prince                       \\
   \fullref{sec:bg_catalogues}            & Peter Prince                       \\
   \fullref{sec:bg_jira}                  & Peter Prince                       \\
@@ -798,7 +795,7 @@ This was not previously implemented due to the team's inexperience at working wi
   \fullref{sec:plan_skills_audit}        & Peter Prince                       \\
   \fullref{sec:plan_risk_analysis}       & Charles Sherman                    \\
   \fullref{sec:plan_customer_relations}  & Peter Prince                       \\
-  \fullref{sec:plan_deliverables}        & Peter Prince    \\
+  \fullref{sec:plan_deliverables}        & Peter Prince                       \\
   \fullref{sec:version_control}          & James Robinson                     \\
   \fullref{sec:plan_testing_methodology} & Andrew Sullivan                    \\ \hline
 \end{tabularx}
@@ -811,12 +808,12 @@ This was not previously implemented due to the team's inexperience at working wi
   \fullref{sec:impl_sprint_3}            & Charles Sherman\par Peter Prince   \\
   \fullref{sec:impl_sprint_4}            & Charles Sherman\par Peter Prince   \\
   \fullref{sec:impl_sprint_5}            & Charles Sherman\par Peter Prince   \\
-  \fullref{sec:impl_final_meeting}       & Andrew Sullivan   \\ \hline
+  \fullref{sec:impl_final_meeting}       & Andrew Sullivan                    \\ \hline
   \fullref{sec:final_system}             & James Robinson\par Charles Sherman \\ \hline
-  \fullref{sec:critical_evaluation}        & Peter Prince                     \\
+  \fullref{sec:critical_evaluation}      & Peter Prince                       \\
   \fullref{sec:eval_git_workflow}        & James Robinson                     \\
   \fullref{sec:eval_project_management}  & -                                  \\
-  \fullref{sec:eval_customer_feedback}  & Andrew Sullivan  \\ \hline
+  \fullref{sec:eval_customer_feedback}   & Andrew Sullivan                    \\ \hline
   \fullref{sec:conclusions}              & Peter Prince                       \\ \hline
   \fullref{sec:future_testing}           & James Robinson                     \\
   \fullref{sec:future_designators}       & Peter Prince                       \\
@@ -858,7 +855,7 @@ Adrian\\
 -- \\
 Adrian McKenzie\\
 Head of Software Development\\
-Snowflake Software 
+Snowflake Software
 
 
 \end{document}
