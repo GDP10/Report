@@ -273,6 +273,8 @@ This architecture is generally implemented using a \emph{broker}, which exists a
 
 In Java, brokers typically implement the Java Message Service (JMS) API provided by Java Enterprise Edition, which offers a consistent interface for communicating with many different message broker implementations.
 
+This architecture can be used to turn a pull notification system into a push notification system by creating a publisher (or several publishers) that regularly polls and retrieves messages from the existing pull notification system, and then sends them to the broker (which pushes them to the appropriate consumers).
+
 \subsection{Web Services Notification}
 \label{sec:bg_wsn}
 
@@ -283,6 +285,8 @@ WSN covers a family of smaller specifications including WS-Base Notifications, W
 WS-Brokered Notification works in a similar manner to WS-Base, but introduces a middleman between the message publishers and the message subscribers known as the broker. The broker is designed to decouple the connection between producers and consumers and allows for advanced messaging features such as demand-based publishing, load-balancing and publication of messages from entities which are not themselves web service providers.
 
 WS-Topics is a specification which defines a method for categorising subscriptions into ``topics''. This specification is designed to work in conjunction with WS-Base or WS-Brokered and contains various methods for defining groups of subscriptions.
+
+WSN is a favoured standard of the aerospace industry, which is why it is highly desired that the final product uses it.
 
 \subsection{Web Services Description Language}
 \label{sec:bg_wsdl}
@@ -302,7 +306,7 @@ DOM parsing is one of the two most commonly used XML parsing methods, the other 
 
 XML files contain references to external XML resources such as schema files and WSDL files. When referencing a large number of external files, events such as network outages and slow connections can cause major issues for a service and its performance. Another problem which can occur when referencing external resources is relative URLs being used to address them. Relative URLs limit the service using them to the context in which it was created, as launching it from any other location will not work.
 
-A solution to these problems is creating an XML catalogue, which allows you to store these files locally and instruct your service to use these local references when its external counterpart is requested. The catalogue maps between these two versions of the same resource.
+A solution to these problems is creating an XML catalogue, which allows these files to be stored locally and a service to be instructed to use these local references when its external counterpart is requested. The catalogue maps between these two versions of the same resource.
 
 \subsection{JIRA Issue Tracking}
 \label{sec:bg_jira}
@@ -321,7 +325,7 @@ Apache ActiveMQ is an open source message queue service which communicates using
 
 Git is a distributed version control system, which allows multiple people to work on a single project at the same time, without necessitating the use of a shared network, as well as tracking document history, affording reversions or rollbacks to previous versions. Some form of source control is essential for effective collaboration between programmers and greatly aides coordination and communication.
 
-GitHub is a Git repository hosting service, which also offers other features that aide collaborative coding, such as issue tracking and task assignment.
+GitHub is a Git repository hosting service, which also offers other features that aide collaborative coding, such as issue tracking and task assignment, which can aide greatly in project management.
 
 \subsection{Travis CI}
 \label{sec:bg_travis}
@@ -340,6 +344,13 @@ A feature definition describes a single behaviour the code is supposed to be abl
 
 For each feature, there is then a set of corresponding step definitions, that is, code to test the feature, in the form of a subroutine for each step (e.g. there will be a single subroutine for ``Given a broker is running'', which will check that a broker is running and, if not, launch one). Depending on the keyword, these should either set up the initial conditions (in the case of Given or a following And), perform a particular action (in the case of When or a following And), or assert that particular conditions are true (in the case of Then or a following And). If all conditions are satisfied, the test passes, otherwise it fails.
 
+In this project, feature definitions were based on the client's user stories, keeping the tests focused on satisfying the customer's requirements.
+
+\subsection{JSON}
+\label{sec:bg_json}
+
+JSON (or JavaScript Object Notation) is a human readable data interchange format and an alternative to XML. It transmits data objects consisting of attribute-value pairs and is primarily used for server-web application communication. One of its primary advantages is its relative concision and lack of redundancy when compared to XML.
+
 \subsection{SOAP}
 \label{sec:bg_soap}
 
@@ -348,12 +359,12 @@ SOAP (or, originally, Simple Object Access Protocol) is a platform independent p
 \subsection{Netcat}
 \label{sec:bg_netcat}
 
-Netcat is a utility to read from and write across network connections using TCP or UDP. It is designed so that it can easily and reliably be used as a back-end tool, so it can be used by other programs. It is frequently referred to as the `Swiss army knife of networking' because of its wide array of features, such as port scanning and a large number of network debugging and investigation tools.
+Netcat is a utility to read from and write across network connections using TCP or UDP. It is designed so that it can easily and reliably be used as a back-end tool, so it can be used by other programs. It is frequently referred to as the `Swiss army knife' of networking tool because of its wide array of features, such as port scanning and a large number of network debugging and investigation tools. In this project, it was used to retrieve data from a WFS and to implement a mock consumer, for demonstrative purposes.
 
 \subsection{cURL}
 \label{sec:bg_curl}
 
-cURL is both a library and command line tool for sending and retrieving data using a wide variety of protocols (such as HTTP, FTP, SCP, POP3, etc.). It is very portable, working on a wide variety of platforms, and bindings are available for a large number of programming languages.
+cURL is both a library and command line tool for sending and retrieving data using a wide variety of protocols (such as HTTP, FTP, SCP, POP3, etc.). It is very portable, working on a wide variety of platforms, and bindings are available for a large number of programming languages. It was used to send subscription requests from the consumer.
 
 \subsection{Open Geospatial Consortium}
 \label{sec:bg_ogc}
