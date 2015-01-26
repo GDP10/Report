@@ -655,11 +655,11 @@ Since it was the final meeting, the typical sprint review was omitted, since the
 \label{fig:system_overview}
 \end{figure}
 
-The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in our project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. An block diagram giving an overview of this system is provided in figure~\ref{fig:system_overview}.
+The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in this project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. An block diagram giving an overview of this system is provided in figure~\ref{fig:system_overview}.
 
 The system was designed with scalability in mind, since it needed to be able to handle a large volume of NOTAM traffic, and a potentially large number of consumers. For this reason, an arbitrary number of producers and an arbitrary number of WS-Notification brokers are supported, with each broker servicing multiple consumers. The limiting factor in this setup is the number of simultaneous connections that the JMS broker itself is able to service. Since ActiveMQ already has robust support for clustering, this was deemed to be a non-issue.
 
-Although the consumer was out of this project's scope, we still produced a basic implementation in order to demonstrate the system's functionality. A class diagram for this separate project is given in figure X. Note that this project does not directly reference any of the classes from our main project; instead, it uses the published WSDL for our service, along with JAX-WS, to connect to the service.
+Although the consumer was out of this project's scope, a basic implementation was still produced, in order to demonstrate the system's functionality. A class diagram for this separate project is given in figure X. Note that this project does not directly reference any of the classes from thw main project; instead, it uses the published WSDL for the project's service, along with JAX-WS, to connect to the service.
 
 \section{Critical Evaluation}
 \label{sec:critical_evaluation}
@@ -671,7 +671,7 @@ In order to properly judge the success of a project such as this, it is importan
 
 Assigned to James
 
-After we switched to the new workflow, this worked pretty well
+After we (<- no) switched to the new workflow, this worked pretty well
 
 \subsection{Project management}
 \label{sec:eval_project_management}
