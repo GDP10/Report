@@ -449,11 +449,9 @@ At the start of the project, the team had a meeting with Snowflake, were introdu
 
 \subsubsection{Sprint Goals}
 
-For the first sprint, the goal was to have a basic push notification system running that could publish and receive an XML. As well as this, the development environment and tools for the project had to be set up.
+For the first sprint, the goal was to have a basic push notification system running that could publish and receive an XML.
 
-The project was written in Java because of the familiarity the team already had with it. The team worked in the IDE Eclipse, and used the build system Maven to handle library dependencies, as it has automatic dependency resolution and plugins for code generation. For version control the team used GitHub.
-
-For the first sprint, there was only a single user story to implement. Jira\ref{JIRA} was used to manage the user stories and to allocate the work, however there were problems using it.
+The customer had no preference for what language the project was written in. The team chose Java because of the familiarity the team already had with it. The team worked in the IDE Eclipse, and used the build system Maven to handle library dependencies, as it has automatic dependency resolution and plugins for code generation. For version control the team used GitHub.
 
 \userstory{Basic Push Notification}{flight planner}{to be notified if there is a change to my destination airport for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
@@ -461,11 +459,7 @@ To implement the user story required setting up Apache ActiveMQ\ref{activeMQ} an
 
 \subsubsection{Work Allocation}
 
-As the sprint goal was very simple, it was difficult to separate the work between team members. The majority of the coding work was done by James, whilst everyone else in the group assisted by researching the possible tools that could be used. This was, in effect, an extension of pair-programming, where two people working on a single machine take turns in programming while the other critiques and checks for mistakes.
-
-Once a solution that worked has been found, James presented the code to everyone else so that the group understood the chosen implementation and the motives behind it.
-
-Apart from programming, James also helped to set up Maven on the team member's machines so that they could also work on the code. Charles Sherman set up the GitHub repository to store the code for the project and Peter Prince set up the team's project on Jira.
+As the sprint goal was to create the foundations of the code with modules that were very tightly linked, it was difficult to separate the work between team members. The majority of the coding work was done by James, whilst everyone else in the group assisted by researching the possible tools that could be used. Once a solution that worked had been found, James presented the code to everyone else so that the group understood the chosen implementation and the motives behind it. Other team members were also assigned non-coding tasks such as setting up the Git repo and using JIRA.
 
 \subsubsection{Implementation}
 
@@ -475,9 +469,11 @@ Apache CXF is an open source framework for producing web services, and after Act
 
 \subsubsection{Review}
 
-At the end of the first sprint, the first user story had been completed and the development environment set up for all the team members. Eclipse with Maven was working on everyone's machines and using GitHub, the code that had been written was shared, so that in future sprints everyone would be able to work on the code.
+At the end of the first sprint, the first user story had been completed. The code used Apache CXF with the WS-Notification standard that came included with it. This implementation was capable of sending a NOTAM to a hard-coded consumer who also had a hard-coded subscription to a broker. The subscription method used simple string topic names, for example a topic would be published with an aiport name ``AIR1'' and a consumer with a subscription ``AIR1'' would recieve it. This implementation was not capable of doing any more complex filtering as was required later in the project which meant the system had to be changed in future sprints.
 
 The major issue in this sprint was the bottleneck caused by the coding. It was impossible to divide up the programming work between group members, which made it difficult to progress through the work quickly and to keep everyone informed about the work. Although it was inefficient, by having one team member write the code whilst everyone else researched, this did mean that everyone was at least familiar with the project so that they would be able to work efficiently in future sprints. At the end of the sprint, the team had a meeting without the customer, where the code was reviewed, so that everyone understood it and could work on it in the future sprints.
+
+There were no automated tests written for the first sprint. Since values were hard-coded for the broker address and the message topics, there was only one route through the code. For this sprint the team tested the code manually and did not write automated unit or system-level tests. As the code expanded in future sprints, automated tests were added to check for errors in the code when changes were made and to demonstrate to the customer that the project was working.
 
 There were issues with writing the user stories to Jira. Peter and Andrew were the only people who could access the online service due to issues with the web plugin on other team member's machines. This made the point of assigning work to group members on Jira useless, as people couldn't see what work they had been given. This issue was solved in the next sprint where Jira was replaced with GitHub issue tracking.
 
@@ -507,24 +503,28 @@ During the second sprint planning meeting a table of requirements was made with 
 
 \subsubsection{Work Allocation}
 
-Peter and James worked on rewriting the code so that multiple subscriptions were possible and could be configured by command line arguments. Charles was assigned writing tests for the system using Cucumber.
+Unlike in the first sprint, the project now had enough complexity for programming work to be divided between the team. Peter and James worked on rewriting the code so that multiple subscriptions were possible and could be configured by command line arguments. Charles was assigned writing tests for the system using Cucumber.
 
 \subsubsection{Implementation}
 
-In practice it was found that the jump from hard coded values to fully configurable parameters was trivial. However, creating tests for the code was not as simple as hoped. A set of Cucumber tests was created to check that a NOTAM could be sent from a producer, to a broker and out to a set of consumers. There were issues with starting multiple processes up and having time-outs to check if a NOTAM had been received.
+In practice it was found that the jump from hard coded values to fully configurable code could be done in a single step. The difficulty in making the step was in creating the tests for the new configurable code. A set of Cucumber tests was created to check that a NOTAM could be sent from a producer, to a broker and out to a set of consumers. Consumers had individual subscriptions so it could be demonstrated to the customer that consumers only recieved messages they were subscribed to.
 
 \subsubsection{Review}
 
-It was at this point, after producing a large number of user stories for this sprint, that the decision to cease using JIRA for issue tracking was made. At this point in the project, the group getting bogged down by the many unused pages and tools of JIRA which served no purpose to the small project, so it was decided to switch entirely to GitHub's issue tracker which was already being used in a minimal capacity. While JIRA initially proved useful early on in the project, having to install and use the VPN software on every computer that needed access to the tools meant the issue tracker provided by the source repository (GitHub) ended up being temporarily used as a middleman. Shortly after it was decided that this was not an efficient use of time, the group debated leaving JIRA in favour of fully committing to GitHub. While a number of tools offered by JIRA did not exist in GitHub's issue tracker, this often worked against JIRA, as it contained a large array of tools not useful for a small scale project such as this, which often got in the way. As GitHub was already being used as the source repository, bringing issue tracking and source control into one place seemed like the most efficient thing to do.
+At the end of the sprint the sprint goals were all met. The system was now capable of having multiple consumers with unique subscriptions and the produced could send out multiple NOTAM's which were not hard-coded into the system. 
 
-Having tests for the system would have been useful but they only worked on certain team member's machines. This made the tests counterproductive as they would sometimes give the impression that the system was working when it would only work on one machine, in a specific set of circumstances. There were also issues with setting up and pulling down services, such as the notification broker, between tests. Additionally since the tests ran every time the code was compiled this slowed the development process considerably when long timeouts for the tests had to be included. In sprint 3, the tests were moved to Travis CI, which solved all these problems.
+The tests at the end of the sprint were found to contain bugs. This made the tests counterproductive as they would sometimes give the impression that the system was working when it would only work on one machine, in a specific set of circumstances. There were also issues with setting up and pulling down services, such as the notification broker, between tests which meant that tests had to be run one at a time. Additionally since the tests ran every time the code was compiled this slowed the development process considerably when long timeouts for the tests had to be included. In sprint 3, the tests were moved to Travis CI, which solved these issues. At the sprint meeting with snowflake, the team demonstrated that the system worked by running it manually rather than using the Cucumber tests as evidence.
 
 \subsection{Sprint 3}
 \label{sec:impl_sprint_3}
 
 \subsubsection{Sprint Goals}
 
-The main focus of sprint 3 was to research the extent of JBoss A-MQ's filtering capabilities, to access its viability for use in the project. Through research in the previous sprint, the prominence of JBoss as a message queue used industrially had become apparent. Research done by Snowflake themselves also suggested that it would be useful for the project. The subject of testing was also brought up, and the implementation of a continuous integration system was decided upon to streamline the implementation of changes to the project. Early on in the sprint, Jenkins was implemented and set up to run tests continuously on the latest version of the project, updating the project's GitHub page with the outcome of the latest tests.
+In the planning meeting for this sprint, the team was made aware of JBoss A-MQ by Snowflake. JBoss A-MQ is a fork of Apache ActiveMQ that also contains the Apache CXF implementation of WS-Notifications. It was hoped that swapping to using this system instead of the code already written would allow the team to implement more complex filtering on messages. 
+
+The main focus of sprint 3 was to research the extent of JBoss A-MQ's filtering capabilities, to assess its viability for use in the project. Through research in the previous sprint, the prominence of JBoss as a message queue used industrially had become apparent. Research done by Snowflake themselves also suggested that it would be useful for the project.
+
+The subject of testing was also brought up, and the implementation of a continuous integration system was decided upon to streamline the implementation of changes to the project. Early on in the sprint, Jenkins was implemented and set up to run tests continuously on the latest version of the project, updating the project's GitHub page with the outcome of the latest tests.
 
 It was in sprint 3, after the progress made up to that point was shown in the sprint meeting, that another representative of Snowflake expressed the importance of spatial filtering over temporal filtering. The utility of spatial filtering is obvious in the case of flight planning, a flight planner simply defining the start and end point of the journey and then receiving all messages relevant to that geographical space would save considerable time when compared to the alternative of manually subscribing to airspaces and airports which are within range. Temporal filtering would allow a consumer to only receive NOTAMs that are in effect for the duration of their flight, dramatically reducing the number of irrelevant NOTAMs being sent.
 
@@ -534,41 +534,46 @@ Additionally, one of the team's main desires was to fix the problems with the Cu
 
 \subsubsection{Work Allocation}
 
-Charles continued working on the Cucumber tests, writing more case scenarios and fixing bugs in the old tests. He also set up the GitHub repository to work with the continuous integration service on Travis. James was assigned changing the system over to JBoss. In the middle of the sprint it became apparent that JBoss wouldn't be able to meet the requirements, so James then started to work on a JMS system. Pete looked into temporal and spatial filtering and was set the task of writing a basic test scenario to check basic filters based on GPS co-ordinates could be produced.
+Charles continued working on the Cucumber tests, writing more case scenarios and fixing bugs in the old tests. He also set up the GitHub repository to work with the continuous integration service on Travis. James was assigned  the task of moving the system over to JBoss A-MQ; however in the middle of the sprint it became apparent that JBoss A-MQ wasn't capable of complex message filtering, so James then started to work on a JMS system. Peter researched temporal and spatial filtering and was set the task of writing a basic test scenario to check basic filters based on GPS co-ordinates could be produced.
 
 \subsubsection{Implementation}
 
-With these two filtering types being the goal of the sprint, work was split into exploring documentation for implementation instructions and information regarding filtering, in JBoss A-MQ. After a week of investigation, it became apparent that JBoss did not have the capabilities to fulfil the requirements of the product, due to its extremely limited filtering implementation. JBoss filtering is restricted exclusively to simple strings, comparing the contents of each message with a given filter and sending based on its presence. This left two options: either forking A-MQ and modifying it to support the required features, or dropping it in favour of a message queue which does fulfil those requirements. Basing the decision on the scope of the project and limited remaining time to complete it, it was decided to abandon A-MQ. As it was early in the sprint and the outcome of the decision would dramatically affect the outcome of the sprint, the customer was notified of the decision, to ensure it was satisfactory to them.
+The main focus of the sprint was implementing temporal and spatial filtering of messages. As mentioned in the first sprint, the current system could only filter subscriptions based on strings and was not capable of filtering on queries for example listening to all messages published from a given area.
 
-Once the decision had been made to use JMS, a filtering proof of concept was required to justify the change. Using JMS Selectors to filter based on dummy GPS co-ordinates randomly assigned to each NOTAM, a basic implementation of spatial filtering was created.
+Work was split into exploring documentation of JBoss A-MQ for implementation instructions and information regarding filtering. After a week of investigation, it became apparent that JBoss did not have the capabilities to fulfil the requirements of the product. JBoss filtering  was also restricted exclusively to filtering on strings.
+
+The inadequacy of JBoss A-MQ left two options: either forking JBoss A-MQ and modifying it to support the required features, or dropping it in favour of a message queue which does fulfil those requirements. Basing the decision on the scope of the project and limited remaining time to complete it, it was decided to abandon JBoss A-MQ. As it was early in the sprint and the outcome of the decision would dramatically affect the outcome of the sprint, the customer was notified of the decision, to ensure it was satisfactory to them.
+
+The decision was made to swap to using JMS and a filtering proof of concept was created to justify the change. Using JMS Selectors to filter based on dummy GPS co-ordinates randomly assigned to each NOTAM, a basic implementation of spatial filtering was created. NOTAM's were also given dummy time codes that were simple integer values and filtered based on those to create a form of temporal filtering.
 
 Moving the Cucumber tests to Travis CI was done with little difficulty. As the team was already using Maven for the project, the only work that was required was in creating a configuration file to call the relevant tests. The issues with startup and teardown with the Cucumber tests were fixed by rewriting the consumer and producer code so that they could be run in a single process rather than in multiple ones. When the tests were moved to running on Travis CI rather whenever the code was compiled, they were instead run every time a commit or a merge request was made, which worked well with the Git workflow of the group.
 
 \subsubsection{Review}
 
-In this sprint, a major shift was made from JBoss A-MQ to a JMS-based service. This change required a large amount of work to complete, but allowed work to start on filtering. Basic spatial filtering was created and filtered NOTAMs based on dummy GPS co-ordinates, requiring NOTAM enrichment to complete this feature.
+In this sprint, a major shift was made from JBoss A-MQ to a JMS-based service. This change required a large amount of work to complete, but meant that it would be possible to implement complex filtering methods that were required by the customer. Basic spatial filtering was created and filtered NOTAMs based on dummy GPS co-ordinates. To expand on the system would require NOTAM enrichment, where a NOTAM is parsed and extra information such as geographic and temporal data is added, before sending the NOTAM on to the consumer.
 
-Cucumber tests easily made the transition on Travis CI and improved consistency with the existing Git workflow.
+In making this change to the code, WS-Notification support was lost. This made re-implenting WS-Notification support a priority for the next sprint as it was a requirement of the customer.
 
 \subsection{Sprint 4}
 \label{sec:impl_sprint_4}
 
-The forth sprint meeting consisted of bringing up to speed members of Snowflake in attendance who had not been notified about JBoss A-MQ. As well as the product owner, Eddie, and the scrum master, Adrian, Alex Brooker also attended, and after discussing the need for GPS locations in order to perform spatial filtering, Alex provided access to a HTTP-GET web feature service (WFS), which returns latitude and longitude locations for all European airfields. Ideally, calling this service would be implemented into AES itself, however given the time remaining on the project and the status of the product as a proof of concept, it was elected to simply retrieve data for all airfields and hard-code them into the system for use in spatial queries, knowing that the system could easily be modified to directly call the service and utilise the data if more time was spent on it.
+In the fourth sprint meeting the topic of NOTAM enrichment was raised. Many NOTAM's contained no geographic data or no temporal data which made filtering impossible, this made the enrichment of the NOTAM data a requirement for our software to filter the data. Snowflake provided access to a HTTP-GET web feature service (WFS), which returns latitude and longitude locations for all European airfields which could provide our software a means of enriching NOTAM's with geographic data by looking up the airport name in the NOTAM and finding its corresponding location.
+
+Ideally, calling this service would be implemented into AES itself, however given the time remaining on the project and the status of the product as a proof of concept, it was elected to simply retrieve data for all airfields and hard-code them into the system for use in spatial queries, knowing that the system could easily be modified to directly call the service and utilise the data if more time was spent on it.
 
 \subsubsection{Sprint Goals}
 
 After JBoss A-MQ proved to be a dead end, a new system structure was decided on, with only the consumer side using WS-Notifications to communicate. All remaining communication between brokers and producers was changed to rely on JMS, with converters between WS-Notification topics and JMS filters becoming a primary focus for the sprint.
 
-To implement the goals of spatial and temporal filtering, NOTAM enrichment was required.
-
+As well as re-implementing WS-Notifications, the system also had to be expanded to include NOTAM enrichment so that spatial and temporal filtering could be done with real data. The previous code which used dummy temporal data had to be changed to use real timestamps and the fake geographic data was to be replaced with real data from the HTTP-GET service provided by Snowflake.
 
 \subsubsection{Work Allocation}
 
-For this sprint, Charles was assigned the task of building more elaborate temporal filtering; in parallel to this, Peter worked on spatial filtering, James was tasked with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
+For this sprint, Charles was assigned the task of building more elaborate temporal filtering; in parallel to this, Peter worked on spatial filtering. James was tasked with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
 
 \subsubsection{Implementation}
 
-Temporal filtering was implemented by parsing the NOTAM XML and converting the timestamps in the data to a Unix time stamp format. The time stamp measures the time in milliseconds, so it is possible to directly compare the times using inequality operators. The code allows a consumer to subscribe to topics after a given time, or within a time period.
+Temporal filtering was implemented by parsing the NOTAM XML and converting the timestamps in the data to a Unix time stamp format. The time stamp measures the time in a single number counting milliseconds. Using Unix time stamps, it is possible to directly compare the times using inequality operators. The code allows a consumer to subscribe to topics after a given time, or within a time period.
 
 The selectors used for filtering are based on SQL 92, which features only simple arithmetic operators. In order to create a proper bounding box which covered a plane route, more operators were required (such as square roots, which are not included). As a result, spatial filtering's implementation was simplified to an axis-aligned bounding box. This type of spatial filtering required simply greater than and less than operators to perform.
 
@@ -576,7 +581,7 @@ To produce the subset XML document, a bounding box was placed over Europe and su
 
 \subsubsection{Review}
 
-All required features of JMS (selectors and subscriptions) were successfully added, however a functioning implementation of the WS-Notification standard could not be created. This goal was moved to the final sprint as a primary focus.
+Unfortunately the team was unable to implement WS-Notifications in this sprint, however the code for filtering and enriching the data was completed. The task of creating a WS-Notification front end was much larger than expected and only assigning a single team member to work on it meant that the team couldn't complete the task in time.
 
 \subsection{Sprint 5}
 \label{sec:impl_sprint_5}
