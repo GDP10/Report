@@ -569,7 +569,7 @@ The decision was made to swap to using JMS and a filtering proof of concept was 
 
 In this sprint, a major shift was made from JBoss A-MQ to a JMS-based service. This change required a large amount of work to complete, but meant that it would be possible to implement complex filtering methods that were required by the customer. Basic spatial filtering was created and filtered NOTAMs based on dummy GPS co-ordinates. To expand on the system would require NOTAM enrichment, where a NOTAM is parsed and extra information such as geographic and temporal data is added, before sending the NOTAM on to the consumer.
 
-In making this change to the code, WS-Notification support was lost. This made re-implenting WS-Notification support a priority for the next sprint as it was a requirement of the customer.
+In making this change to the code, WS-Notification support was lost. This made re-implementing WS-Notification support a priority for the next sprint as it was a requirement of the customer.
 
 \subsection{Sprint 4}
 \label{sec:impl_sprint_4}
@@ -609,39 +609,49 @@ The goal for the final sprint was to produce a complete minimal viable product f
 
 \subsubsection{Work Allocation}
 
-\begin{tabular}{l|l}
-  \emph{Task} & \emph{Assignee(s)} \\ \hline
-  JAX-WS code generation using CXF Maven plugin & James \\
-  WSDL for AES' WS-Notification implementation & James, Charles \\
-  WAR generation using Maven & Charles \\
-  Tomcat setup and WAR deployment & Charles \\
-  Mapping from OpenGIS filters to JMS selectors & Peter \\
-  Mock client implementation using NetCat and cURL & Peter \\
-  Barebones client implementation using JAX-WS & James \\
-  NOTAM enrichment & Peter, Andrew \\
-  Parsing the Snowflake GlobalAerodromes WFS & Andrew \\
-\end{tabular}
+OpenGIS filters were needed to filter temporally and geographically within WS-Notification. This required small changes to the enrichment of the NOTAM's which was assigned to Peter and Andrew.
+
+The service had to be deployed as a WAR on Tomcat for consumers to communicate with to create subscriptions and to recieve relevant NOTAM's. The deployment was assigned to Charles and the mocking of a consumer was assigned to Peter.
+
+To parse the filters, James looked into using JAX-WS however this was not used in the final software. Charles and James also worked on generating a WSDL for the producer and the consumers of the WS-Notification messages.
+
+% \begin{tabular}{l|l}
+%   \emph{Task} & \emph{Assignee(s)} \\ \hline
+%   JAX-WS code generation using CXF Maven plugin & James \\
+%   WSDL for AES' WS-Notification implementation & James, Charles \\
+%   WAR generation using Maven & Charles \\
+%   Tomcat setup and WAR deployment & Charles \\
+%   Mapping from OpenGIS filters to JMS selectors & Peter \\
+%   Mock client implementation using NetCat and cURL & Peter \\
+%   Barebones client implementation using JAX-WS & James \\
+%   NOTAM enrichment & Peter, Andrew \\
+%   Parsing the Snowflake GlobalAerodromes WFS & Andrew \\
+% \end{tabular}
 
 \subsubsection{Implementation}
 
-The Apache CXF JAX-WS codegen plugin for Maven was used to build class stubs from the WSN WSDLs. Unfortunately, the WSDLs provided by Oasis do not specify any endpoints, and so they were created from scratch based on a subset of the WSN WSDL included with the Apache CXF implementation of WSN.
+The Apache CXF JAX-WS codegen plugin for Maven was used to build class stubs from the WSN WSDLs. Unfortunately, the WSDL's provided by Oasis did not specify any endpoints, and so the WSDL's were created from scratch based on a subset of the WSN WSDL included with the Apache CXF implementation of WSN.
 
 A mock client for the system was implemented using NetCat and cURL - NetCat took the place of the WSN consumer, listening on port 80 and simply printing out all received data to standard output, and cURL was used to send a subscription request to the WSN broker. Unfortunately, the correct format for the subscription request couldn't be determined, so the barebones client implementation was abandoned and a new implementation using CXF was created, based on the WSDL for the web service.
 
-The original plan was to switch to JAXB for the XML parsing during this sprint, but there were so many naming conflicts in the generated code for the XML schemata that it was easier to just manually write DOM parsers instead. After consulting with Snowflake, it was discovered that they too attempted to use JAXB but abandoned it due to the same issue.
+Originally JAXB was to be used for the XML parsing during this sprint, but there were many naming conflicts in the generated code for the XML schemata that, given the time constraints, it was easier to write DOM parsers instead. After consulting with Snowflake, it was discovered that they too attempted to use JAXB but abandoned it due to the same issue.
 
 \subsubsection{Review}
 
-All goals for this sprint were completed, and two projects were produced - the AES service itself, consisting of the producer and WS-Notification broker implementation, and a separate project containing an example consumer.
+The majority of the goals for this sprint were completed, and two projects were produced - the AES service itself, consisting of the producer and WS-Notification broker implementation, and a separate project containing an example consumer. There was not enough time to implement temporal filtering in WS-Notification for the demonstration to the customer. However the code was partially implemented in the back-end of the system as the OpenGIS standard already has fields for temporal filtering this extension is absolutely possible. 
 
 \subsection{Final Meeting}
 \label{sec:impl_final_meeting}
 
-The final meeting consisted of the group demoing and explaining the finished project (i.e. the results of sprint 5), not just to the usual customer representatives, but to a large number of other Snowflake employees that had no previous involvement with or knowledge of the project (including the CEO and a number of both technical and non technical roles). Once the demo was concluded, the group fielded questions, both from the original customer representatives about the progress in the last sprint, and from those new to the project about the project as a whole.
+The final meeting consisted of the group demoing and explaining the finished project (i.e. the results of sprint 5), not just to the usual customer representatives, but to a large number of other Snowflake employees that had no previous involvement with or knowledge of the project (including the CEO and a number of both technical and non technical roles). 
 
-The demo consisted of a single producer and a single broker running throughout, with consumers each subscribing to individual topics; this demonstrated that the software can deal with multiple clients and demonstrated that it was actually performing filtering based on topics (as opposed to a precooked demo that could be used to mislead). Once the demo was complete (and after a member of Snowflake requested a demonstration of a topic of their own choosing), the general architecture of the system was explained (as seen in figure 3).
+The demo of the software showed multiple consumers receiving NOTAM's sent by a single producer. The consumers subscribed to a broker of WS-Notifications using OpenGIS spatial filters. The spatial filter was made of an axis-aligned bounding box that matched airports based on the geographic data in the NOTAM's which had been included by the enrichment code.
 
-Since it was the final meeting, the typical sprint review was omitted, since the project was completed and it was no longer needed to guide the direction of the next sprint.  Instead, once the initial meeting with Snowflake at large was concluded, there was a discussion of the project as a whole with just the original client representatives (Adrian and Eddie). Here the total project progress was discussed, as well as how the work would be used and developed further (by Snowflake) in the future.
+Once the demo was concluded, the group fielded questions, both from the original customer representatives about the progress in the last sprint, and from those new to the project about the project as a whole. The general architecture of the system was explained, as shown in figure~\ref{fig:system_overview}.
+
+%The demo consisted of a single producer and a single broker running throughout, with consumers each subscribing to individual topics; this demonstrated that the software can deal with multiple clients and demonstrated that it was actually performing filtering based on topics (as opposed to a precooked demo that could be used to mislead). Once the demo was complete (and after a member of Snowflake requested a demonstration of a topic of their own choosing), the general architecture of the system was explained (as seen in figure 3).
+
+%Since it was the final meeting, the typical sprint review was omitted, as the project was completed and it was no longer needed to guide the direction of the next sprint.  Instead, once the initial meeting with Snowflake at large was concluded, there was a discussion of the project as a whole with just the original client representatives (Adrian and Eddie). Here the total project progress was discussed, as well as how the work would be used and developed further (by Snowflake) in the future.
 
 
 
