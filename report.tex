@@ -519,22 +519,22 @@ Cucumber tests easily made the transition on Travis CI and improved consistency 
 \subsection{Sprint 4}
 \label{sec:impl_sprint_4}
 
-The forth sprint meeting consisted of bringing up to speed members of Snowflake in attendance who had not been notified about JBoss A-MQ. As well as the customer representative, Eddie, and the scrum master, Adrian, Alexis Brooker also attended, and after discussing the need for GPS locations in order to perform spatial filtering, Alexis provided access to a HTTP-GET web feature service (WFS), which returns latitude and longitude locations for all European airfields. Ideally, calling this service would be implemented into AES itself, however given the time remaining on the project and the status of the product as a proof of concept, it was elected to simply retrieve data for all airfields and hard-code them into the system for use in spatial queries, knowing that the system could easily be modified to directly call the service and utilise the data if more time was spent on it.
+The forth sprint meeting consisted of bringing up to speed members of Snowflake in attendance who had not been notified about JBoss A-MQ. As well as the product owner, Eddie, and the scrum master, Adrian, Alexis Brooker also attended, and after discussing the need for GPS locations in order to perform spatial filtering, Alexis provided access to a HTTP-GET web feature service (WFS), which returns latitude and longitude locations for all European airfields. Ideally, calling this service would be implemented into AES itself, however given the time remaining on the project and the status of the product as a proof of concept, it was elected to simply retrieve data for all airfields and hard-code them into the system for use in spatial queries, knowing that the system could easily be modified to directly call the service and utilise the data if more time was spent on it.
 
 \subsubsection{Sprint Goals}
 
 After JBoss A-MQ proved to be a dead end, a new system structure was decided on, with only the consumer side using WS-Notifications to communicate. All remaining communication between brokers and producers was changed to rely on JMS, with converters between WS-Notification topics and JMS filters becoming a primary focus for the sprint.
 
-We also needed to implement spatial and temporal filtering and required NOTAM enrichment to do this.
+To implement the goals of spatial and temporal filtering, NOTAM enrichment was required.
 
 
 \subsubsection{Work Allocation}
 
-For this sprint Charles was assigned to the task of building more elaborate temporal filtering, in parallel to this, Peter worked on spatial filtering, James was tasking with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
+For this sprint, Charles was assigned the task of building more elaborate temporal filtering; in parallel to this, Peter worked on spatial filtering, James was tasked with implementing the WS-Notifications standard into the system and Andrew created an XML document which contained a subset of all airport locations, narrowing them to just European aerodromes. Due to the large number of global aerodromes, it was necessary to reduce this just to relevant locations in the interest of parsing time.
 
 \subsubsection{Implementation}
 
-Temporal filtering was implemented by parsing the NOTAM XML and converting the timestamps in the data to a Unix time stamp format. The time stamp measures the time in milliseconds so it is possible to directly compare the times using inequality operators. The code allows a consumer to subscribe to topics after a given time, or within a time period.
+Temporal filtering was implemented by parsing the NOTAM XML and converting the timestamps in the data to a Unix time stamp format. The time stamp measures the time in milliseconds, so it is possible to directly compare the times using inequality operators. The code allows a consumer to subscribe to topics after a given time, or within a time period.
 
 The selectors used for filtering are based on SQL 92, which features only simple arithmetic operators. In order to create a proper bounding box which covered a plane route, more operators were required (such as square roots, which are not included). As a result, spatial filtering's implementation was simplified to an axis-aligned bounding box. This type of spatial filtering required simply greater than and less than operators to perform.
 
@@ -542,7 +542,7 @@ To produce the subset XML document, a bounding box was placed over Europe and su
 
 \subsubsection{Review}
 
-All required features of JMS (selectors and subscriptions) were successfully added, however we could not create a functioning implementation of the WS-Notification standard. This goal was moved to the final sprint as a primary focus.
+All required features of JMS (selectors and subscriptions) were successfully added, however a functioning implementation of the WS-Notification standard could not be created. This goal was moved to the final sprint as a primary focus.
 
 \subsection{Sprint 5}
 \label{sec:impl_sprint_5}
