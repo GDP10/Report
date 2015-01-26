@@ -132,7 +132,9 @@ This group report details the planning, design processes and final implementatio
 \newpage
 
 \section*{Acknowledgements}
-
+Alex Brooker, for providing access to Global Aerodromes, the web service used to obtain GPS co-ordinates for aerodromes. Without which spatial filtering and NOTAM enrichment wouldn't have been possible. His advice on the subject of web services was also extremely useful towards the tail end of the project.
+Adrian McKenzie, for providing us with tools and exercises to maximise the usefulness of each sprint meeting, as well as being our liason with Snowflake.
+Eddie Curtis, for providing with constant feedback in each sprint meeting which proved to be invaluable to the project.
 
 \newpage
 
@@ -573,7 +575,7 @@ The goal for the final sprint was to produce a complete minimal viable product f
 
 \subsubsection{Implementation}
 
-The Apache CXF JAX-WS codegen plugin for Maven was sued to build class stubs from the WSN WSDLs. Unfortunately, the WSDLs provided by Oasis do not specify any endpoints, and so they were created from scratch based on a subset of the WSN WSDL included with the Apache CXF implementation of WSN.
+The Apache CXF JAX-WS codegen plugin for Maven was used to build class stubs from the WSN WSDLs. Unfortunately, the WSDLs provided by Oasis do not specify any endpoints, and so they were created from scratch based on a subset of the WSN WSDL included with the Apache CXF implementation of WSN.
 
 A mock client for the system was implemented using NetCat and cURL - NetCat took the place of the WSN consumer, listening on port 80 and simply printing out all received data to standard output, and cURL was used to send a subscription request to the WSN broker. Unfortunately, the correct format for the subscription request couldn't be determined, so the barebones client implementation was abandoned and a new implementation using CXF was created, based on the WSDL for the web service.
 
