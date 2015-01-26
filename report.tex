@@ -549,7 +549,7 @@ All required features of JMS (selectors and subscriptions) were successfully add
 
 \subsubsection{Sprint Goals}
 
-The goal for the final sprint was to produce a complete minimal viable product for the product owner. This involved finishing our WS-Notification implementation, packaging the application as a WAR for deployment on Tomcat, building a WSDL for the web service, making a barebones client to demonstrate the service's functionality, and implementing basic OpenGIS filtering support. We also planned to replace our DOM parsers with JAXB in order to make it easier to implement the OpenGIS filtering support.
+The goal for the final sprint was to produce a complete minimal viable product for the product owner. This involved finishing the WS-Notification implementation, packaging the application as a WAR for deployment on Tomcat, building a WSDL for the web service, making a barebones client to demonstrate the service's functionality, and implementing basic OpenGIS filtering support. It was also planned to replace the DOM parsers with JAXB, in order to make it easier to implement the OpenGIS filtering support.
 
 \subsubsection{Work Allocation}
 
@@ -568,15 +568,15 @@ The goal for the final sprint was to produce a complete minimal viable product f
 
 \subsubsection{Implementation}
 
-We used the Apache CXF JAX-WS codegen plugin for Maven to build class stubs from the WSN WSDLs. Unfortunately the WSDLs provided by Oasis do not specify any endpoints, and so we created our own based on a subset of the WSN WSDL included with the Apache CXF implementation of WSN.
+The Apache CXF JAX-WS codegen plugin for Maven was sued to build class stubs from the WSN WSDLs. Unfortunately, the WSDLs provided by Oasis do not specify any endpoints, and so they were created from scratch based on a subset of the WSN WSDL included with the Apache CXF implementation of WSN.
 
-A mock client for the system was implemented using NetCat and cURL - NetCat took the place of the WSN consumer, listening on port 80 and simply printing out all received data to standard output, and cURL was used to send a subscription request to the WSN broker. Unfortunately we were unable to determine the correct format for the subscription request, so we ditched the barebones client implementation and created a new implementation using CXF, based on the WSDL for our web service.
+A mock client for the system was implemented using NetCat and cURL - NetCat took the place of the WSN consumer, listening on port 80 and simply printing out all received data to standard output, and cURL was used to send a subscription request to the WSN broker. Unfortunately, the correct format for the subscription request couldn't be determined, so the barebones client implementation was abandoned and a new implementation using CXF was created, based on the WSDL for the web service.
 
-We originally planned to switch to JAXB for our XML parsing needs during this sprint, but there were so many naming conflicts in the generated code for the XML schemata that it was easier to just manually write DOM parsers instead. After consulting with Snowflake we discovered that they too attempted to use JAXB but abandoned it due to the same issue.
+The original plan was to switch to JAXB for the XML parsing during this sprint, but there were so many naming conflicts in the generated code for the XML schemata that it was easier to just manually write DOM parsers instead. After consulting with Snowflake, we discovered that they too attempted to use JAXB but abandoned it due to the same issue.
 
 \subsubsection{Review}
 
-We were able to complete all of our goals for this sprint, and produced two projects - the AES service itself, consisting of our producer and WS-Notification broker implementation, and a separate project containing an example consumer.
+All goals for this sprint were completed, and two projects were produced - the AES service itself, consisting of the producer and WS-Notification broker implementation, and a separate project containing an example consumer.
 
 \subsection{Final Meeting}
 \label{sec:impl_final_meeting}
