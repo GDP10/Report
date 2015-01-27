@@ -483,7 +483,7 @@ The initial meeting with Snowflake introduced the project and the scope, require
 
 For the first sprint, the goal was to have a basic push notification system running that could publish and receive an XML.
 
-The customer had no preference for what language the project was written in. The team chose Java because of the libraries and tools avaliable.
+The customer had no preference for what language the project was written in. The team chose Java because of the libraries and tools available.
 
 \userstory{Basic Push Notification}{flight planner}{to be notified if there is a change to my destination airport for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
@@ -501,7 +501,7 @@ Apache CXF is an open source framework for producing web services, and after Act
 
 \subsubsection{Review}
 
-At the end of the first sprint, the first user story had been completed. The code used Apache CXF with the WS-Notification standard that came included with it. This implementation was capable of sending a NOTAM to a hard-coded consumer who also had a hard-coded subscription to a broker. The subscription method used simple string topic names, for example a topic would be published with an aiport name ``AIR1'' and a consumer with a subscription ``AIR1'' would recieve it. This implementation was not capable of doing any more complex filtering as was required later in the project which meant the system had to be changed in future sprints.
+At the end of the first sprint, the first user story had been completed. The code used Apache CXF with the WS-Notification standard that came included with it. This implementation was capable of sending a NOTAM to a hard-coded consumer who also had a hard-coded subscription to a broker. The subscription method used simple string topic names, for example a topic would be published with an aiport name ``AIR1'' and a consumer with a subscription ``AIR1'' would receive it. This implementation was not capable of doing any more complex filtering as was required later in the project which meant the system had to be changed in future sprints.
 
 The major issue in this sprint was the bottleneck caused by the coding. It was impossible to divide up the programming work between group members, which made it difficult to progress through the work quickly and to keep everyone informed about the work. Although it was inefficient, by having one team member write the code whilst everyone else researched, this did mean that everyone was at least familiar with the project so that they would be able to work efficiently in future sprints. At the end of the sprint, the team had a meeting without the customer, where the code was reviewed, so that everyone understood it and could work on it in the future sprints.
 
@@ -793,7 +793,7 @@ Alternatively, the system could be deployed on Amazon Elastic Beanstalk, which a
 \subsection{IATA Designators and ICAO Location Indicators}
 \label{sec:future_designators}
 
-Global Aerodromes is a service provided by Snowflake which allowed the AES system to map from aerodromes referenced in NOTAMs to GPS co-ordinates, a feature required in order to perform spatial filtering. Within the AIXM specification for NOTAMs, both IATA (International Air Transport Assocation) designators and ICAO (International Civil Aviation Organisation) location indicators are specified. Both of these designating IDs are used by Global Aerodromes and the AES service produced made use of just IATA designators to pair NOTAMs to GPS co-ordinates. This caused an issue due to a fraction of the aerodromes listed by the Global Aerodromes service not containing a value for this identifier. A possible future extension would be to add a contingency for this occurrence and include support for ICAO location indicators as well, to maximise the chance that every NOTAMs aerodrome is matched to a location for filtering.
+Global Aerodromes is a service provided by Snowflake which allowed the AES system to map from aerodromes referenced in NOTAMs to GPS co-ordinates, a feature required in order to perform spatial filtering. Within the AIXM specification for NOTAMs, both IATA (International Air Transport Association) designators and ICAO (International Civil Aviation Organisation) location indicators are specified. Both of these designating IDs are used by Global Aerodromes and the AES service produced made use of just IATA designators to pair NOTAMs to GPS co-ordinates. This caused an issue due to a fraction of the aerodromes listed by the Global Aerodromes service not containing a value for this identifier. A possible future extension would be to add a contingency for this occurrence and include support for ICAO location indicators as well, to maximise the chance that every NOTAMs aerodrome is matched to a location for filtering.
 
 \subsection{Compile Time Issues}
 \label{sec:future_compilation}
