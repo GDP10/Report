@@ -323,7 +323,7 @@ As the customer is a company which regularly works on projects of a much greater
 \subsection{ActiveMQ}
 \label{sec:bg_activemq}
 
-Apache ActiveMQ is an open source message queue service which communicates using the Java Message Service (JMS)\cite{activemq}. It contains a number of features deemed useful to the project including subscription management and filtering. The filtering itself is through objects known as selectors, which use the SQL 92 syntax to filter messages. SQL 92 is a fairly barebones SQL syntax, which features basic arithmetic operators (addition, subtraction, multiplication, division and modulo), enough for the requirements set out by the customer of temporal filtering and spatial filtering using GPS co-ordinates.
+Apache ActiveMQ is an open source message queue service which communicates using the Java Message Service (JMS) \cite{activeMQ}. It contains a number of features deemed useful to the project including subscription management and filtering. The filtering itself is through objects known as selectors, which use the SQL 92 syntax to filter messages. SQL 92 is a fairly barebones SQL syntax, which features basic arithmetic operators (addition, subtraction, multiplication, division and modulo), enough for the requirements set out by the customer of temporal filtering and spatial filtering using GPS co-ordinates.
 
 \subsection{Git and GitHub}
 \label{sec:bg_git}
@@ -487,7 +487,7 @@ The customer had no preference for what language the project was written in. The
 
 \userstory{Basic Push Notification}{flight planner}{to be notified if there is a change to my destination airport for my planned flight.}{I can change my plan in response to events involving airspaces and runways on my route.}
 
-To implement the user story required setting up Apache ActiveMQ\ref{activeMQ} and implementing a method of providing a message to the broker and a way of displaying the message so tests could be written to see that it was received correctly.
+To implement the user story required setting up Apache ActiveMQ \cite{activeMQ} and implementing a method of providing a message to the broker and a way of displaying the message so tests could be written to see that it was received correctly.
 
 \subsubsection{Work Allocation}
 
