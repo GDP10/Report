@@ -184,9 +184,9 @@ The customer for this project was Snowflake Software, a company focused on open 
 \subsection{Goals}
 \label{sec:intro_goals}
 
-The vision, as stated by Snowflake, was ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced over the course of the project was to explore options and find methods to limit the incoming data to a flight planner to only what is relevant by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of specific relevant NOTAMs by pilots.
+The vision, as stated by Snowflake, was ``To develop a proof of concept push event service for delivering digital NOTAM updates to pilots; to demonstrate the feasibility of using Publish/Subscribe to communicate relevant NOTAMs to flight planners''. From this vision, the goal of the software produced over the course of the project was to explore options and find methods to filter the incoming data to a flight planner to only what is relevant by utilising a publish and subscribe model, removing the need for manual filtering and the pulling of specific relevant NOTAMs by pilots.
 
-The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy was determined by geographic data, such as departure and arrival airports, and more complex temporal queries, for example, limiting NOTAMs to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes.
+The subscriptions to this service had to be based on the relevancy of NOTAMs to the recipients. This relevancy was determined by geographic data, such as departure and arrival airports, and more complex temporal queries, for example, filtering NOTAMs to ones relevant only during the course of the flight. The software was required to use open standards for the publish and subscribe architecture, for example: OASIS Web Services Notification or WSN. The software also had to be capable of handling an estimated 10,000 messages per day. These messages come from two sources: the Federal NOTAM Service, which publishes a baseline NOTAM every 28 days, and updated delta files which arrive every 15 minutes.
 
 \subsubsection{Project Goals}
 \begin{enumerate}
@@ -606,7 +606,7 @@ For this sprint, Charles was assigned the task of building more elaborate tempor
 
 Temporal filtering was implemented by parsing the NOTAM XML and converting the timestamps in the data to a Unix time stamp format. The time stamp measures the time in a single number counting milliseconds. Using Unix time stamps, it is possible to directly compare the times using inequality operators. The code allows a consumer to subscribe to topics after a given time, or within a time period.
 
-The selectors used for filtering are based on SQL 92, which features only simple arithmetic operators. In order to create a proper bounding box which covered a plane route, more operators were required (such as square roots, which are not included). As a result, spatial filtering's implementation was simplified to an axis-aligned bounding box. This type of spatial filtering required simply greater than and less than operators to perform.
+The selectors used for filtering are based on SQL 92, which features only simple arithmetic operators. In order to create a proper bounding box which covered a plane route, more operators were required (such as square roots, which are not included). As a result, the spatial filtering implementation was simplified to an axis-aligned bounding box. This type of spatial filtering required simply greater than and less than operators to perform.
 
 To produce the subset XML document, a bounding box was placed over Europe and submitted to the Global Aerodromes service, all aerodromes within the given bounding box were retrieved.
 
@@ -625,7 +625,7 @@ The goal for the final sprint was to produce a complete minimal viable product f
 
 OpenGIS filters were needed to filter temporally and geographically within WS-Notification. This required small changes to the enrichment of the NOTAMs which was assigned to Peter and Andrew.
 
-The service had to be deployed as a WAR on Tomcat for consumers to communicate with to create subscriptions and to recieve relevant NOTAMs. The deployment was assigned to Charles and the mocking of a consumer was assigned to Peter.
+The service had to be deployed as a WAR on Tomcat for consumers to communicate with to create subscriptions and to receive relevant NOTAMs. The deployment was assigned to Charles and the mocking of a consumer was assigned to Peter.
 
 To parse the filters, James looked into using JAX-WS however this was not used in the final software. Charles and James also worked on generating a WSDL for the producer and the consumers of the WS-Notification messages.
 
@@ -792,7 +792,7 @@ Alternatively, the system could be deployed on Amazon Elastic Beanstalk, which a
 \subsection{IATA Designators and ICAO Location Indicators}
 \label{sec:future_designators}
 
-Global Aerodromes is a service provided by Snowflake which allowed the AES system to map from aerodromes referenced in NOTAMs to GPS co-ordinates, a feature required in order to perform spatial filtering. Within the AIXM specification for NOTAMs, both IATA (International Air Transport Assocation) designators and ICAO (International Civil Aviation Organisation) location indicators are specified. Both of these designating IDs are used by Global Aerodromes and the AES service produced made use of just IATA designators to pair NOTAMs to GPS co-ordinates. This caused an issue due to a fraction of the aerodromes listed by the Global Aerodromes service not containing a value for this identifier. A possible future extension would be to add a contingency for this occurrence and include support for ICAO location indicators as well, to maximise the chance that every NOTAM's aerodrome is matched to a location for filtering.
+Global Aerodromes is a service provided by Snowflake which allowed the AES system to map from aerodromes referenced in NOTAMs to GPS co-ordinates, a feature required in order to perform spatial filtering. Within the AIXM specification for NOTAMs, both IATA (International Air Transport Assocation) designators and ICAO (International Civil Aviation Organisation) location indicators are specified. Both of these designating IDs are used by Global Aerodromes and the AES service produced made use of just IATA designators to pair NOTAMs to GPS co-ordinates. This caused an issue due to a fraction of the aerodromes listed by the Global Aerodromes service not containing a value for this identifier. A possible future extension would be to add a contingency for this occurrence and include support for ICAO location indicators as well, to maximise the chance that every NOTAMs aerodrome is matched to a location for filtering.
 
 \subsection{Compile Time Issues}
 \label{sec:future_compilation}
