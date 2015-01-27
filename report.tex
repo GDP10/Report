@@ -136,7 +136,7 @@ Alex Brooker, Snowflake's professional services director, for providing access t
 \\\\
 Adrian McKenzie, Snowflake's head of software development, for providing us with tools and exercises to maximise the usefulness of each sprint meeting, as well as being our liason with Snowflake.
 \\\\
-Eddie Curtis, Snowflake's chief technology officer, for acting as the product owner and providing with constant feedback in each sprint meeting which proved to be invaluable to the project. 
+Eddie Curtis, Snowflake's chief technology officer, for acting as the product owner and providing with constant feedback in each sprint meeting which proved to be invaluable to the project.
 
 \newpage
 
@@ -543,7 +543,7 @@ In practice it was found that the jump from hard coded values to fully configura
 
 \subsubsection{Review}
 
-At the end of the sprint the sprint goals were all met. The system was now capable of having multiple consumers with unique subscriptions and the produced could send out multiple NOTAMs which were not hard-coded into the system. 
+At the end of the sprint the sprint goals were all met. The system was now capable of having multiple consumers with unique subscriptions and the produced could send out multiple NOTAMs which were not hard-coded into the system.
 
 The tests at the end of the sprint were found to contain bugs. This made the tests counter-productive as they would sometimes give the impression that the system was working when it would only work on one machine, in a specific set of circumstances. There were also issues with setting up and pulling down services between tests, which meant that tests had to be run one at a time to prevent issues with services such as the notification broker. Additionally, since the tests ran every time the code was compiled this slowed the development process considerably when long timeouts for the tests had to be included. In sprint 3, the tests were moved to Travis CI, which solved these issues. At the sprint meeting with Snowflake, the system was run manually rather than using the Cucumber tests to evidence that the code was working.
 
@@ -552,7 +552,7 @@ The tests at the end of the sprint were found to contain bugs. This made the tes
 
 \subsubsection{Sprint Goals}
 
-In the planning meeting for this sprint Snowflake mentioned JBoss A-MQ as a possible alternative to the code that had already been written. JBoss A-MQ is a fork of Apache ActiveMQ that also contains the Apache CXF implementation of WS-Notifications. It was hoped that swapping to using this system instead of the code already written would allow for the implementation of more complex filtering on messages. 
+In the planning meeting for this sprint Snowflake mentioned JBoss A-MQ as a possible alternative to the code that had already been written. JBoss A-MQ is a fork of Apache ActiveMQ that also contains the Apache CXF implementation of WS-Notifications. It was hoped that swapping to using this system instead of the code already written would allow for the implementation of more complex filtering on messages.
 
 The main focus of sprint 3 was to research the extent of JBoss A-MQ's filtering capabilities, to assess its viability for use in the project. Through research in the previous sprint, the prominence of JBoss as a message queue used industrially had become apparent. Research done by Snowflake themselves also suggested that it would be useful for the project.
 
@@ -653,12 +653,12 @@ Originally JAXB was to be used for the XML parsing during this sprint, but there
 
 \subsubsection{Review}
 
-The majority of the goals for this sprint were completed, and two projects were produced - the AES service itself, consisting of the producer and WS-Notification broker implementation, and a separate project containing an example consumer. There was not enough time to implement temporal filtering in WS-Notification for the demonstration to the customer. However the code was partially implemented in the back-end of the system as the OpenGIS standard already has fields for temporal filtering this extension is absolutely possible. 
+The majority of the goals for this sprint were completed, and two projects were produced - the AES service itself, consisting of the producer and WS-Notification broker implementation, and a separate project containing an example consumer. There was not enough time to implement temporal filtering in WS-Notification for the demonstration to the customer. However the code was partially implemented in the back-end of the system as the OpenGIS standard already has fields for temporal filtering this extension is absolutely possible.
 
 \subsection{Final Meeting}
 \label{sec:impl_final_meeting}
 
-The final meeting consisted of the group demoing and explaining the finished project (i.e. the results of sprint 5), not just to the usual customer representatives, but to a large number of other Snowflake employees that had no previous involvement with or knowledge of the project (including the CEO and a number of both technical and non-technical roles). 
+The final meeting consisted of the group demoing and explaining the finished project (i.e. the results of sprint 5), not just to the usual customer representatives, but to a large number of other Snowflake employees that had no previous involvement with or knowledge of the project (including the CEO and a number of both technical and non-technical roles).
 
 The demo of the software showed multiple consumers receiving NOTAMs sent by a single producer. The consumers subscribed to a broker of WS-Notifications using OpenGIS spatial filters. The spatial filter was made of an axis-aligned bounding box that matched airports based on the geographic data in the NOTAMs which had been included by the enrichment code.
 
@@ -884,9 +884,9 @@ This was not previously implemented due to the team's inexperience at working wi
 Hi guys\\
 As discussed, some feedback for you from Eddie and myself.
 \\\\
-The deliverables produced from your Group Design Project have resulted in a good outcome for Snowflake Software; they answered some of our key questions and provided a solid foundation to commence our Pub-Sub product development in 2015. 
+The deliverables produced from your Group Design Project have resulted in a good outcome for Snowflake Software; they answered some of our key questions and provided a solid foundation to commence our Pub-Sub product development in 2015.
 \\\\
-The project posed some significant challenges including reconciling complex technical standards with the user requirements and a complex set of factors to weigh up in selecting the technologies to use. Reaching firm conclusions about the relative merits of the technologies you assessed represents a real achievement. 
+The project posed some significant challenges including reconciling complex technical standards with the user requirements and a complex set of factors to weigh up in selecting the technologies to use. Reaching firm conclusions about the relative merits of the technologies you assessed represents a real achievement.
 \\\\
 As mentioned during the wrap up from the final demonstration I feel it would have been productive if there was a more balanced contribution to Sprint planning, demonstration and retrospectives from each member of the team.
 \\\\
