@@ -279,52 +279,6 @@ In Java, brokers typically implement the Java Message Service (JMS) API provided
 
 This architecture can be used to turn a pull notification system into a push notification system by creating a publisher (or several publishers) that regularly polls and retrieves messages from the existing pull notification system, and then sends them to the broker (which pushes them to the appropriate consumers).
 
-\subsection{Web Services Notification}
-\label{sec:bg_wsn}
-
-Web services notification (or WSN) is a set of specifications created by OASIS\cite{oasisWSN} that defines the interactions between web services, using notifications, which can form the basis of a publish/subscribe architecture built using web services. They provide a standardised way to communicate with and between web services, without having prior information about them. It includes facilities for detailed subscription, where those wishing to consume information can register with a web service along with details about the type of information they wish to receive. WSN was designed to revolve around these subscription details known as ``topics'' and use them to filter down subscriptions, allowing for large scale usage of the publish/subscribe architecture without unwanted message overload.
-
-WSN covers a family of smaller specifications including WS-Base Notifications, WS-Brokered Notification and WS-Topics. WS-Base Notifications is a specification of the simple producer/consumer relationship, consumers send out subscription requests to the producers, specifying the subset of messages produced by that producer which it wishes to receive. The request also contains a reference to the consumer itself, so the producer knows where to send the messages.
-
-WS-Brokered Notification works in a similar manner to WS-Base, but introduces a middleman between the message publishers and the message subscribers known as the broker. The broker is designed to decouple the connection between producers and consumers and allows for advanced messaging features such as demand-based publishing, load-balancing and publication of messages from entities which are not themselves web service providers.
-
-WS-Topics is a specification which defines a method for categorising subscriptions into ``topics''. This specification is designed to work in conjunction with WS-Base or WS-Brokered and contains various methods for defining groups of subscriptions.
-
-WSN is a favoured standard of the aerospace industry, which is why it is highly desired that the final product uses it.
-
-\subsection{Web Services Description Language}
-\label{sec:bg_wsdl}
-
-Web Services Description Language (or WSDL) is an XML based language for describing the interfaces and functionality of a web service\cite{christensen2001web}. A WSDL file provides a machine readable description of a web service's interface, including the function calls, parameters they expect and return values.
-
-Typically, it is used in combination with SOAP to provide a web service, where a client program will read the WSDL, to determine the functions available, and then use SOAP to call them\cite{curbera2002unraveling}.
-
-\subsection{JAXB and DOM Parsing}
-\label{sec:bg_parsing}
-
-JAXB, or ``Java Architecture for XML Binding'', is a tool used to marshal Java objects into XML and unmarshal XML into Java objects. It can be used as an alternative to standard XML parsers, taking complicated schema and converting XML created from them into usable Java objects\cite{ort2003java}. Use of JAXB was explored towards the end of the project for use in spatial filtering. It was intended to use JAXB to parse XML filters of the OpenGIS standard in order to create filters within the system, however, implementing JAXB proved beyond the scope of the project in terms of time, given the nature of the system as a proof of concept piece with a strict time constraint. Instead, a more commonly used XML parsing method known as ``Document Object Model'' or DOM parsing was settled on.
-
-DOM parsing is one of the two most commonly used XML parsing methods, the other being SAX parsing. A DOM parser works by loading the entirety of an XML document into memory, modelling it as a tree to allow it to be easily traversed. The tree is traversed node by node to obtain the required information, in this case known tags within the OpenGIS standard for use in spatial filtering. This method of parsing generally has quite a large overhead when parsing large XML files, due to the fact it needs to parse the entire file.
-
-\subsection{XML Catalogues}
-\label{sec:bg_catalogues}
-
-XML files contain references to external XML resources such as schema files and WSDL files, these external resources are also able to reference other files, which can lead to long chains of resources and massive downloads. When referencing a large number of external files, events such as network outages and slow connections can cause major issues for a service and its performance. Another problem which can occur when referencing external resources is relative URLs being used to address them. Relative URLs limit the service using them to the context in which it was created, as launching it from any other location will not work.
-
-A solution to these problems is creating an XML catalogue, which allows these files to be stored locally and a service to be instructed to use these local references when its external counterpart is requested. The catalogue maps between these two versions of the same resource.
-
-\subsection{JIRA Issue Tracking}
-\label{sec:bg_jira}
-
-Issue trackers are systems which maintain lists of issues in an ongoing project, with the ability to assign these issues to specific group members, report bugs while working and connect solved issues to source control commits which fix them. Issues can also be broken into sub-tasks, prioritised and categorised to improve efficiency. For example, many issues were recorded after each sprint meeting, these included work for the next sprint, work for near future sprints and overall project goals. These issue reports were categorised according to the sprint which they were to be completed in. When every issue attached to a sprint was marked as solved, a sprint was considered complete in terms of work.
-
-As the customer is a company which regularly works on projects of a much greater scale than that of the AES system, they possess a number of professional tools for organisation and issue tracking. One of these is JIRA, an issue tracker created by Atlassian designed to work with the chosen cycle of creating user stories and acceptance criteria with the customer and assigning these stories to team members after each sprint meeting. As JIRA is a professional piece of software which normally requires a monthly fee for usage, it had to be accessed via the server running it licensed to the customer through their VPN. By using the tools in use by the customer, the product customer was able to easily keep track of progress and make comments on submissions to the service.
-
-\subsection{ActiveMQ}
-\label{sec:bg_activemq}
-
-Apache ActiveMQ is an open source message queue service which communicates using the Java Message Service (JMS) \cite{activeMQ}. It contains a number of features deemed useful to the project including subscription management and filtering. The filtering itself is through objects known as selectors, which use the SQL 92 syntax to filter messages. SQL 92 is a fairly barebones SQL syntax, which features basic arithmetic operators (addition, subtraction, multiplication, division and modulo), enough for the requirements set out by the customer of temporal filtering and spatial filtering using GPS co-ordinates.
-
 \subsection{Git and GitHub}
 \label{sec:bg_git}
 
@@ -351,6 +305,57 @@ For each feature, there is then a set of corresponding step definitions, that is
 
 In this project, feature definitions were based on the client's user stories, keeping the tests focused on satisfying the customer's requirements.
 
+\subsection{JIRA Issue Tracking}
+\label{sec:bg_jira}
+
+Issue trackers are systems which maintain lists of issues in an ongoing project, with the ability to assign these issues to specific group members, report bugs while working and connect solved issues to source control commits which fix them. Issues can also be broken into sub-tasks, prioritised and categorised to improve efficiency. For example, many issues were recorded after each sprint meeting, these included work for the next sprint, work for near future sprints and overall project goals. These issue reports were categorised according to the sprint which they were to be completed in. When every issue attached to a sprint was marked as solved, a sprint was considered complete in terms of work.
+
+As the customer is a company which regularly works on projects of a much greater scale than that of the AES system, they possess a number of professional tools for organisation and issue tracking. One of these is JIRA, an issue tracker created by Atlassian designed to work with the chosen cycle of creating user stories and acceptance criteria with the customer and assigning these stories to team members after each sprint meeting. As JIRA is a professional piece of software which normally requires a monthly fee for usage, it had to be accessed via the server running it licensed to the customer through their VPN. By using the tools in use by the customer, the product customer was able to easily keep track of progress and make comments on submissions to the service.
+
+\subsection{JAXB and DOM Parsing}
+\label{sec:bg_parsing}
+
+JAXB, or ``Java Architecture for XML Binding'', is a tool used to marshal Java objects into XML and unmarshal XML into Java objects. It can be used as an alternative to standard XML parsers, taking complicated schema and converting XML created from them into usable Java objects\cite{ort2003java}. Use of JAXB was explored towards the end of the project for use in spatial filtering. It was intended to use JAXB to parse XML filters of the OpenGIS standard in order to create filters within the system, however, implementing JAXB proved beyond the scope of the project in terms of time, given the nature of the system as a proof of concept piece with a strict time constraint. Instead, a more commonly used XML parsing method known as ``Document Object Model'' or DOM parsing was settled on.
+
+DOM parsing is one of the two most commonly used XML parsing methods, the other being SAX parsing. A DOM parser works by loading the entirety of an XML document into memory, modelling it as a tree to allow it to be easily traversed. The tree is traversed node by node to obtain the required information, in this case known tags within the OpenGIS standard for use in spatial filtering. This method of parsing generally has quite a large overhead when parsing large XML files, due to the fact it needs to parse the entire file.
+
+\subsection{XML Catalogues}
+\label{sec:bg_catalogues}
+
+XML files contain references to external XML resources such as schema files and WSDL files, these external resources are also able to reference other files, which can lead to long chains of resources and massive downloads. When referencing a large number of external files, events such as network outages and slow connections can cause major issues for a service and its performance. Another problem which can occur when referencing external resources is relative URLs being used to address them. Relative URLs limit the service using them to the context in which it was created, as launching it from any other location will not work.
+
+A solution to these problems is creating an XML catalogue, which allows these files to be stored locally and a service to be instructed to use these local references when its external counterpart is requested. The catalogue maps between these two versions of the same resource.
+
+\subsection{ActiveMQ}
+\label{sec:bg_activemq}
+
+Apache ActiveMQ is an open source message queue service which communicates using the Java Message Service (JMS) \cite{activeMQ}. It contains a number of features deemed useful to the project including subscription management and filtering. The filtering itself is through objects known as selectors, which use the SQL 92 syntax to filter messages. SQL 92 is a fairly barebones SQL syntax, which features basic arithmetic operators (addition, subtraction, multiplication, division and modulo), enough for the requirements set out by the customer of temporal filtering and spatial filtering using GPS co-ordinates.
+
+\subsection{Web Feature Service}
+\label{sec:bg_wfs}
+
+The Web Feature Service interface standard (WFS) is a standard by the Open Geospatial Consortium that provides a platform-independent web interface for requesting geographical features. By default, the data is encoded in the GML format, although other formats can be used. In this project, Snowflake Software's GO Publisher WFS was used to retrieve the airport data. WFS includes the ability to query features based on spatial constraints, so it could be queried to only return airports within a particular area, allowing program testing to be performed with more manageable amounts of data.
+
+\subsection{Web Services Notification}
+\label{sec:bg_wsn}
+
+Web services notification (or WSN) is a set of specifications created by OASIS\cite{oasisWSN} that defines the interactions between web services, using notifications, which can form the basis of a publish/subscribe architecture built using web services. They provide a standardised way to communicate with and between web services, without having prior information about them. It includes facilities for detailed subscription, where those wishing to consume information can register with a web service along with details about the type of information they wish to receive. WSN was designed to revolve around these subscription details known as ``topics'' and use them to filter down subscriptions, allowing for large scale usage of the publish/subscribe architecture without unwanted message overload.
+
+WSN covers a family of smaller specifications including WS-Base Notifications, WS-Brokered Notification and WS-Topics. WS-Base Notifications is a specification of the simple producer/consumer relationship, consumers send out subscription requests to the producers, specifying the subset of messages produced by that producer which it wishes to receive. The request also contains a reference to the consumer itself, so the producer knows where to send the messages.
+
+WS-Brokered Notification works in a similar manner to WS-Base, but introduces a middleman between the message publishers and the message subscribers known as the broker. The broker is designed to decouple the connection between producers and consumers and allows for advanced messaging features such as demand-based publishing, load-balancing and publication of messages from entities which are not themselves web service providers.
+
+WS-Topics is a specification which defines a method for categorising subscriptions into ``topics''. This specification is designed to work in conjunction with WS-Base or WS-Brokered and contains various methods for defining groups of subscriptions.
+
+WSN is a favoured standard of the aerospace industry, which is why it is highly desired that the final product uses it.
+
+\subsection{Web Services Description Language}
+\label{sec:bg_wsdl}
+
+Web Services Description Language (or WSDL) is an XML based language for describing the interfaces and functionality of a web service\cite{christensen2001web}. A WSDL file provides a machine readable description of a web service's interface, including the function calls, parameters they expect and return values.
+
+Typically, it is used in combination with SOAP to provide a web service, where a client program will read the WSDL, to determine the functions available, and then use SOAP to call them\cite{curbera2002unraveling}.
+
 \subsection{SOAP}
 \label{sec:bg_soap}
 
@@ -375,11 +380,6 @@ The Open Geospatial Consortium (or OGC) is a voluntary standards organisation sp
 \label{sec:bg_gml}
 
 Geography Markup Language (or GML) is an XML grammar designed to express geographical features. It serves as both a geographical modelling language and as an data interchange format for the exchange of geographic data on the internet. It includes a very wide range of primitive objects, so that it can be used to express and integrate all forms of geographic information together. It was the standard used to encode the airport information that was used to perform NOTAM enrichment.
-
-\subsection{Web Feature Service}
-\label{sec:bg_wfs}
-
-The Web Feature Service interface standard (WFS) is a standard by the Open Geospatial Consortium that provides a platform-independent web interface for requesting geographical features. By default, the data is encoded in the GML format, although other formats can be used. In this project, Snowflake Software's GO Publisher WFS was used to retrieve the airport data. WFS includes the ability to query features based on spatial constraints, so it could be queried to only return airports within a particular area, allowing program testing to be performed with more manageable amounts of data.
 
 \newpage
 
