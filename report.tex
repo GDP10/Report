@@ -749,6 +749,19 @@ The system was designed with scalability in mind, since it needed to be able to 
 
 Although the consumer was out of this project's scope, a basic implementation was still produced, in order to demonstrate the system's functionality. A class diagram for this separate project is given in figure~\ref{fig:consumer_class_diagram}. Note that this project does not directly reference any of the classes from the main project; instead, it uses the published WSDL for the project's service, along with JAX-WS, to connect to the service.
 
+\section{Summary of Explored Technologies}
+\label{sec:explored}
+
+Given the exploratory goals of the project, information gained about technologies not used is potentially just as valuable to the customer as the final system itself. Overall, it was found that no complete WSN implementations existed, within Java message brokers that were capable of satisfying all of the customer's requirements.
+
+Apache ActiveMQ was one of the main message brokers that the customer suggested being investigated, as it officially listed support for the WS-Notification protocol. Despite this, it had no such implementation and the documentation for which, whilst listed, was non-existent.
+
+Apache CXF was found to have a limited implementation but it was unlisted and undocumented, making relying upon it a risky proposition, since the lack of officially declared support could mean it was untested or that it could be removed at any time. Additionally, message filtering was limited to filtering based on topics, meaning it would be unable to satisfy all of the customer's requirements.
+
+JBoss A-MQ, a fork of ActiveMQ, had the same implementation as Apache CXF. It was initially promising, with the customer expressing high expectations for it, but it was found that it could only perform filtering based on string matching, so was also unable to meet the requirements.
+
+One potential solution for this was to fork JBoss A-MQ and to manual implement a more capable filtering system, which may be an option the customer finds worth exploring in the future. However, in the limited time available for this project, it was instead opted to use JMS for filtering, in combination with ActiveMQ and a basic WS-BrokeredNotification implementation, as described previously.
+
 \section{Critical Evaluation}
 \label{sec:critical_evaluation}
 
