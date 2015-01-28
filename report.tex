@@ -731,7 +731,13 @@ Once the demo was concluded, the group fielded questions, both from the original
 \label{fig:system_overview}
 \end{figure}
 
-The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in this project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. A block diagram giving an overview of this system is provided in figure~\ref{fig:system_overview}.
+\begin{figure}
+  \includegraphics[width=\linewidth]{aes_class_diagram.png}
+  \caption{System class diagram}
+  \label{fig:aes_class_diagram}
+\end{figure}
+
+The completed system consists of two parts: a producer, which parses NOTAM data and publishes it to a JMS broker (ActiveMQ, in this project), and a basic WS-BrokeredNotification implementation that allows consumers to retrieve messages from this JMS broker via the WS-Notification protocol. A block diagram giving an overview of this system is provided in figure~\ref{fig:system_overview}, and a class diagram is given in figure~\ref{fig:aes_class_diagram}.
 
 The system was designed with scalability in mind, since it needed to be able to handle a large volume of NOTAM traffic, and a potentially large number of consumers. For this reason, an arbitrary number of producers and an arbitrary number of WS-Notification brokers are supported, with each broker servicing multiple consumers. The limiting factor in this setup is the number of simultaneous connections that the JMS broker itself is able to service. Since ActiveMQ already has robust support for clustering, this was deemed to be a non-issue.
 
