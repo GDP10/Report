@@ -177,7 +177,7 @@ As Snowflake were relatively unfamiliar with a number of the tools and technolog
 \section{Project Description}
 \subsection{Motivation}
 \label{sec:intro_motivation}
-Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Examples of such events includes: closed runways, restricted airspaces, extreme weather conditions, and even the presence of migrating birds through an airspace. Currently, flight planners receive such information by pulling all current NOTAMs, or `Notice to Airmen', and must manually sort through them to find only the notices which are relevant to their flight, which is extremely time consuming. The efficiency of this task could be improved dramatically if the filtering were performed automatically, using defined geographic regions and time frames. The aeronautics industry uses WSN as their preferred standard, so the customer required us to work to this standard or the alternative standard WS-Events.
+Pilots need to be notified of hazards and events that may require them to make changes to their flight plan. Examples of such events include: closed runways, restricted airspaces, extreme weather conditions, and even the presence of migrating birds through an airspace. Currently, flight planners receive such information by pulling all current NOTAMs, or `Notice to Airmen', and must manually sort through them to find only the notices which are relevant to their flight, which is extremely time consuming. The efficiency of this task could be improved dramatically if the filtering were performed automatically, using defined geographic regions and time frames. The aeronautics industry favours the WS-Notification family of standards for publish/subscribe systems, and so an early constraint placed on the system by the customer required us to work to either this standard or to a similar competing standard named WS-Eventing.
 
 \subsection{Customer}
 \label{sec:intro_customer}
@@ -257,7 +257,7 @@ All NOTAMs are sent as XML documents using a schema known as AIXM. The AIXM, or 
 \def\svgwidth{\columnwidth}
 \includegraphics[scale=0.5]{aixmUML.png}
 \end{center}
-\caption{UML diagram highlighting some features of the AIXM conceptual model.\cite{aixm}}
+\caption{UML diagram highlighting some features of the AIXM conceptual model \cite{aixm}}
 \label{fig:aixm}
 \end{figure}
 
