@@ -832,6 +832,11 @@ A solution to this would be the implementation of XML catalogues which map exter
 
 This was not previously implemented due to the team's inexperience at working with them and the compile time creep did not occur until late in the project. At which point a cost-benefit analysis of learning how to use this tool and implementing it into the system at that late a stage was done and decided against.
 
+\subsection{Airport data retrieval}
+\label{sec:future_airport}
+
+Currently in the AES system, NOTAM enrichment is performed from a processed XML file originally obtained from Snowflake Software's Go Publisher WFS, containing information on all airports listed in the WFS. This could be changed to query the web feature service directly for each NOTAM, to ensure the data is up to date. This would introduce a significant bottleneck, so it would have to be combined with some form of caching (for example, storing all airport data locally and updating it by querying the WFS once each day). If possible, a better solution would be to combine caching with some form of web cache validation (provided the WFS supports it), where client requests are conditional on the content having changed, if not, the WFS doesn't need to send the usual full response.
+
 \newpage
 
 \addcontentsline{toc}{section}{References}
