@@ -257,7 +257,7 @@ All NOTAMs are sent as XML documents using a schema known as AIXM. The AIXM, or 
 \def\svgwidth{\columnwidth}
 \includegraphics[scale=0.5]{aixmUML.png}
 \end{center}
-\caption{UML diagram highlighting some features of the AIXM conceptual model \cite{aixm}}
+\caption[UML diagram highlighting some features of the AIXM conceptual model]{UML diagram highlighting some features of the AIXM conceptual model \cite{aixm}. The model gives information to pilots such as the number of runways at an airport and their sizes. If there are no runways large enough for the plane then this information is important so that the flight plan can be changed.}
 \label{fig:aixm}
 \end{figure}
 
@@ -271,7 +271,7 @@ All NOTAMs are sent as XML documents using a schema known as AIXM. The AIXM, or 
 \def\svgwidth{\columnwidth}
 \input{broker.pdf_tex}
 \end{center}
-\caption{Publish/Subscribe Architecture with Broker}
+\caption[Publish/Subscribe Architecture with Broker]{Publish/Subscribe Architecture with Broker. Multiple producers can all publish to the same broker and the broker then becomes a front-end for these producers to transfer messages to subscribers. Consumers can subscribe using string-based topics or by using filters, depending on the implementation.}
 \label{fig:pubsub}
 \end{figure}
 
@@ -322,7 +322,7 @@ As the customer is a company which regularly works on projects of a much greater
 JAXB, or ``Java Architecture for XML Binding'', is a tool used to marshal Java objects into XML and unmarshal XML into Java objects. It can be used as an alternative to standard XML parsers, taking complicated schema and converting XML created from them into usable Java objects\cite{ort2003java}. Use of JAXB was explored towards the end of the project for use in spatial filtering. It was intended to use JAXB to parse XML filters of the OpenGIS standard in order to create filters within the system, however, implementing JAXB proved beyond the scope of the project in terms of time, given the nature of the system as a proof of concept piece with a strict time constraint. Instead, a more commonly used XML parsing method known as ``Document Object Model'' or DOM parsing was settled on.
 
 DOM parsing is one of the two most commonly used XML parsing methods, the other being SAX parsing. A DOM parser works by loading the entirety of an XML document into memory, modelling it as a tree to allow it to be easily traversed. The tree is traversed node by node to obtain the required information, in this case known tags within the OpenGIS standard for use in spatial filtering. This method of parsing generally has quite a large overhead when parsing large XML files, due to the fact it needs to parse the entire file.
-
+\newpage
 \subsection{XML Catalogues}
 \label{sec:bg_catalogues}
 
@@ -365,6 +365,7 @@ Typically, it is used in combination with SOAP to provide a web service, where a
 
 SOAP (or, originally, Simple Object Access Protocol) is a platform independent protocol for exchanging information between web services, based on XML, and is dependant on other application layer protocols for message transmission (typically HTTP but other transport protocols are supported as well)\cite{curbera2002unraveling}.
 
+\newpage
 \subsection{Netcat}
 \label{sec:bg_netcat}
 
@@ -420,6 +421,8 @@ Charles Sherman    & Java, WSDLs, SOAP-UI, JUnit, Cucumber, Scrum     \\ \hline
 Peter Prince       & Java, Python, JUnit, cURL, Netcat                \\ \hline
 James Robinson     & Java, Maven, Git, JIRA, Travis, Cucumber, JUnit  \\ \hline
 \end{tabular}
+\caption{Skills Audit Table}
+\label{tab:skillsAudit}
 \end{table}
 
 During each sprint meeting the work for the following sprint was decided upon, followed by a meeting in labs to break down the sprint work further and assign each key area to a team member according to their relevant skills. Due to the nature of the project, a lot of early work was not easily divisible, so a system of a single team member coding as the rest of the team researched and provided support, was used.
@@ -459,10 +462,10 @@ Our client suggested switching to the Git Flow branching model \cite{Driessen201
 
 After watching Zach Holman's presentation \emph{How GitHub Uses GitHub to Build GitHub} \cite{hgugtbg}, the team opted to use a similar git workflow for the project. Under this model, features are again developed in separate branches, and once they are complete the branch owner opens a \emph{pull request} to merge that branch into the \texttt{master} branch. Every other member of the team is then able to perform code review, comment on the pull request and suggest improvements. In addition, Travis automatically builds and tests the pull request. Once every team member is satisfied with the pull request, it is merged and closed. A pull request from the project can be seen in figure~\ref{fig:pull_request}.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-  \includegraphics[width=0.8\linewidth]{pull_request.png}
-  \caption{Example pull request}
+  \includegraphics[width=0.7\linewidth]{pull_request.png}
+  \caption[Example pull request]{Example pull request. When a team member wants to merge in their branch, they open a pull request which other team members can write issues on. These ensure that the team is satisfied with eachother's work throughout the project. The pull requests also trigger automated tests on Travis to check for any new bugs in the new code.}
   \label{fig:pull_request}
 \end{figure}
 
@@ -533,7 +536,7 @@ In the second sprint, the goals set were to expand on the work completed in the 
     ~              & Configurable   & Multiple Hard-Coded   & Multiple  \\ \hline
     ~              & ~              & Multiple Configurable & ~         \\ \hline
     \end{tabular}
-\caption{Sprint 2 Table}
+\caption[Sprint 2 user story table]{Sprint 2 user story table. This task breakdown laid out tasks to be completed row by row but the order of columns could be done in any order. In practice the team found it very simple to move from the first row straight to the full configurable code.}
 \label{tab:sprint2}
 \end{table}
 
@@ -732,13 +735,13 @@ Once the demo was concluded, the group fielded questions, both from the original
     \draw[-latex] (Consumer2.north) -- (WSN Broker2.south) node[midway,right] {WSN(SOAP over HTTP)};
 
 \end{tikzpicture}
-\caption{System overview}
+\caption[System Overview]{System overview. The system has been designed to be scalable, multiple JMS publishers can publish to ActiveMQ and then multiple WSN brokers can become subscribers to ActiveMQ. Each individual broker can then have a number of consumers subscribed to them using spatial and temporal filtering.}
 \label{fig:system_overview}
 \end{figure}
 
 \begin{figure}[h]
   \includegraphics[width=\linewidth]{aes_class_diagram.png}
-  \caption{System class diagram}
+  \caption[System class diagram]{System class diagram. The system uses interfaces which are automatically generated from WSN WSDLs from Oasis.}
   \label{fig:aes_class_diagram}
 \end{figure}
 
@@ -748,7 +751,7 @@ The system was designed with scalability in mind, since it needed to be able to 
 
 \begin{figure}
   \includegraphics[width=\linewidth]{consumer_class_diagram.png}
-  \caption{Consumer class diagram}
+  \caption[Consumer class diagram]{Consumer class diagram. The consumer also has a set of interfaces generated from an Oasis WSDL. The interface contains a single method to notify a consumer when they have a message.}
   \label{fig:consumer_class_diagram}
 \end{figure}
 
@@ -787,6 +790,7 @@ Despite these successes, there were some areas that could have been improved. As
 
 Those who attended the workshop meetings found them useful and productive. Most of the team preferred working together on code rather than having meetings to discuss the work then splitting off to work individually. Although tasks would be assigned to individual team members when able, they were nonetheless very linked. The format of the workshop meant that as a team member was writing their code, they could easily discuss with other team members about other parts of the code and make sure that the modules would work together. This was particularly useful for the team member who wrote tests for the code as they had to understand how the various classes had to work together.
 
+\newpage
 \subsection{Customer feedback}
 \label{sec:eval_customer_feedback}
 
