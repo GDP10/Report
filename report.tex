@@ -460,11 +460,13 @@ Our client suggested switching to the Git Flow branching model \cite{Driessen201
 After watching Zach Holman's presentation \emph{How GitHub Uses GitHub to Build GitHub} \cite{hgugtbg}, the team opted to use a similar git workflow for the project. Under this model, features are again developed in separate branches, and once they are complete the branch owner opens a \emph{pull request} to merge that branch into the \texttt{master} branch. Every other member of the team is then able to perform code review, comment on the pull request and suggest improvements. In addition, Travis automatically builds and tests the pull request. Once every team member is satisfied with the pull request, it is merged and closed. A pull request from the project can be seen in figure~\ref{fig:pull_request}.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{pull_request.png}
+\centering
+  \includegraphics[width=0.8\linewidth]{pull_request.png}
   \caption{Example pull request}
   \label{fig:pull_request}
 \end{figure}
 
+\newpage
 \subsection{Testing Methodology}
 \label{sec:plan_testing_methodology}
 
@@ -522,7 +524,7 @@ There were issues with writing the user stories to Jira. Peter and Andrew were t
 
 In the second sprint, the goals set were to expand on the work completed in the first sprint. At the end of the first sprint, a producer, broker and consumer had been written, all with hard-coded values for the subscription information. The target for the end of the second sprint was to have a consumer that subscribed with configurable topics, and to have multiple consumers listening to a broker. As the objective of the system was to create a proof of concept, it was also important to develop tests to demonstrate to the customer that the software was working.
 
-\begin{table}
+\begin{table}[h]
     \begin{tabular}{|l|l|l|l|}
     \hline
     \emph{Origin}         & \emph{Destination}    & \emph{Route}                 & \emph{Consumers} \\ \hline
@@ -670,10 +672,11 @@ The demo of the software showed multiple consumers receiving NOTAMs sent by a si
 
 Once the demo was concluded, the group fielded questions, both from the original customer representatives about the progress in the last sprint, and from those new to the project about the project as a whole. The general architecture of the system was explained, as shown in figure~\ref{fig:system_overview}.
 
+\newpage
 \section{Final System Overview}
 \label{sec:final_system}
 
-\begin{figure}
+\begin{figure}[h]
 \begin{tikzpicture}[scale=0.75, every node/.style={transform shape}, node distance=2cm]
      \node (Producer1) [abstract, rectangle split, rectangle split parts=2]
         {
@@ -733,7 +736,7 @@ Once the demo was concluded, the group fielded questions, both from the original
 \label{fig:system_overview}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
   \includegraphics[width=\linewidth]{aes_class_diagram.png}
   \caption{System class diagram}
   \label{fig:aes_class_diagram}
